@@ -1,9 +1,10 @@
-package repo.pattimuradev.fsearch
+package repo.pattimuradev.fsearch.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import dagger.hilt.android.AndroidEntryPoint
+import repo.pattimuradev.fsearch.R
 import javax.inject.Inject
 import javax.inject.Named
 
