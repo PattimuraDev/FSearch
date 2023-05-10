@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Hasil coba", nyobaString)
+        Log.d("Hasil coba 1", nyobaString)
         setContentView(R.layout.activity_main)
     }
 }
