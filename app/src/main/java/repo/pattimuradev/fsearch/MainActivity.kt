@@ -1,0 +1,22 @@
+package repo.pattimuradev.fsearch
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Named
+
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+
+    @Inject
+    @Named("Coba String 1")
+    lateinit var nyobaString: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Hasil coba", nyobaString)
+        setContentView(R.layout.activity_main)
+    }
+}
