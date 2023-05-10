@@ -19,6 +19,9 @@
         android:theme="@style/Theme.FSearch"
         tools:targetApi="31">
         <activity
+            android:name=".view.activity.RegisterCodeVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.RegisterActivity"
             android:exported="false" />
         <activity
@@ -32,7 +35,7 @@
         </activity>
         <activity
             android:name=".view.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

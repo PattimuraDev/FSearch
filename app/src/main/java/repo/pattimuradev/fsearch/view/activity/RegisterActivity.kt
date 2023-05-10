@@ -1,10 +1,11 @@
 package repo.pattimuradev.fsearch.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_register.*
 import repo.pattimuradev.fsearch.R
@@ -14,6 +15,26 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkFields()
+        register_button_daftar.setOnClickListener {
+            startActivity(Intent(this, RegisterCodeVerificationActivity::class.java))
+        }
+    }
+
+    private fun sendOtpViaEmail() {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        val emailField = register_field_email.text.toString()
+        val emailSubject = "Kode verifikasi akun"
+        val otp = "";
+        for(i in 1..4){
+            otp + (0..9).random().toString()
+        }
+        val emailBody = "Berikut kode verifikasi akun anda adalah $otp"
+
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+        intent.putExtra(Intent.EXTRA_TEXT, emailBody)
+        intent.data = Uri.parse("mailto:$emailField")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     private fun checkFields(){
@@ -47,11 +68,11 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                    // no action needed
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
-
+                    // no action needed
                 }
 
             })

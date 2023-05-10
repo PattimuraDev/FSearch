@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/login_header"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:paddingHorizontal="40dp"
@@ -17,8 +17,6 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="Mulailah miliki tim lomba yang kamu dambakan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -52,6 +50,7 @@
         android:id="@+id/login_button_masuk"
         android:text="Masuk"
         android:textColor="@color/white"
+        android:background="@drawable/custom_button_layout"
         app:layout_constraintTop_toBottomOf="@+id/login_field_password"/>
 
     <androidx.appcompat.widget.AppCompatTextView

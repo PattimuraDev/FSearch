@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.RegisterCodeVerificationActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/register_code_verification_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="160dp"
+        android:paddingHorizontal="50dp"
+        android:text="Kode verifikasi telah dikirim ke email kamu"
+        android:textColor="@color/secondary_three"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Masukkan kode 4 digit tersebut"
+        android:textColor="@color/secondary_three"
+        app:layout_constraintTop_toBottomOf="@+id/register_code_verification_header"
+        android:paddingHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/register_code_verification_hint_text"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/register_code_verification_hint_text"
+        android:paddingHorizontal="50dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/register_code_verification_otp_field">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="30sp"
+            android:id="@+id/register_code_verification_one"
+            android:layout_marginEnd="20dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="30sp"
+            android:id="@+id/register_code_verification_two"
+            android:layout_marginEnd="20dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="30sp"
+            android:id="@+id/register_code_verification_three"
+            android:layout_marginEnd="20dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textSize="30sp"
+            android:id="@+id/register_code_verification_four" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/register_code_verification_otp_field"
+        android:paddingHorizontal="10dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/custom_button_layout"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:id="@+id/register_code_verification_button_submit"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
