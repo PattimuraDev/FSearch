@@ -1,13 +1,20 @@
 package repo.pattimuradev.fsearch.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.model.EmailVerification
+import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 import uk.co.jakebreen.sendgridandroid.SendGrid
 import uk.co.jakebreen.sendgridandroid.SendGridMail
 import uk.co.jakebreen.sendgridandroid.SendTask
@@ -15,13 +22,14 @@ import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity() {
 
+    private val userViewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkFields()
         register_button_daftar.setOnClickListener {
             sendOtpViaEmail()
-            //startActivity(Intent(this, RegisterCodeVerificationActivity::class.java))
         }
     }
 
@@ -48,10 +56,33 @@ class RegisterActivity : AppCompatActivity() {
 
         try {
             val sendtask = SendTask(sendgrid)
-            sendtask.send(email)
+            val status = sendtask.send(email)
             Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+            if(status.isSuccessful){
+                val emailField = register_field_email.text.toString().trim()
+
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val result = userViewModel.saveOtpEmail(EmailVerification(emailField, otp))
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        result.observe(this@RegisterActivity){
+                            if(it.equals("OK")){
+                                startActivity(Intent(
+                                    this@RegisterActivity,
+                                    RegisterCodeVerificationActivity::class.java
+                                ).putExtra(
+                                    "register_email",
+                                    emailField
+                                ))
+                            }else{
+                                Toast.makeText(this@RegisterActivity, "Failed, somtehing wrong", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+            }
         }catch (e: Exception){
             e.printStackTrace()
+            Toast.makeText(this, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_SHORT).show()
         }
     }
 

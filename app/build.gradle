@@ -3,11 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 
     // added plugin
-    // add dagger hilt plugin
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     //  add kotlin android extension plugin
     id 'kotlin-android-extensions'
+    // google service
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -80,12 +80,14 @@ dependencies {
     // swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    // dependency injection
-    implementation 'com.google.dagger:hilt-android:2.46'
-    kapt 'com.google.dagger:hilt-compiler:2.46'
-
+    // sendgrid library for sending email
     implementation 'com.github.jakebreen:android-sendgrid:1.3.1'
 
+    // firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+
+    // cloud firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }
 
 kapt {

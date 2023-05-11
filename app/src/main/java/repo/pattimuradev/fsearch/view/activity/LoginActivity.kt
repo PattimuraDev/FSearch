@@ -16,8 +16,13 @@ class LoginActivity : AppCompatActivity() {
         checkFields()
 
         login_button_daftar.setOnClickListener {
+            processLogin()
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+    }
+
+    private fun processLogin() {
+        // edit
     }
 
     private fun checkFields(){

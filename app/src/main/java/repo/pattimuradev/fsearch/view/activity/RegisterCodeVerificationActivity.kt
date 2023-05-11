@@ -1,23 +1,59 @@
 package repo.pattimuradev.fsearch.view.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
-import kotlinx.android.synthetic.main.activity_login.*
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register_code_verification.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.OTPEditTextHandler
+import repo.pattimuradev.fsearch.model.EmailVerification
+import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
 class RegisterCodeVerificationActivity : AppCompatActivity() {
+
+    private val userViewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_code_verification)
 
         otpFieldHandler()
         checkFields()
+
+        register_code_verification_button_submit.setOnClickListener {
+            processVerificationCode()
+        }
+    }
+
+    private fun processVerificationCode() {
+        val registerEmail = intent.getStringExtra("register_email")!!
+        val inputOtpUser = (
+                register_code_verification_one.text.toString() +
+                register_code_verification_two.text.toString() +
+                register_code_verification_three.text.toString() +
+                register_code_verification_four.text.toString()
+        )
+
+        lifecycleScope.launch(Dispatchers.IO){
+            val result = userViewModel.otpEmailVerification(EmailVerification(registerEmail, inputOtpUser))
+            lifecycleScope.launch {
+                result.observe(this@RegisterCodeVerificationActivity){
+                    if(it.equals("OK")){
+                        startActivity(Intent(this@RegisterCodeVerificationActivity, LoginActivity::class.java))
+                    }else{
+                        Toast.makeText(this@RegisterCodeVerificationActivity, "Kode verifikasi salah", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun otpFieldHandler() {
@@ -64,24 +100,29 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
         )
 
         for(field in verificationFields){
-            field.addTextChangedListener { object: TextWatcher{
+            field.addTextChangedListener ( object: TextWatcher {
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     val kodeSatuField = register_code_verification_one.text.toString().trim()
                     val kodeDuaField = register_code_verification_two.text.toString().trim()
                     val kodeTigaField = register_code_verification_three.text.toString().trim()
                     val kodeEmpatField = register_code_verification_four.text.toString().trim()
 
-                    register_code_verification_button_submit.isEnabled = kodeSatuField.isNotEmpty() && kodeDuaField.isNotEmpty() && kodeTigaField.isNotEmpty() && kodeEmpatField.isNotEmpty()
-                    if(register_code_verification_button_submit.isEnabled){
-                        register_code_verification_button_submit.setBackgroundColor(ContextCompat.getColor(
-                            applicationContext,
-                            R.color.primary
-                        ))
-                    }else{
-                        register_code_verification_button_submit.setBackgroundColor(ContextCompat.getColor(
-                            applicationContext,
-                            R.color.secondary_four
-                        ))
+                    register_code_verification_button_submit.isEnabled =
+                        kodeSatuField.isNotEmpty() && kodeDuaField.isNotEmpty() && kodeTigaField.isNotEmpty() && kodeEmpatField.isNotEmpty()
+                    if (register_code_verification_button_submit.isEnabled) {
+                        register_code_verification_button_submit.setBackgroundColor(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.primary
+                            )
+                        )
+                    } else {
+                        register_code_verification_button_submit.setBackgroundColor(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.secondary_four
+                            )
+                        )
                     }
                 }
 
@@ -93,7 +134,7 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
                     // no action needed
                 }
 
-            } }
+            } )
         }
     }
 }
