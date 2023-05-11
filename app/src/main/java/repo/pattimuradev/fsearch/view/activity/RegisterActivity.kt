@@ -1,40 +1,58 @@
 package repo.pattimuradev.fsearch.view.activity
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_register.*
 import repo.pattimuradev.fsearch.R
+import uk.co.jakebreen.sendgridandroid.SendGrid
+import uk.co.jakebreen.sendgridandroid.SendGridMail
+import uk.co.jakebreen.sendgridandroid.SendTask
+import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkFields()
         register_button_daftar.setOnClickListener {
-            startActivity(Intent(this, RegisterCodeVerificationActivity::class.java))
+            sendOtpViaEmail()
+            //startActivity(Intent(this, RegisterCodeVerificationActivity::class.java))
         }
     }
 
     private fun sendOtpViaEmail() {
-        val intent = Intent(Intent.ACTION_SENDTO)
+        val apiKey = getString(R.string.api_key)
+        val devEmail = getString(R.string.developer_email)
+        val devName = getString(R.string.developer_name)
         val emailField = register_field_email.text.toString()
         val emailSubject = "Kode verifikasi akun"
-        val otp = "";
+        val name = register_field_nama.text.toString()
+        var otp = ""
         for(i in 1..4){
-            otp + (0..9).random().toString()
+            otp += (0..9).random().toString()
         }
         val emailBody = "Berikut kode verifikasi akun anda adalah $otp"
+        val sendgrid = SendGrid.create(apiKey)
+        val email = SendGridMail()
 
-        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
-        intent.putExtra(Intent.EXTRA_TEXT, emailBody)
-        intent.data = Uri.parse("mailto:$emailField")
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        email.addRecipient(emailField, name)
+        email.setFrom(devEmail, devName)
+        email.setSubject(emailSubject)
+        email.setContent(emailBody)
+        email.setReplyTo(devEmail, devName)
+
+        try {
+            val sendtask = SendTask(sendgrid)
+            sendtask.send(email)
+            Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun checkFields(){
