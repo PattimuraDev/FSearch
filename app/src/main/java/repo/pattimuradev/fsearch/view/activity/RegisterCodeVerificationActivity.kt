@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.OTPEditTextHandler
+import repo.pattimuradev.fsearch.model.Account
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
@@ -35,6 +36,8 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
 
     private fun processVerificationCode() {
         val registerEmail = intent.getStringExtra("register_email")!!
+        val registerPassword = intent.getStringExtra("register_password")!!
+        val registerNama = intent.getStringExtra("register_nama")!!
         val inputOtpUser = (
                 register_code_verification_one.text.toString() +
                 register_code_verification_two.text.toString() +
@@ -43,13 +46,25 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
         )
 
         lifecycleScope.launch(Dispatchers.IO){
-            val result = userViewModel.otpEmailVerification(EmailVerification(registerEmail, inputOtpUser))
-            lifecycleScope.launch {
-                result.observe(this@RegisterCodeVerificationActivity){
-                    if(it.equals("OK")){
-                        startActivity(Intent(this@RegisterCodeVerificationActivity, LoginActivity::class.java))
+            val otpVerificationResult = userViewModel.otpEmailVerification(EmailVerification(registerEmail, inputOtpUser))
+            lifecycleScope.launch(Dispatchers.Main) {
+                otpVerificationResult.observe(this@RegisterCodeVerificationActivity){ verificationResult ->
+                    if(verificationResult.equals("OK")){
+                        lifecycleScope.launch(Dispatchers.IO){
+                            val registerAccountResult = userViewModel.registerAccount(Account(registerEmail, registerPassword, registerNama))
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                registerAccountResult.observe(this@RegisterCodeVerificationActivity){ registerResult ->
+                                    if(registerResult.equals("OK")){
+                                        Toast.makeText(this@RegisterCodeVerificationActivity, "Registrasi berhasil", Toast.LENGTH_LONG).show()
+                                        startActivity(Intent(this@RegisterCodeVerificationActivity, LoginActivity::class.java))
+                                    }else{
+                                        Toast.makeText(this@RegisterCodeVerificationActivity, "Registrasi gagal", Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                            }
+                        }
                     }else{
-                        Toast.makeText(this@RegisterCodeVerificationActivity, "Kode verifikasi salah", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterCodeVerificationActivity, "Kode verifikasi salah", Toast.LENGTH_LONG).show()
                     }
                 }
             }

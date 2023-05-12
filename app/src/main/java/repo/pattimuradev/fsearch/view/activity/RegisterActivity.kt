@@ -56,10 +56,12 @@ class RegisterActivity : AppCompatActivity() {
 
         try {
             val sendtask = SendTask(sendgrid)
-            val status = sendtask.send(email)
-            Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
-            if(status.isSuccessful){
+            val sendOtpStatus = sendtask.send(email)
+            if(sendOtpStatus.isSuccessful){
+                Toast.makeText(this@RegisterActivity, "Check your email", Toast.LENGTH_LONG).show()
                 val emailField = register_field_email.text.toString().trim()
+                val passwordFIeld = register_field_password.text.toString().trim()
+                val namaField = register_field_nama.text.toString().trim()
 
                 lifecycleScope.launch(Dispatchers.IO) {
                     val result = userViewModel.saveOtpEmail(EmailVerification(emailField, otp))
@@ -72,9 +74,19 @@ class RegisterActivity : AppCompatActivity() {
                                 ).putExtra(
                                     "register_email",
                                     emailField
+                                ).putExtra(
+                                    "register_password",
+                                    passwordFIeld
+                                ).putExtra(
+                                    "register_nama",
+                                    namaField
                                 ))
+                            }else if(it.equals("ALREADY REGISTERED")){
+
+                                // cari solusinya
+                                Toast.makeText(this@RegisterActivity, "Email sudah terdaftar", Toast.LENGTH_LONG).show()
                             }else{
-                                Toast.makeText(this@RegisterActivity, "Failed, somtehing wrong", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegisterActivity, "Failed, somtehing wrong", Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -82,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }catch (e: Exception){
             e.printStackTrace()
-            Toast.makeText(this, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_LONG).show()
         }
     }
 
