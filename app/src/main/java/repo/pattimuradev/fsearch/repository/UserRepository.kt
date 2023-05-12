@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import repo.pattimuradev.fsearch.model.Account
+import repo.pattimuradev.fsearch.model.DataLogin
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.model.UserProfile
 
@@ -60,6 +61,21 @@ class UserRepository {
                 }
             }
         return resultMessage
+    }
+
+    suspend fun login(dataLogin: DataLogin): MutableLiveData<String>{
+        val result = MutableLiveData<String>()
+
+        firebaseAuth.signInWithEmailAndPassword(dataLogin.email!!, dataLogin.password!!)
+            .addOnCompleteListener{ loginTask ->
+                if(loginTask.isSuccessful){
+                    currentUser.value = firebaseAuth.currentUser
+                    result.postValue("OK")
+                }else{
+                    result.postValue("FAILED")
+                }
+            }
+        return result
     }
 
     suspend fun saveOtpEmail(emailVerification: EmailVerification): MutableLiveData<String>{

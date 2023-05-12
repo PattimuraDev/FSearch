@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.model.EmailVerification
@@ -58,12 +59,12 @@ class RegisterActivity : AppCompatActivity() {
             val sendtask = SendTask(sendgrid)
             val sendOtpStatus = sendtask.send(email)
             if(sendOtpStatus.isSuccessful){
-                Toast.makeText(this@RegisterActivity, "Check your email", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@RegisterActivity, "Check email anda", Toast.LENGTH_SHORT).show()
                 val emailField = register_field_email.text.toString().trim()
                 val passwordFIeld = register_field_password.text.toString().trim()
                 val namaField = register_field_nama.text.toString().trim()
 
-                lifecycleScope.launch(Dispatchers.IO) {
+                val job = lifecycleScope.launch(Dispatchers.IO) {
                     val result = userViewModel.saveOtpEmail(EmailVerification(emailField, otp))
                     lifecycleScope.launch(Dispatchers.Main) {
                         result.observe(this@RegisterActivity){
@@ -91,6 +92,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                 }
+                job.cancel()
             }
         }catch (e: Exception){
             e.printStackTrace()
