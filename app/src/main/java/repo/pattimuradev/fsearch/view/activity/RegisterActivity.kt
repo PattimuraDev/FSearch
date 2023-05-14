@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.model.EmailVerification
@@ -29,6 +28,11 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkFields()
+        userViewModel.registerCurrentUser.observe(this){
+            if(it != null){
+                finish()
+            }
+        }
         register_button_daftar.setOnClickListener {
             sendOtpViaEmail()
         }
@@ -59,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
             val sendtask = SendTask(sendgrid)
             val sendOtpStatus = sendtask.send(email)
             if(sendOtpStatus.isSuccessful){
-                Toast.makeText(this@RegisterActivity, "Check email anda", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, "Check email anda", Toast.LENGTH_LONG).show()
                 val emailField = register_field_email.text.toString().trim()
                 val passwordFIeld = register_field_password.text.toString().trim()
                 val namaField = register_field_nama.text.toString().trim()
@@ -87,16 +91,14 @@ class RegisterActivity : AppCompatActivity() {
                                 // cari solusinya
                                 Toast.makeText(this@RegisterActivity, "Email sudah terdaftar", Toast.LENGTH_LONG).show()
                             }else{
-                                Toast.makeText(this@RegisterActivity, "Failed, somtehing wrong", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@RegisterActivity, "Failed, something wrong", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 }
-                job.cancel()
             }
         }catch (e: Exception){
-            e.printStackTrace()
-            Toast.makeText(this@RegisterActivity, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@RegisterActivity, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_SHORT).show()
         }
     }
 

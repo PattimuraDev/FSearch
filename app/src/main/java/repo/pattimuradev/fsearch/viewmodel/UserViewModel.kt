@@ -9,6 +9,7 @@ import repo.pattimuradev.fsearch.repository.UserRepository
 
 class UserViewModel : ViewModel(){
     private val userRepository = UserRepository.getInstance()
+    val registerCurrentUser = userRepository.currentUserLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)

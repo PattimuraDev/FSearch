@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_host"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/lombaFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.LombaFragment"
+        android:label="fragment_lomba"
+        tools:layout="@layout/fragment_lomba" />
+    <fragment
+        android:id="@+id/penggunaFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.PenggunaFragment"
+        android:label="fragment_pengguna"
+        tools:layout="@layout/fragment_pengguna" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
