@@ -19,6 +19,8 @@ class UserRepository {
     val otpEmailVerificationResultLiveData: LiveData<String> = otpEmailVerificationResult
     private val currentUser = MutableLiveData<FirebaseUser>()
     val currentUserLiveData = currentUser
+    private val currentUserProfile = MutableLiveData<UserProfile>()
+    val currentUserProfileLiveData = currentUserProfile
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -71,6 +73,19 @@ class UserRepository {
                 if(loginTask.isSuccessful){
                     currentUser.value = firebaseAuth.currentUser
                     result.postValue("OK")
+
+                    val dataDiriUser = UserProfile(
+                        currentUser.value!!.uid,
+                        currentUser.value!!.displayName!!,
+                        currentUser.value!!.email!!,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                    currentUserProfile.postValue(dataDiriUser)
                 }else{
                     result.postValue("FAILED")
                 }
@@ -127,6 +142,19 @@ class UserRepository {
                 }else{
                     otpEmailVerificationResult.postValue("FAILED")
                 }
+            }
+    }
+
+    suspend fun getProfile(userId: String){
+        firestoreDb.collection("user_profile")
+            .document(currentUser.value!!.uid)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val profile = snapshot.toObject(UserProfile::class.java)
+                currentUserProfile.value = profile
+            }
+            .addOnFailureListener {
+                currentUserProfile.value = null
             }
     }
 

@@ -62,7 +62,7 @@
         android:layout_marginTop="60dp"
         android:id="@+id/register_button_daftar"
         android:text="Daftar"
-        android:background="@drawable/custom_button_layout"
+        android:background="@drawable/custom_button_not_enabled_layout"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/register_field_password"/>
 

@@ -23,6 +23,6 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_above="@id/main_bottom_navigation"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/bottom_navigation_host"/>
+        app:navGraph="@navigation/main_navigation_host"/>
 
 </RelativeLayout>

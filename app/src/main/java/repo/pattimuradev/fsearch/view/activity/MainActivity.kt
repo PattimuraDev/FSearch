@@ -2,6 +2,7 @@ package repo.pattimuradev.fsearch.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.isInvisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -19,6 +20,14 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val bottomNavigationView = main_bottom_navigation
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            bottomNavigationView.isInvisible = !(destination.id == R.id.homeFragment ||
+                    destination.id == R.id.lombaFragment ||
+                    destination.id == R.id.penggunaFragment ||
+                    destination.id == R.id.chatFragment ||
+                    destination.id == R.id.profileFragment
+            )
+        }
     }
 
     override fun onBackPressed() {

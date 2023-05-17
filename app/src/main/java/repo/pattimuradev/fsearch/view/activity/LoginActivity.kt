@@ -1,14 +1,13 @@
 package repo.pattimuradev.fsearch.view.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.Dispatchers
@@ -62,15 +61,9 @@ class LoginActivity : AppCompatActivity() {
 
                     login_button_masuk.isEnabled = emailField.isNotEmpty() && passwordField.isNotEmpty()
                     if(login_button_masuk.isEnabled){
-                        login_button_masuk.setBackgroundColor(ContextCompat.getColor(
-                            applicationContext,
-                            R.color.primary
-                        ))
+                        login_button_masuk.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_enabled_layout, null)
                     }else{
-                        login_button_masuk.setBackgroundColor(ContextCompat.getColor(
-                            applicationContext,
-                            R.color.secondary_four
-                        ))
+                        login_button_masuk.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_not_enabled_layout, null)
                     }
                 }
 

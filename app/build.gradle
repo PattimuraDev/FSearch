@@ -92,6 +92,9 @@ dependencies {
 
     // firebase authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // firebase cloud storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 }
 
 kapt {

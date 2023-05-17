@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,6 @@ import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 import uk.co.jakebreen.sendgridandroid.SendGrid
 import uk.co.jakebreen.sendgridandroid.SendGridMail
 import uk.co.jakebreen.sendgridandroid.SendTask
-import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -28,13 +27,17 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkFields()
-        userViewModel.registerCurrentUser.observe(this){
+        userViewModel.currentUser.observe(this){
             if(it != null){
                 finish()
             }
         }
         register_button_daftar.setOnClickListener {
-            sendOtpViaEmail()
+            if(register_field_password.text.toString().length <= 6){
+                Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show()
+            }else{
+                sendOtpViaEmail()
+            }
         }
     }
 
@@ -64,12 +67,12 @@ class RegisterActivity : AppCompatActivity() {
             val sendOtpStatus = sendtask.send(email)
             if(sendOtpStatus.isSuccessful){
                 Toast.makeText(this@RegisterActivity, "Check email anda", Toast.LENGTH_LONG).show()
-                val emailField = register_field_email.text.toString().trim()
+                val recipientEmailField = register_field_email.text.toString().trim()
                 val passwordFIeld = register_field_password.text.toString().trim()
                 val namaField = register_field_nama.text.toString().trim()
 
-                val job = lifecycleScope.launch(Dispatchers.IO) {
-                    val result = userViewModel.saveOtpEmail(EmailVerification(emailField, otp))
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val result = userViewModel.saveOtpEmail(EmailVerification(recipientEmailField, otp))
                     lifecycleScope.launch(Dispatchers.Main) {
                         result.observe(this@RegisterActivity){
                             if(it.equals("OK")){
@@ -78,7 +81,7 @@ class RegisterActivity : AppCompatActivity() {
                                     RegisterCodeVerificationActivity::class.java
                                 ).putExtra(
                                     "register_email",
-                                    emailField
+                                    recipientEmailField
                                 ).putExtra(
                                     "register_password",
                                     passwordFIeld
@@ -120,15 +123,9 @@ class RegisterActivity : AppCompatActivity() {
                     register_button_daftar.isEnabled = namaField.isNotEmpty() && emailField.isNotEmpty() && passwordField.isNotEmpty()
 
                     if(register_button_daftar.isEnabled){
-                        register_button_daftar.setBackgroundColor(ContextCompat.getColor(
-                                applicationContext,
-                                R.color.primary
-                        ))
+                        register_button_daftar.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_enabled_layout, null)
                     }else{
-                        register_button_daftar.setBackgroundColor(ContextCompat.getColor(
-                            applicationContext,
-                            R.color.secondary_four
-                        ))
+                        register_button_daftar.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_not_enabled_layout, null)
                     }
                 }
 

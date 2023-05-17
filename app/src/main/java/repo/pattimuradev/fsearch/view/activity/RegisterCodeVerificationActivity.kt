@@ -1,13 +1,13 @@
 package repo.pattimuradev.fsearch.view.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_register_code_verification.*
 import kotlinx.coroutines.Dispatchers
@@ -125,19 +125,9 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
                     register_code_verification_button_submit.isEnabled =
                         kodeSatuField.isNotEmpty() && kodeDuaField.isNotEmpty() && kodeTigaField.isNotEmpty() && kodeEmpatField.isNotEmpty()
                     if (register_code_verification_button_submit.isEnabled) {
-                        register_code_verification_button_submit.setBackgroundColor(
-                            ContextCompat.getColor(
-                                applicationContext,
-                                R.color.primary
-                            )
-                        )
+                        register_code_verification_button_submit.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_enabled_layout, null)
                     } else {
-                        register_code_verification_button_submit.setBackgroundColor(
-                            ContextCompat.getColor(
-                                applicationContext,
-                                R.color.secondary_four
-                            )
-                        )
+                        register_code_verification_button_submit.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_not_enabled_layout, null)
                     }
                 }
 
