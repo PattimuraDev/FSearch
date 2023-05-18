@@ -40,9 +40,11 @@ class LombaAdapter(private val lombaClickListener: LombaClickListener): Recycler
                 .load(listLomba!![position].posterLombaUrl)
                 .error(R.drawable.no_image_available)
                 .into(rv_lomba_poster_lomba)
+
             rv_lomba_container.setOnClickListener {
                 lombaClickListener.clickOnDaftarLombaBody(listLomba!![position], position)
             }
+
             rv_lomba_button_like.setOnClickListener {
                 lombaClickListener.clickOnLikeButton(listLomba!![position], position)
             }

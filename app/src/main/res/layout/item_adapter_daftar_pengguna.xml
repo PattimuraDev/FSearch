@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/rv_pengguna_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="25dp">
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="10dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/rv_pengguna_foto_profile"
+                android:src="@drawable/standard_user_photo"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:src="@drawable/like_icon"
+                app:civ_circle_background_color="@color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/rv_pengguna_button_like"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Nama pengguna"
+                android:textSize="20sp"
+                android:id="@+id/rv_pengguna_nama_pengguna"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asal prodi"
+                android:id="@+id/rv_pengguna_asal_prodi"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asal universitas"
+                android:id="@+id/rv_pengguna_asal_universitas"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2019"
+                android:id="@+id/rv_pengguna_tahun_angkatan"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RatingBar
+                    android:id="@+id/rv_pengguna_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rv_pengguna_jumlah_testimoni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="(10)" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/secondary_four"
+        android:layout_marginBottom="10dp"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

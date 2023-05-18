@@ -1,7 +1,10 @@
 package repo.pattimuradev.fsearch.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Lomba(
     val posterLombaUrl: String? = null,
     val kategoriTingkatLomba: String = "",
@@ -14,4 +17,4 @@ data class Lomba(
     val tanggalPosting: Date? = null,
     val biayaPendaftaran: String = "",
     val deskripsiLomba: String = ""
-)
+) : Parcelable

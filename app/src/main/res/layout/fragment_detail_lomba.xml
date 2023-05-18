@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.DetailLombaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_icon"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/detail_lomba_button_back"/>
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/detail_lomba_button_back"
+                android:text="Detail Lomba"
+                android:textColor="@color/primary"
+                android:textSize="16sp" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_icon"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/detail_lomba_button_share"
+                android:backgroundTint="@color/white"/>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_icon"
+                android:layout_toLeftOf="@id/detail_lomba_button_share"
+                android:backgroundTint="@color/white"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:layout_marginBottom="10dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/no_image_available"
+                android:id="@+id/detail_lomba_poster"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:src="@drawable/like_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                app:civ_circle_background_color="@color/white"
+                android:id="@+id/detail_lomba_button_like"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/detail_lomba_tanggal_posting"
+                android:text="Minggu, 11 Januari 2023"/>
+        </RelativeLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="CONTOH JUDUL"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:id="@+id/detail_lomba_judul_lomba"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/university_icon"
+                    android:layout_marginEnd="5dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Penyelenggara"
+                    android:id="@+id/detail_lomba_nama_penyelenggara"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/location_icon"
+                    android:layout_marginEnd="5dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_lomba_lokasi_lomba"
+                    android:text="Lokasi lomba"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar_icon"
+                    android:layout_marginEnd="5dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Minggu, 2 Juni 2019"
+                    android:id="@+id/detail_lomba_tanggal_lomba"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Rp 200.000"
+                android:id="@+id/detail_lomba_biaya_pendaftaran"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/secondary_four"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi lomba"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="Contoh deskripsi"
+            android:id="@+id/detail_lomba_deskripsi_lomba"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

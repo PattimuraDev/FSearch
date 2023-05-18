@@ -3,20 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragment.LombaFragment"
-    android:padding="10dp">
-
+    tools:context=".view.fragment.LombaFragment">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/lomba_action_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true">
-
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,7 +26,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
         android:layout_below="@+id/lomba_action_bar"
         android:id="@+id/lomba_rv_lomba"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,9 +34,9 @@
         android:contentDescription="Tambah lomba"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/primary"
         android:src="@drawable/add_symbol"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:id="@+id/lomba_button_tambah_lomba"/>
 </RelativeLayout>

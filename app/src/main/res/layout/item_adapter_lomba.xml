@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp"
+    android:orientation="vertical"
     android:id="@+id/rv_lomba_container">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_margin="25dp">
         <RelativeLayout
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -20,16 +20,18 @@
                 android:src="@drawable/no_image_available"
                 android:scaleType="centerCrop"
                 android:id="@+id/rv_lomba_poster_lomba"/>
+
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rv_lomba_button_like"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/like_icon"
+                android:padding="3dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="5dp"
-                app:civ_circle_background_color="@color/white"
-                android:id="@+id/rv_lomba_button_like"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/like_icon"
+                app:civ_circle_background_color="@color/white" />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,5 +106,9 @@
                 android:id="@+id/rv_lomba_biaya_pendaftaran"/>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/secondary_four"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

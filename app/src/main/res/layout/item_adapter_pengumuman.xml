@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp">
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_margin="25dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_pengumuman_foto_profile"
                 android:layout_width="50dp"
@@ -67,19 +67,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Deskripsi pengumuman"
-            android:id="@+id/rv_pengumuman_deskripsi"/>
+            android:id="@+id/rv_pengumuman_deskripsi"
+            android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:id="@+id/rv_pengumuman_poster"
-            android:src="@drawable/no_image_available"/>
+            android:src="@drawable/no_image_available"
+            android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ajukan Diri"
             android:id="@+id/rv_pengumuman_button_ajukan_diri"
             android:backgroundTint="@color/primary"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/secondary_four"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

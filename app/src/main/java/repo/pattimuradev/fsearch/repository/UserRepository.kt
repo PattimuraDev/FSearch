@@ -21,6 +21,8 @@ class UserRepository {
     val currentUserLiveData = currentUser
     private val currentUserProfile = MutableLiveData<UserProfile>()
     val currentUserProfileLiveData = currentUserProfile
+    private val allUser = MutableLiveData<List<UserProfile>>()
+    val allUserLiveData: LiveData<List<UserProfile>> = allUser
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -38,6 +40,7 @@ class UserRepository {
                                     user.uid,
                                     user.displayName!!,
                                     user.email!!,
+                                    null,
                                     null,
                                     null,
                                     null,
@@ -78,6 +81,7 @@ class UserRepository {
                         currentUser.value!!.uid,
                         currentUser.value!!.displayName!!,
                         currentUser.value!!.email!!,
+                        null,
                         null,
                         null,
                         null,
@@ -155,6 +159,21 @@ class UserRepository {
             }
             .addOnFailureListener {
                 currentUserProfile.value = null
+            }
+    }
+
+    suspend fun getALlUser(){
+        firestoreDb.collection("user_profile")
+            .get()
+            .addOnSuccessListener { result ->
+                val hasil = mutableListOf<UserProfile>()
+                for(document in result){
+                    val userProfilePengguna = document.toObject(UserProfile::class.java)
+                    hasil += userProfilePengguna
+                }
+                allUser.postValue(hasil)
+            }.addOnFailureListener {
+                allUser.postValue(null)
             }
     }
 

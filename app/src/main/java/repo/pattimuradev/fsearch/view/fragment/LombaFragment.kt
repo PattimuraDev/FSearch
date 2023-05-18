@@ -40,7 +40,8 @@ class LombaFragment : Fragment(), LombaClickListener {
     }
 
     private fun initView() {
-        lomba_action_bar.inflateMenu(R.menu.csutom_fragment_toolbar)
+        initLombaAdapter()
+        lomba_action_bar.inflateMenu(R.menu.custom_fragment_toolbar)
         lomba_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.search_view -> {
@@ -60,7 +61,7 @@ class LombaFragment : Fragment(), LombaClickListener {
                     true
                 }
                 R.id.go_to_favorit -> {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_lombaFragment_to_formTambahLombaFragment)
+                    //
                     true
                 }
                 R.id.go_to_notification -> {
@@ -70,8 +71,6 @@ class LombaFragment : Fragment(), LombaClickListener {
                 else -> false
             }
         }
-
-        initLombaAdapter()
     }
 
     private fun initLombaAdapter() {
@@ -81,20 +80,24 @@ class LombaFragment : Fragment(), LombaClickListener {
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
             lombaViewModel.getAllLomba()
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
-                lombaViewModel.listLomba.observe(viewLifecycleOwner){
-                    lombaAdapter.setListLomba(it)
-                    lombaAdapter.notifyDataSetChanged()
-                }
-            }
+        }
+
+        lombaViewModel.listLomba.observe(viewLifecycleOwner){
+            lombaAdapter.setListLomba(it)
+            lombaAdapter.notifyDataSetChanged()
         }
     }
 
     override fun clickOnLikeButton(item: Lomba, position: Int) {
-        // edit
+        // nothing to do
     }
 
     override fun clickOnDaftarLombaBody(item: Lomba, position: Int) {
-        // edit
+        val bundle = Bundle()
+        bundle.putParcelable("lomba", item)
+        Navigation.findNavController(requireView()).navigate(R.id.action_lombaFragment_to_detailLombaFragment, bundle)
     }
+
+
+
 }

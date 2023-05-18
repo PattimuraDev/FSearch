@@ -9,5 +9,6 @@ data class UserProfile(
     val jumlahLike: Int? = null,
     val bio: String? = null,
     val dataDiri: DataDiriUser? = null,
-    val testimoni: ArrayList<Testimoni>? = null
+    val testimoni: ArrayList<Testimoni>? = null,
+    val ratingKeseluruhan: Float? = null
 )

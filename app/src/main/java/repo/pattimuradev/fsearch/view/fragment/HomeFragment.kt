@@ -39,10 +39,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        home_action_bar.inflateMenu(R.menu.csutom_fragment_toolbar)
+        initPengumumanAdapter()
+        home_action_bar.inflateMenu(R.menu.custom_fragment_toolbar)
         home_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
-                // belum benar 100%
                 R.id.search_view -> {
                     val searchView: SearchView = menuItem.actionView as SearchView
                     searchView.maxWidth = Int.MAX_VALUE
@@ -69,8 +69,6 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
-
-        initPengumumanAdapter()
     }
 
     private fun initPengumumanAdapter(){
@@ -83,12 +81,11 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.IO){
             pengumumanViewModel.getAllPengumuman()
-            lifecycleScope.launch(Dispatchers.Main){
-                pengumumanViewModel.listPengumuman.observe(viewLifecycleOwner){
-                    pengumumanAdapter.setListPengumuman(it)
-                    pengumumanAdapter.notifyDataSetChanged()
-                }
-            }
+        }
+
+        pengumumanViewModel.listPengumuman.observe(viewLifecycleOwner){
+            pengumumanAdapter.setListPengumuman(it)
+            pengumumanAdapter.notifyDataSetChanged()
         }
 
     }

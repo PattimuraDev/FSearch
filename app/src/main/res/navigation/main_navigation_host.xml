@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_lombaFragment_to_formTambahLombaFragment"
             app:destination="@id/formTambahLombaFragment" />
+        <action
+            android:id="@+id/action_lombaFragment_to_detailLombaFragment"
+            app:destination="@id/detailLombaFragment" />
     </fragment>
     <fragment
         android:id="@+id/penggunaFragment"
@@ -54,6 +57,15 @@
         tools:layout="@layout/fragment_form_tambah_lomba" >
         <action
             android:id="@+id/action_formTambahLombaFragment_to_lombaFragment"
+            app:destination="@id/lombaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailLombaFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.DetailLombaFragment"
+        android:label="fragment_detail_lomba"
+        tools:layout="@layout/fragment_detail_lomba" >
+        <action
+            android:id="@+id/action_detailLombaFragment_to_lombaFragment"
             app:destination="@id/lombaFragment" />
     </fragment>
 </navigation>

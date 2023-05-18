@@ -11,6 +11,7 @@ class UserViewModel : ViewModel(){
     private val userRepository = UserRepository.getInstance()
     val currentUser = userRepository.currentUserLiveData
     val currentUserProfile = userRepository.currentUserProfileLiveData
+    val allUser = userRepository.allUserLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)
@@ -20,4 +21,5 @@ class UserViewModel : ViewModel(){
     }
     suspend fun login(dataLogin: DataLogin) = userRepository.login(dataLogin)
     suspend fun getUserProfile(id: String) = userRepository.getProfile(id)
+    suspend fun getAllUser() = userRepository.getALlUser()
 }

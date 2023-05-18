@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.PenggunaFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:id="@+id/pengguna_action_bar"
+        android:layout_marginHorizontal="10dp"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Pengguna"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="pengguna fragment" />
-
-</FrameLayout>
+        android:layout_below="@+id/pengguna_action_bar"
+        android:id="@+id/pengguna_rv_daftar_pengguna"/>
+</RelativeLayout>
