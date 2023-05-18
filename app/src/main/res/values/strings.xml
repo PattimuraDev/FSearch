@@ -2,4 +2,24 @@
     <string name="app_name">FSearch</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- custom string value -->
+    <string name="nasional">Nasional</string>
+    <string name="internasional">Internasional</string>
+    <string name="pemerintah">Pemerintah</string>
+    <string name="perusahaan">Perusahaan</string>
+    <string name="universitas">Universitas</string>
+    <string-array name="tema_lomba">
+        <item>Desain Grafis</item>
+        <item>Informasi dan Teknologi</item>
+        <item>Sosial Politik</item>
+        <item>Hukum</item>
+        <item>Seni Tari</item>
+        <item>Musik</item>
+        <item>Karya Ilmiah</item>
+        <item>Olahraga</item>
+        <item>Seni Rupa</item>
+        <item>Bahasa</item>
+        <item>Agama</item>
+        <item>Lainnya</item>
+    </string-array>
 </resources>

@@ -15,8 +15,8 @@ class PengumumanRepository {
     val listPengumumanLiveData: LiveData<List<Pengumuman>> = listPengumuman
     private val addPengumumanStatus = MutableLiveData<String>()
     val addPengumumanStatusLiveData: LiveData<String> = addPengumumanStatus
-    private val getPosterImageUrl = MutableLiveData<String>()
-    val getPosterImageUrlLiveData: LiveData<String> = getPosterImageUrl
+    private val getPosterPengumumanImageUrl = MutableLiveData<String>()
+    val getPosterPengumumanImageUrlLiveData: LiveData<String> = getPosterPengumumanImageUrl
 
     suspend fun getAllPengumuman(){
         firestoreDb.collection("pengumuman")
@@ -35,7 +35,7 @@ class PengumumanRepository {
     suspend fun postImageToStorage(fileUri: Uri?, isUploadingImage: Boolean){
         if(isUploadingImage){
             val storageRef = firebaseCloudStorage.reference
-            val riversRef = storageRef.child("images/${fileUri!!.lastPathSegment}")
+            val riversRef = storageRef.child("pengumuman/${fileUri!!.lastPathSegment}")
             val uploadTask = riversRef.putFile(fileUri)
             uploadTask.continueWithTask { getDownloadUrlTask ->
                 if(!getDownloadUrlTask.isSuccessful){
@@ -46,13 +46,13 @@ class PengumumanRepository {
                 riversRef.downloadUrl
             }.addOnCompleteListener {  getDownloadTaskStatus ->
                 if(getDownloadTaskStatus.isSuccessful){
-                    getPosterImageUrl.postValue(getDownloadTaskStatus.result.toString())
+                    getPosterPengumumanImageUrl.postValue(getDownloadTaskStatus.result.toString())
                 }else{
-                    getPosterImageUrl.postValue(null)
+                    getPosterPengumumanImageUrl.postValue(null)
                 }
             }
         }else{
-            getPosterImageUrl.postValue("")
+            getPosterPengumumanImageUrl.postValue("")
         }
     }
 

@@ -35,7 +35,7 @@ class UserRepository {
                         .addOnCompleteListener{ updateDisplayNameTask ->
                             if(updateDisplayNameTask.isSuccessful){
                                 val dataDiriUser = UserProfile(
-                                    user!!.uid,
+                                    user.uid,
                                     user.displayName!!,
                                     user.email!!,
                                     null,
@@ -97,14 +97,14 @@ class UserRepository {
         val result = MutableLiveData<String>()
 
         firestoreDb.collection("email_verification")
-            .addSnapshotListener{ value, error ->
+            .addSnapshotListener{ value, _ ->
                 var emailRegistered = true
                 if(!value?.isEmpty!!){
                     for(item in value){
                         val emailVerificationItem = item.toObject(EmailVerification::class.java)
-                        if(emailVerificationItem.email.equals(emailVerification.email)){
+                        if(emailVerificationItem.email == emailVerification.email){
                             emailRegistered = true
-                        }else if(item == value.last() && !emailVerificationItem.email.equals(emailVerification.email)){
+                        }else if(item == value.last() && emailVerificationItem.email != emailVerification.email){
                             emailRegistered = false
                         }
                     }
@@ -135,7 +135,7 @@ class UserRepository {
                 if(!value?.isEmpty!!){
                     value.forEach { item ->
                         val emailVerificationItem = item.toObject(EmailVerification::class.java)
-                        if(emailVerificationItem.verificationCode.equals(emailVerification.verificationCode)){
+                        if(emailVerificationItem.verificationCode == emailVerification.verificationCode){
                             otpEmailVerificationResult.postValue("OK")
                         }
                     }
@@ -145,7 +145,7 @@ class UserRepository {
             }
     }
 
-    suspend fun getProfile(userId: String){
+    suspend fun getProfile(userId: String) {
         firestoreDb.collection("user_profile")
             .document(currentUser.value!!.uid)
             .get()

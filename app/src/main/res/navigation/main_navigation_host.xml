@@ -18,7 +18,11 @@
         android:id="@+id/lombaFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.LombaFragment"
         android:label="fragment_lomba"
-        tools:layout="@layout/fragment_lomba" />
+        tools:layout="@layout/fragment_lomba" >
+        <action
+            android:id="@+id/action_lombaFragment_to_formTambahLombaFragment"
+            app:destination="@id/formTambahLombaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/penggunaFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.PenggunaFragment"
@@ -42,5 +46,14 @@
         <action
             android:id="@+id/action_formBuatPengumumanFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formTambahLombaFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormTambahLombaFragment"
+        android:label="fragment_form_tambah_lomba"
+        tools:layout="@layout/fragment_form_tambah_lomba" >
+        <action
+            android:id="@+id/action_formTambahLombaFragment_to_lombaFragment"
+            app:destination="@id/lombaFragment" />
     </fragment>
 </navigation>

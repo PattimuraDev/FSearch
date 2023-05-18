@@ -95,6 +95,9 @@ dependencies {
 
     // firebase cloud storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // currency edit text
+    implementation 'com.cottacush:CurrencyEditText:0.0.10'
 }
 
 kapt {

@@ -1,8 +1,9 @@
 package repo.pattimuradev.fsearch.misc
 
+import java.text.SimpleDateFormat
 import java.util.*
 
-object TimeHandler {
+object DateAndTimeHandler {
     private const val SECOND_MILLIS = 1000
     private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
     private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
@@ -40,5 +41,43 @@ object TimeHandler {
         } else {
             (selisih / DAY_MILLIS).toString() + "d"
         }
+    }
+
+    private fun nameOfMonthFromNumber(monthNumber: Int): String{
+        val monthName = listOf(
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        )
+        return monthName[monthNumber]
+    }
+
+    private fun nameOfDayIndonesian(dayName: String): String{
+        return when(dayName){
+            "Monday" -> "Senin"
+            "Tuesday" -> "Selasa"
+            "Wednesday" -> "Rabu"
+            "Thursday" -> "Kamis"
+            "Friday" -> "Jumat"
+            "Saturday" -> "Sabtu"
+            "Sunday" -> "Minggu"
+            else -> "error"
+        }
+    }
+
+    fun formatTanggalDaftarLombaPickerDialog(year: Int, monthOfYear: Int, dayOfMonth: Int): String{
+        val simpleDateFormat = SimpleDateFormat("EEEE")
+        val date = Date(year, monthOfYear, dayOfMonth - 1)
+        val dayString = simpleDateFormat.format(date)
+        return "${nameOfDayIndonesian(dayString)}, $dayOfMonth ${nameOfMonthFromNumber(monthOfYear)} $year"
     }
 }

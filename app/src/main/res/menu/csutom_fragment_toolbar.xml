@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home_search_view"
+        android:id="@+id/search_view"
         android:title="Search View"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/search_icon"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
     <item
-        android:id="@+id/home_go_to_favorit"
+        android:id="@+id/go_to_favorit"
         android:title="Favorite"
         android:icon="@drawable/like_icon"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/home_go_to_notification"
+        android:id="@+id/go_to_notification"
         android:title="Notification"
         android:icon="@drawable/notification_icon"
         app:showAsAction="always"/>

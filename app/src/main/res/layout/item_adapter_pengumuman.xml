@@ -12,7 +12,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_pengumuman_foto_profile"
                 android:layout_width="50dp"
@@ -72,8 +71,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:id="@+id/rv_pengumuman_poster"
-            android:src="@drawable/contoh_poster_lomba"/>
+            android:src="@drawable/no_image_available"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

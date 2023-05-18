@@ -9,7 +9,7 @@ class PengumumanViewModel : ViewModel() {
     private val pengumumanRepository =  PengumumanRepository.getInstance()
     val listPengumuman = pengumumanRepository.listPengumumanLiveData
     val addPengumumanStatus = pengumumanRepository.addPengumumanStatusLiveData
-    val posterUrl = pengumumanRepository.getPosterImageUrlLiveData
+    val posterPengumumanUrl = pengumumanRepository.getPosterPengumumanImageUrlLiveData
 
     suspend fun addPengumuman(pengumuman: Pengumuman) = pengumumanRepository.addPengumuman(pengumuman)
     suspend fun getAllPengumuman() = pengumumanRepository.getAllPengumuman()

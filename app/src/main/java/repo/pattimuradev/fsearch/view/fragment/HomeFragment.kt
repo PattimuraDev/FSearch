@@ -1,7 +1,6 @@
 package repo.pattimuradev.fsearch.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
@@ -42,13 +39,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        val navController = findNavController()
-        home_action_bar.setupWithNavController(navController)
-
+        home_action_bar.inflateMenu(R.menu.csutom_fragment_toolbar)
         home_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 // belum benar 100%
-                R.id.home_search_view -> {
+                R.id.search_view -> {
                     val searchView: SearchView = menuItem.actionView as SearchView
                     searchView.maxWidth = Int.MAX_VALUE
                     searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -59,17 +54,16 @@ class HomeFragment : Fragment() {
                         override fun onQueryTextChange(p0: String?): Boolean {
                             pengumumanAdapter.filter.filter(p0)
                             pengumumanAdapter.notifyDataSetChanged()
-                            Log.d("hasil filter", p0!!)
                             return true
                         }
                     })
                     true
                 }
-                R.id.home_go_to_notification -> {
+                R.id.go_to_notification -> {
 //                    startActivity(Intent(context, LoginActivity::class.java))
                     true
                 }
-                R.id.home_go_to_favorit -> {
+                R.id.go_to_favorit -> {
                     true
                 }
                 else -> false

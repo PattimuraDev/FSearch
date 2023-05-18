@@ -6,11 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.HomeFragment"
     android:padding="10dp">
-    <com.google.android.material.appbar.MaterialToolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:id="@+id/home_action_bar"
-        app:menu="@menu/search_menu"
         android:layout_height="?attr/actionBarSize">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,7 +23,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/primary"/>
         </RelativeLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
+    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

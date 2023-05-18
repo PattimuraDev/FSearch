@@ -7,16 +7,12 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.custom_dialog.view.*
@@ -24,10 +20,11 @@ import kotlinx.android.synthetic.main.fragment_form_buat_pengumuman.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
-import repo.pattimuradev.fsearch.misc.TimeHandler
+import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Pengumuman
 import repo.pattimuradev.fsearch.viewmodel.PengumumanViewModel
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
+import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 
 class FormBuatPengumumanFragment : Fragment() {
     private val userViewModel: UserViewModel by viewModels()
@@ -86,19 +83,18 @@ class FormBuatPengumumanFragment : Fragment() {
                 currentUserProfile.dataDiri.tahunAngkatan
             }
             val deskripsiPengumuman = form_buat_pengumuman_deskpripsi.text.toString()
-            pengumumanViewModel.posterUrl.observe(viewLifecycleOwner){ posterUrlValue ->
+            pengumumanViewModel.posterPengumumanUrl.observeOnce(viewLifecycleOwner){ posterUrlValue ->
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                     pengumumanViewModel.addPengumuman(Pengumuman(
                         fotoProfilUrl,
                         namaPengirim,
                         asalProgramStudi,
                         asalUniversitas,
-                        TimeHandler.currentDate(),
+                        DateAndTimeHandler.currentDate(),
                         tahunAngkatan,
                         deskripsiPengumuman,
                         posterUrlValue
                     ))
-                    Log.d("Observasi", posterUrlValue)
                 }
             }
         }
@@ -159,20 +155,11 @@ class FormBuatPengumumanFragment : Fragment() {
             .setView(dialogView)
             .setCancelable(true)
             .create()
-        dialogView.custom_dialog_message.text = "Selamat kamu telah berhasil membuat post pengumuman"
+        dialogView.custom_dialog_message.text = "Selamat! kamu telah berhasil membuat post pengumuman"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
         customDialog.window!!.attributes.x = 50
         customDialog.window!!.attributes.y = 50
         customDialog.show()
-    }
-
-    private fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: (T) -> Unit) {
-        observe(owner, object: Observer<T> {
-            override fun onChanged(value: T) {
-                removeObserver(this)
-                observer(value)
-            }
-        })
     }
 }
