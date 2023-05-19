@@ -13,12 +13,10 @@ import repo.pattimuradev.fsearch.misc.LombaClickListener
 import repo.pattimuradev.fsearch.model.Lomba
 import java.util.*
 
-class LombaAdapter(private val lombaClickListener: LombaClickListener): RecyclerView.Adapter<LombaAdapter.ViewHolder>(), Filterable{
+class LombaAdapter(private val lombaClickListener: LombaClickListener): RecyclerView.Adapter<LombaAdapter.ViewHolder>(){
     private var listLomba: List<Lomba>? = null
-    private var listLombaFiltered: List<Lomba>? = null
     fun setListLomba(listLomba: List<Lomba>){
         this.listLomba = listLomba
-        this.listLombaFiltered = listLomba
         notifyDataSetChanged()
     }
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
@@ -35,7 +33,15 @@ class LombaAdapter(private val lombaClickListener: LombaClickListener): Recycler
             rv_lomba_nama_penyelenggara.text = listLomba!![position].penyelenggaraLomba
             rv_lomba_lokasi_lomba.text = listLomba!![position].lokasi
             rv_lomba_tanggal_lomba.text = listLomba!![position].tanggalPelaksanaan
-            rv_lomba_biaya_pendaftaran.text = "Rp ${listLomba!![position].biayaPendaftaran}"
+
+            val biayaPendaftaranValue = listLomba!![position].biayaPendaftaran
+            rv_lomba_biaya_pendaftaran.text = if(biayaPendaftaranValue.substring(biayaPendaftaranValue.lastIndex - 1, biayaPendaftaranValue.lastIndex + 1) == ".0"){
+                "Rp " + biayaPendaftaranValue.substring(0, biayaPendaftaranValue.lastIndex - 1)
+            }else{
+                "Rp $biayaPendaftaranValue"
+            }
+
+
             Glide.with(rv_lomba_poster_lomba.context)
                 .load(listLomba!![position].posterLombaUrl)
                 .error(R.drawable.no_image_available)
@@ -59,35 +65,35 @@ class LombaAdapter(private val lombaClickListener: LombaClickListener): Recycler
         }
     }
 
-    override fun getFilter(): Filter {
-        val filter = object: Filter(){
-            override fun performFiltering(p0: CharSequence?): FilterResults {
-                val filterResult = FilterResults()
-                if(p0.isNullOrEmpty()){
-                    filterResult.values = listLombaFiltered
-                    filterResult.count = listLombaFiltered!!.size
-                }else{
-                    val searchChar = p0.toString().lowercase(Locale.getDefault())
-                    val filteredResult = mutableListOf<Lomba>()
-                    for(lomba in listLombaFiltered!!){
-                        if(lomba.judulLomba.lowercase(Locale.getDefault()).contains(searchChar)){
-                            filteredResult += lomba
-                        }
-                    }
-
-                    filterResult.values = filteredResult.toList()
-                    filterResult.count = filteredResult.size
-                }
-
-                return filterResult
-            }
-
-            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                listLomba = p1!!.values as List<Lomba>
-                notifyDataSetChanged()
-            }
-
-        }
-        return filter
-    }
+//    override fun getFilter(): Filter {
+//        val filter = object: Filter(){
+//            override fun performFiltering(p0: CharSequence?): FilterResults {
+//                val filterResult = FilterResults()
+//                if(p0.isNullOrEmpty()){
+//                    filterResult.values = listLombaFiltered
+//                    filterResult.count = listLombaFiltered!!.size
+//                }else{
+//                    val searchChar = p0.toString().lowercase(Locale.getDefault())
+//                    val filteredResult = mutableListOf<Lomba>()
+//                    for(lomba in listLombaFiltered!!){
+//                        if(lomba.judulLomba.lowercase(Locale.getDefault()).contains(searchChar)){
+//                            filteredResult += lomba
+//                        }
+//                    }
+//
+//                    filterResult.values = filteredResult.toList()
+//                    filterResult.count = filteredResult.size
+//                }
+//
+//                return filterResult
+//            }
+//
+//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//                listLomba = p1!!.values as List<Lomba>
+//                notifyDataSetChanged()
+//            }
+//
+//        }
+//        return filter
+//    }
 }

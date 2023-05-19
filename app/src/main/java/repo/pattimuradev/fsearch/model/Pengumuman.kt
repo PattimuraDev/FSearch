@@ -10,5 +10,6 @@ data class Pengumuman(
     val riwayatPosting: Date? = null,
     val tahunAngkatan: Int? = null,
     val deskripsiPengumuman: String = "",
-    val posterUrl: String? = null
+    val posterUrl: String? = null,
+    val idPengirim: String? = null
 )

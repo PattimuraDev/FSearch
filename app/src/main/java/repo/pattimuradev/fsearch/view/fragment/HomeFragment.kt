@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,23 +39,23 @@ class HomeFragment : Fragment() {
 
     private fun initView() {
         initPengumumanAdapter()
-        home_action_bar.inflateMenu(R.menu.custom_fragment_toolbar)
+        home_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
         home_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.search_view -> {
-                    val searchView: SearchView = menuItem.actionView as SearchView
-                    searchView.maxWidth = Int.MAX_VALUE
-                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-                        override fun onQueryTextSubmit(p0: String?): Boolean {
-                            return true
-                        }
-
-                        override fun onQueryTextChange(p0: String?): Boolean {
-                            pengumumanAdapter.filter.filter(p0)
-                            pengumumanAdapter.notifyDataSetChanged()
-                            return true
-                        }
-                    })
+//                    val searchView: SearchView = menuItem.actionView as SearchView
+//                    searchView.maxWidth = Int.MAX_VALUE
+//                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+//                        override fun onQueryTextSubmit(p0: String?): Boolean {
+//                            return true
+//                        }
+//
+//                        override fun onQueryTextChange(p0: String?): Boolean {
+//                            pengumumanAdapter.filter.filter(p0)
+//                            pengumumanAdapter.notifyDataSetChanged()
+//                            return true
+//                        }
+//                    })
                     true
                 }
                 R.id.go_to_notification -> {

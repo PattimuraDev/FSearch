@@ -3,22 +3,17 @@ package repo.pattimuradev.fsearch.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_adapter_pengumuman.view.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Pengumuman
-import java.util.*
 
-class PengumumanAdapter(private val onClick: (Pengumuman) -> Unit): RecyclerView.Adapter<PengumumanAdapter.ViewHolder>(), Filterable {
+class PengumumanAdapter(private val onClick: (Pengumuman) -> Unit): RecyclerView.Adapter<PengumumanAdapter.ViewHolder>() {
     private var listPengumuman: List<Pengumuman>? = null
-    private var listPengumumanFiltered: List<Pengumuman>? = null
     fun setListPengumuman(list: List<Pengumuman>){
         this.listPengumuman = list
-        this.listPengumumanFiltered = list
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -64,36 +59,36 @@ class PengumumanAdapter(private val onClick: (Pengumuman) -> Unit): RecyclerView
         }
     }
 
-    override fun getFilter(): Filter {
-        val filter = object: Filter(){
-            override fun performFiltering(p0: CharSequence?): FilterResults {
-                val filterResult = FilterResults()
-                if(p0.isNullOrEmpty()){
-                    filterResult.values = listPengumumanFiltered
-                    filterResult.count = listPengumumanFiltered!!.size
-                }else{
-                    val searchChar = p0.toString().lowercase(Locale.getDefault())
-                    val filteredResult = mutableListOf<Pengumuman>()
-                    for(pengumuman in listPengumumanFiltered!!){
-                        if(pengumuman.deskripsiPengumuman.lowercase(Locale.getDefault()).contains(searchChar)){
-                            filteredResult += pengumuman
-                        }
-                    }
-
-                    filterResult.values = filteredResult.toList()
-                    filterResult.count = filteredResult.size
-                }
-
-                return filterResult
-            }
-
-            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                listPengumuman = p1!!.values as List<Pengumuman>
-                notifyDataSetChanged()
-            }
-
-        }
-        return filter
-    }
+//    override fun getFilter(): Filter {
+//        val filter = object: Filter(){
+//            override fun performFiltering(p0: CharSequence?): FilterResults {
+//                val filterResult = FilterResults()
+//                if(p0.isNullOrEmpty()){
+//                    filterResult.values = listPengumumanFiltered
+//                    filterResult.count = listPengumumanFiltered!!.size
+//                }else{
+//                    val searchChar = p0.toString().lowercase(Locale.getDefault())
+//                    val filteredResult = mutableListOf<Pengumuman>()
+//                    for(pengumuman in listPengumumanFiltered!!){
+//                        if(pengumuman.deskripsiPengumuman.lowercase(Locale.getDefault()).contains(searchChar)){
+//                            filteredResult += pengumuman
+//                        }
+//                    }
+//
+//                    filterResult.values = filteredResult.toList()
+//                    filterResult.count = filteredResult.size
+//                }
+//
+//                return filterResult
+//            }
+//
+//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//                listPengumuman = p1!!.values as List<Pengumuman>
+//                notifyDataSetChanged()
+//            }
+//
+//        }
+//        return filter
+//    }
 
 }

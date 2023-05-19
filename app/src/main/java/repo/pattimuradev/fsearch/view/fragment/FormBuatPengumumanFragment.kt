@@ -83,6 +83,11 @@ class FormBuatPengumumanFragment : Fragment() {
                 currentUserProfile.dataDiri.tahunAngkatan
             }
             val deskripsiPengumuman = form_buat_pengumuman_deskpripsi.text.toString()
+            val idPengirim = if(currentUserProfile.id.isNullOrEmpty()){
+                ""
+            }else{
+                currentUserProfile.id
+            }
             pengumumanViewModel.posterPengumumanUrl.observeOnce(viewLifecycleOwner){ posterUrlValue ->
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                     pengumumanViewModel.addPengumuman(Pengumuman(
@@ -93,7 +98,8 @@ class FormBuatPengumumanFragment : Fragment() {
                         DateAndTimeHandler.currentDate(),
                         tahunAngkatan,
                         deskripsiPengumuman,
-                        posterUrlValue
+                        posterUrlValue,
+                        idPengirim
                     ))
                 }
             }

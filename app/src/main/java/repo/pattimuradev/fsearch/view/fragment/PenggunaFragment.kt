@@ -39,7 +39,7 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
     private fun initView() {
         initAdapter()
 
-        pengguna_action_bar.inflateMenu(R.menu.custom_fragment_toolbar)
+        pengguna_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
         pengguna_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.search_view -> {

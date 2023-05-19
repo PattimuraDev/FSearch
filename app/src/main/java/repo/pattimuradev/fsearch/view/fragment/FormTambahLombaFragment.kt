@@ -71,7 +71,7 @@ class FormTambahLombaFragment : Fragment() {
                     val judulLomba = form_tambah_lomba_judul_lomba.text.toString().trim()
                     val tanggalPelaksanaan = form_tambah_lomba_tanggal_pelaksanaan.text.toString().trim()
                     val lokasi = form_tambah_lomba_lokasi_lomba.text.toString().trim()
-                    val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.text.toString().trim()
+                    val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.getNumericValue().toString()
                     val deskripsiLomba = form_tambah_lomba_deskripsi_pengumuman.text.toString().trim()
                     val temaLomba = form_tambah_lomba_tema_lomba.text.toString().trim()
 
@@ -166,7 +166,7 @@ class FormTambahLombaFragment : Fragment() {
             val judulLomba = form_tambah_lomba_judul_lomba.text.toString().trim()
             val tanggalPelaksanaan = form_tambah_lomba_tanggal_pelaksanaan.text.toString().trim()
             val lokasi = form_tambah_lomba_lokasi_lomba.text.toString().trim()
-            val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.text.toString().trim()
+            val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.getNumericValue().toString()
             val deskripsiLomba = form_tambah_lomba_deskripsi_pengumuman.text.toString().trim()
 
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){

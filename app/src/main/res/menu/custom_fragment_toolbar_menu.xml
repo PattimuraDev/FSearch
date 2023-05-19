@@ -5,8 +5,7 @@
         android:id="@+id/search_view"
         android:title="Search View"
         android:icon="@drawable/search_icon"
-        app:showAsAction="always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+        app:showAsAction="always" />
     <item
         android:id="@+id/go_to_favorit"
         android:title="Favorite"
