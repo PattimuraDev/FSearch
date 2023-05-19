@@ -48,7 +48,14 @@ class DetailLombaFragment : Fragment() {
         detail_lomba_nama_penyelenggara.text = lomba.penyelenggaraLomba
         detail_lomba_lokasi_lomba.text = lomba.lokasi
         detail_lomba_tanggal_lomba.text = lomba.tanggalPelaksanaan
-        detail_lomba_biaya_pendaftaran.text = lomba.biayaPendaftaran
         detail_lomba_deskripsi_lomba.text = lomba.deskripsiLomba
+        detail_lomba_link_lomba.text = lomba.linkLomba ?: ""
+
+        val biaya = lomba.biayaPendaftaran
+        detail_lomba_biaya_pendaftaran.text = if(biaya.substring(biaya.lastIndex - 1, biaya.lastIndex + 1) == ".0"){
+            "Rp " + biaya.substring(0, biaya.lastIndex - 1)
+        }else {
+            "Rp $biaya"
+        }
     }
 }

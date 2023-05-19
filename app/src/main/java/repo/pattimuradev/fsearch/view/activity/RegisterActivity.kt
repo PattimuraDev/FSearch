@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         register_button_daftar.setOnClickListener {
-            if(register_field_password.text.toString().length <= 6){
+            if(register_field_password.text.toString().length < 6){
                 Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show()
             }else{
                 sendOtpViaEmail()

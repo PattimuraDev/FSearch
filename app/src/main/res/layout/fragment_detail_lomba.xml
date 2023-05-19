@@ -165,6 +165,25 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:text="Contoh deskripsi"
+            android:layout_marginBottom="20dp"
             android:id="@+id/detail_lomba_deskripsi_lomba"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="Link"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="https://www.google.com/"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/detail_lomba_link_lomba"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

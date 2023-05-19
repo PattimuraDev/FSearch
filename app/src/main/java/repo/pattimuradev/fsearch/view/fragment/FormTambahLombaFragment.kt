@@ -62,7 +62,8 @@ class FormTambahLombaFragment : Fragment() {
             form_tambah_lomba_lokasi_lomba,
             form_tambah_lomba_biaya_pendaftaran,
             form_tambah_lomba_deskripsi_pengumuman,
-            form_tambah_lomba_tema_lomba
+            form_tambah_lomba_tema_lomba,
+            form_tambah_lomba_link_lomba
         )
         for(field in fields){
             field.addTextChangedListener(object: TextWatcher{
@@ -151,13 +152,13 @@ class FormTambahLombaFragment : Fragment() {
         
         form_tambah_lomba_spinner_tema_lomba.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                form_tambah_lomba_tema_lomba.setText(temaLombaList[position])
+                form_tambah_lomba_tema_lomba.text = temaLombaList[position]
                 temaLomba = temaLombaList[position]
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 temaLomba = null
-                form_tambah_lomba_tema_lomba.setText("")
+                form_tambah_lomba_tema_lomba.text = ""
             }
         }
 
@@ -168,6 +169,11 @@ class FormTambahLombaFragment : Fragment() {
             val lokasi = form_tambah_lomba_lokasi_lomba.text.toString().trim()
             val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.getNumericValue().toString()
             val deskripsiLomba = form_tambah_lomba_deskripsi_pengumuman.text.toString().trim()
+            val linkLomba = if(form_tambah_lomba_link_lomba.text.isNullOrEmpty()){
+                ""
+            }else{
+                form_tambah_lomba_link_lomba.text.toString()
+            }
 
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                 if(posterImageUri != null){
@@ -190,7 +196,8 @@ class FormTambahLombaFragment : Fragment() {
                         lokasi,
                         DateAndTimeHandler.currentDate(),
                         biayaPendaftaran,
-                        deskripsiLomba
+                        deskripsiLomba,
+                        linkLomba
                     ))
                 }
             }
