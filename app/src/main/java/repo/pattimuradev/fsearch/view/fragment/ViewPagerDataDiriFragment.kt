@@ -54,27 +54,27 @@ class ViewPagerDataDiriFragment : Fragment() {
             }
 
             viewpager_profile_lokasi.text = if(userProfile.dataDiri == null){
-                ": -"
+                ""
             }else{
-                ": " + userProfile.dataDiri.asalKota
+                " " + userProfile.dataDiri.asalKota
             }
 
             viewpager_profile_jenis_kelamin.text = if(userProfile.dataDiri == null){
-                ": -"
+                ""
             }else{
                 " " + userProfile.dataDiri.jenisKelamin
             }
 
             viewpager_profile_umur.text = if(userProfile.dataDiri == null){
-                " "
+                ""
             }else{
                 " " + userProfile.dataDiri.umur.toString()
             }
 
             viewpager_profile_keminatan.text = if(userProfile.dataDiri == null){
-                " "
+                ": -"
             }else{
-                " " + userProfile.dataDiri.keminatan
+                ": " + userProfile.dataDiri.keminatan
             }
         }
     }

@@ -36,7 +36,7 @@ class UserRepository {
                     user!!.updateProfile(updateDisplayNameUser)
                         .addOnCompleteListener{ updateDisplayNameTask ->
                             if(updateDisplayNameTask.isSuccessful){
-                                val dataDiriUser = UserProfile(
+                                val profilUser = UserProfile(
                                     user.uid,
                                     user.displayName!!,
                                     user.email!!,
@@ -46,11 +46,12 @@ class UserRepository {
                                     null,
                                     null,
                                     null,
+                                    null,
                                     null
                                 )
                                 firestoreDb.collection("user_profile")
-                                    .document(dataDiriUser.id!!)
-                                    .set(dataDiriUser)
+                                    .document(profilUser.id!!)
+                                    .set(profilUser)
                                     .addOnCompleteListener { saveProfileTask ->
                                         if(saveProfileTask.isSuccessful){
                                             currentUser.postValue(firebaseAuth.currentUser)
@@ -77,7 +78,7 @@ class UserRepository {
                     currentUser.value = firebaseAuth.currentUser
                     result.postValue("OK")
 
-                    val dataDiriUser = UserProfile(
+                    val profilUser = UserProfile(
                         currentUser.value!!.uid,
                         currentUser.value!!.displayName!!,
                         currentUser.value!!.email!!,
@@ -87,9 +88,10 @@ class UserRepository {
                         null,
                         null,
                         null,
+                        null,
                         null
                     )
-                    currentUserProfile.postValue(dataDiriUser)
+                    currentUserProfile.postValue(profilUser)
                 }else{
                     result.postValue("FAILED")
                 }

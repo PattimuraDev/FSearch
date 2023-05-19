@@ -8,6 +8,8 @@
     <string name="pemerintah">Pemerintah</string>
     <string name="perusahaan">Perusahaan</string>
     <string name="universitas">Universitas</string>
+    <string name="pria">Pria</string>
+    <string name="wanita">Wanita</string>
     <string-array name="tema_lomba">
         <item>Desain Grafis</item>
         <item>Informasi dan Teknologi</item>

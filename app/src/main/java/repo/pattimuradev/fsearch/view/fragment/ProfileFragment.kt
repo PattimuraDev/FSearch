@@ -1,13 +1,16 @@
 package repo.pattimuradev.fsearch.view.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
+import kotlinx.android.synthetic.main.custom_profile_menu_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.view.adapter.ProfileViewPagerAdapter
@@ -22,7 +25,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -69,13 +71,33 @@ class ProfileFragment : Fragment() {
         profile_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.more -> {
-                    // handle
-
+                    showCustomDialog()
                     true
                 }else -> false
             }
         }
     }
 
+
+    private fun showCustomDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.custom_profile_menu_dialog, null)
+        val customDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+        dialogView.custom_profil_menu_dialog_button_edit_profile.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_formUpdateProfileFragment)
+            customDialog.dismiss()
+        }
+        dialogView.custom_profil_menu_dialog_button_keluar.setOnClickListener {
+            // edit nanti
+            customDialog.dismiss()
+        }
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        customDialog.window!!.attributes.gravity = Gravity.TOP
+        customDialog.window!!.attributes.verticalMargin = 0.2F
+        customDialog.show()
+        customDialog.window!!.setLayout(480, 300)
+    }
 
 }

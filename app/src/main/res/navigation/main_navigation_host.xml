@@ -40,7 +40,11 @@
         android:id="@+id/profileFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_formUpdateProfileFragment"
+            app:destination="@id/formUpdateProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/formBuatPengumumanFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.FormBuatPengumumanFragment"
@@ -67,5 +71,14 @@
         <action
             android:id="@+id/action_detailLombaFragment_to_lombaFragment"
             app:destination="@id/lombaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formUpdateProfileFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormUpdateProfileFragment"
+        android:label="fragment_form_update_profile"
+        tools:layout="@layout/fragment_form_update_profile" >
+        <action
+            android:id="@+id/action_formUpdateProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.custom_dialog.view.*
+import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_form_tambah_lomba.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -214,12 +214,12 @@ class FormTambahLombaFragment : Fragment() {
     }
 
     private fun showCustomDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.custom_dialog, null)
+        val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .setCancelable(true)
             .create()
-        dialogView.custom_dialog_message.text = "Selamat! Kamu berhasil menginputkan suatu lomba"
+        dialogView.custom_notification_dialog_message.text = "Selamat! Kamu berhasil menginputkan suatu lomba"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
         customDialog.window!!.attributes.x = 50

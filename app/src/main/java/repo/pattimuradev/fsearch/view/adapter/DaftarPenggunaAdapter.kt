@@ -29,17 +29,28 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
         with(holder.itemView){
             rv_pengguna_nama_pengguna.text = listPengguna!![position].nama
 
+
             rv_pengguna_asal_prodi.text = if(listPengguna!![position].dataDiri == null){
                 ""
             }else{
-                listPengguna!![position].dataDiri!!.programStudi
+                if(listPengguna!![position].dataDiri!!.programStudi == null){
+                    ""
+                }else{
+                    listPengguna!![position].dataDiri!!.programStudi
+                }
             }
+
 
             rv_pengguna_asal_universitas.text = if(listPengguna!![position].dataDiri == null){
                 ""
             }else{
-                listPengguna!![position].dataDiri!!.asalUniversitas
+                if(listPengguna!![position].dataDiri!!.asalUniversitas == null){
+                    ""
+                }else{
+                    listPengguna!![position].dataDiri!!.asalUniversitas
+                }
             }
+
 
             rv_pengguna_jumlah_testimoni.text = if(listPengguna!![position].testimoni == null){
                 ""
@@ -47,16 +58,24 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
                 "(${listPengguna!![position].testimoni!!.size})"
             }
 
+
             rv_pengguna_tahun_angkatan.text = if(listPengguna!![position].dataDiri == null){
                 ""
             }else{
-                listPengguna!![position].dataDiri!!.tahunAngkatan.toString()
+                if(listPengguna!![position].dataDiri!!.tahunAngkatan == null){
+                    ""
+                }else{
+                    listPengguna!![position].dataDiri!!.tahunAngkatan.toString()
+                }
             }
+
+
             rv_pengguna_rating.rating = if(listPengguna!![position].ratingKeseluruhan == null){
                 0.0.toFloat()
             }else{
                 listPengguna!![position].ratingKeseluruhan!!
             }
+
 
             rv_pengguna_button_like.setOnClickListener {
                 daftarPenggunaClickListener.clickOnLikeButton(listPengguna!![position], position)

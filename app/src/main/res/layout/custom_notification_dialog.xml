@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:id="@+id/custom_dialog_message"
+        android:id="@+id/custom_notification_dialog_message"
         android:text="Contoh teks pada custom dialog"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"

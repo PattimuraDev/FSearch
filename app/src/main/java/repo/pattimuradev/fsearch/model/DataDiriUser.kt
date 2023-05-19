@@ -8,5 +8,7 @@ data class DataDiriUser(
     val keminatan: String? = null,
     val jenisKelamin: String? = null,
     val umur: Int? = null,
-    val asalKota: String? = null
+    val asalKota: String? = null,
+    val fakultas: String? = null,
+    val kepribadian: String? = null
 )
