@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_adapter_lomba.view.*
 import kotlinx.android.synthetic.main.item_adapter_testimoni.view.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Testimoni
 
-class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
+class TestimoniViewPagerAdapter: RecyclerView.Adapter<TestimoniViewPagerAdapter.ViewHolder>() {
 
     private var listTestimoni: ArrayList<Testimoni>? = null
     fun setListTestimoni(listTestimoni: ArrayList<Testimoni>){
@@ -20,7 +19,7 @@ class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestimoniAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestimoniViewPagerAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_adapter_testimoni, parent, false)
         return ViewHolder(view)

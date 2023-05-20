@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_adapter_daftar_pengguna.view.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DaftarPenggunaClickListener
@@ -83,6 +84,11 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
             rv_pengguna_container.setOnClickListener {
                 daftarPenggunaClickListener.clickOnDaftarPenggunaBody(listPengguna!![position], position)
             }
+
+            Glide.with(rv_pengguna_foto_profile.context)
+                .load(listPengguna!![position].urlFoto)
+                .error(R.drawable.standard_user_photo)
+                .into(rv_pengguna_foto_profile)
         }
     }
 

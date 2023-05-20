@@ -35,17 +35,17 @@ class LoginActivity : AppCompatActivity() {
     private fun processLogin() {
         val emailField = login_field_email.text.toString().trim()
         val passwordField = login_field_password.text.toString().trim()
+
         lifecycleScope.launch(Dispatchers.IO){
-            val result = userViewModel.login(DataLogin(emailField, passwordField))
-            lifecycleScope.launch(Dispatchers.Main){
-                result.observe(this@LoginActivity){
-                    if(it.equals("OK")){
-                        Toast.makeText(this@LoginActivity, "Login berhasil", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    }else{
-                        Toast.makeText(this@LoginActivity, "Login gagal, cek ulang data", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            userViewModel.login(DataLogin(emailField, passwordField))
+        }
+
+        userViewModel.loginStatus.observe(this){
+            if(it == "OK"){
+                Toast.makeText(this@LoginActivity, "Login berhasil", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            }else{
+                Toast.makeText(this@LoginActivity, "Login gagal, cek ulang data", Toast.LENGTH_SHORT).show()
             }
         }
     }

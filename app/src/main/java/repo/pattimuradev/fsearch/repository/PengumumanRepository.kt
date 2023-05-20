@@ -48,7 +48,7 @@ class PengumumanRepository {
                 if(getDownloadTaskStatus.isSuccessful){
                     getPosterPengumumanImageUrl.postValue(getDownloadTaskStatus.result.toString())
                 }else{
-                    getPosterPengumumanImageUrl.postValue(null)
+                    getPosterPengumumanImageUrl.postValue("")
                 }
             }
         }else{

@@ -1,5 +1,6 @@
 package repo.pattimuradev.fsearch.repository
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
@@ -7,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Account
 import repo.pattimuradev.fsearch.model.DataLogin
 import repo.pattimuradev.fsearch.model.EmailVerification
@@ -15,6 +17,9 @@ import repo.pattimuradev.fsearch.model.UserProfile
 class UserRepository {
     private val firebaseAuth = Firebase.auth
     private val firestoreDb = FirebaseFirestore.getInstance()
+    private val firebaseCloudStorage = Firebase.storage
+    private val checkIfEmailRegistered = MutableLiveData<String>()
+    val checkIfEmailRegisteredLiveData : LiveData<String> = checkIfEmailRegistered
     private val otpEmailVerificationResult = MutableLiveData<String>()
     val otpEmailVerificationResultLiveData: LiveData<String> = otpEmailVerificationResult
     private val currentUser = MutableLiveData<FirebaseUser>()
@@ -23,6 +28,12 @@ class UserRepository {
     val currentUserProfileLiveData = currentUserProfile
     private val allUser = MutableLiveData<List<UserProfile>>()
     val allUserLiveData: LiveData<List<UserProfile>> = allUser
+    private val currentUserFotoProfilUrl = MutableLiveData<String>()
+    val currentUserFotoProfilUrlLiveData: LiveData<String> = currentUserFotoProfilUrl
+    private val updateProfilStatus = MutableLiveData<String>()
+    val updateProfilLiveData : LiveData<String> = updateProfilStatus
+    private val loginStatus = MutableLiveData<String>()
+    val loginStatusLiveData: LiveData<String> = loginStatus
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -41,7 +52,8 @@ class UserRepository {
                                     user.displayName!!,
                                     user.email!!,
                                     null,
-                                    null,
+                                    0,
+                                    0,
                                     null,
                                     null,
                                     null,
@@ -69,70 +81,128 @@ class UserRepository {
         return resultMessage
     }
 
-    suspend fun login(dataLogin: DataLogin): MutableLiveData<String>{
-        val result = MutableLiveData<String>()
+    suspend fun updateUser(userProfile: UserProfile){
+        val user = firebaseAuth.currentUser
+        val userProfileRef = firestoreDb.collection("user_profile").document(user!!.uid)
+        userProfileRef.update(
+            mapOf(
+                "nama" to userProfile.nama,
+                "bio" to userProfile.bio,
+                "statusBersediaMenerimaAjakan" to userProfile.statusBersediaMenerimaAjakan,
+                "dataDiri.asalUniversitas" to userProfile.dataDiri!!.asalUniversitas,
+                "dataDiri.tahunAngkatan" to userProfile.dataDiri.tahunAngkatan,
+                "dataDiri.fakultas" to userProfile.dataDiri.fakultas,
+                "dataDiri.jurusan" to userProfile.dataDiri.jurusan,
+                "dataDiri.programStudi" to userProfile.dataDiri.programStudi,
+                "dataDiri.keminatan" to userProfile.dataDiri.keminatan,
+                "dataDiri.jenisKelamin" to userProfile.dataDiri.jenisKelamin,
+                "dataDiri.umur" to userProfile.dataDiri.umur,
+                "dataDiri.asalKota" to userProfile.dataDiri.asalKota,
+                "dataDiri.kepribadian" to userProfile.dataDiri.kepribadian,
+                "urlFoto" to userProfile.urlFoto,
+                "profilePhotoFileName" to userProfile.profilePhotoFileName
+            )
+        )
+            .addOnSuccessListener {
+                currentUserProfile.postValue(userProfile)
+                updateProfilStatus.postValue("OK")
+            }
+            .addOnFailureListener {
+                updateProfilStatus.postValue("FAILED")
+            }
+    }
 
+    suspend fun login(dataLogin: DataLogin){
         firebaseAuth.signInWithEmailAndPassword(dataLogin.email!!, dataLogin.password!!)
             .addOnCompleteListener{ loginTask ->
                 if(loginTask.isSuccessful){
                     currentUser.value = firebaseAuth.currentUser
-                    result.postValue("OK")
-
-                    val profilUser = UserProfile(
-                        currentUser.value!!.uid,
-                        currentUser.value!!.displayName!!,
-                        currentUser.value!!.email!!,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
-                    currentUserProfile.postValue(profilUser)
-                }else{
-                    result.postValue("FAILED")
-                }
-            }
-        return result
-    }
-
-    suspend fun saveOtpEmail(emailVerification: EmailVerification): MutableLiveData<String>{
-        val result = MutableLiveData<String>()
-
-        firestoreDb.collection("email_verification")
-            .addSnapshotListener{ value, _ ->
-                var emailRegistered = true
-                if(!value?.isEmpty!!){
-                    for(item in value){
-                        val emailVerificationItem = item.toObject(EmailVerification::class.java)
-                        if(emailVerificationItem.email == emailVerification.email){
-                            emailRegistered = true
-                        }else if(item == value.last() && emailVerificationItem.email != emailVerification.email){
-                            emailRegistered = false
-                        }
-                    }
-                }else{
-                    emailRegistered = false
-                }
-
-                if(!emailRegistered){
-                    firestoreDb.collection("email_verification")
-                        .add(emailVerification)
-                        .addOnSuccessListener {
-                            result.postValue("OK")
+                    firestoreDb.collection("user_profile")
+                        .document(currentUser.value!!.uid)
+                        .get()
+                        .addOnSuccessListener { snapshot ->
+                            val profile = snapshot.toObject(UserProfile::class.java)
+                            currentUserProfile.value = profile
+                            loginStatus.postValue("OK")
                         }
                         .addOnFailureListener {
-                            result.postValue("FAILED")
+                            currentUserProfile.value = null
+                            loginStatus.postValue("FAILED")
                         }
                 }else{
-                    result.postValue("ALREADY REGISTERED")
+                    loginStatus.postValue("FAILED")
                 }
             }
+    }
 
-        return result
+    suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFileFotoLama: String?, namaFileFotoBaru: String?){
+        if(isUploadingImage){
+            if(namaFileFotoLama != null){
+                val storageRef = firebaseCloudStorage.reference
+                val fotoLamaRef = storageRef.child("foto_profil_user/$namaFileFotoLama")
+                fotoLamaRef.delete()
+                    .addOnSuccessListener {
+                        val fotoBaruRef = storageRef.child("foto_profil_user/$namaFileFotoBaru")
+                        val uploadTask = fotoBaruRef.putFile(fileUri!!)
+                        uploadTask.continueWithTask { getDownloadUrlTask ->
+                            if(!getDownloadUrlTask.isSuccessful){
+                                getDownloadUrlTask.exception?.let {
+                                    throw it
+                                }
+                            }
+                            fotoBaruRef.downloadUrl
+                        }.addOnCompleteListener {  getDownloadTaskStatus ->
+                            if(getDownloadTaskStatus.isSuccessful){
+                                currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
+                            }else{
+                                currentUserFotoProfilUrl.postValue(null)
+                            }
+                        }
+                    }
+            }else{
+                val storageRef = firebaseCloudStorage.reference
+                val fotoBaruRef = storageRef.child("foto_profil_user/$namaFileFotoBaru")
+                val uploadTask = fotoBaruRef.putFile(fileUri!!)
+                uploadTask.continueWithTask { getDownloadUrlTask ->
+                    if(!getDownloadUrlTask.isSuccessful){
+                        getDownloadUrlTask.exception?.let {
+                            throw it
+                        }
+                    }
+                    fotoBaruRef.downloadUrl
+                }.addOnCompleteListener {  getDownloadTaskStatus ->
+                    if(getDownloadTaskStatus.isSuccessful){
+                        currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
+                    }else{
+                        currentUserFotoProfilUrl.postValue(null)
+                    }
+                }
+            }
+        }else{
+            currentUserFotoProfilUrl.postValue(null)
+        }
+    }
+
+    suspend fun saveOtpEmail(emailVerification: EmailVerification){
+
+        firebaseAuth.fetchSignInMethodsForEmail(emailVerification.email)
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    val check = !task.result.signInMethods.isNullOrEmpty()
+                    if(!check){
+                        firestoreDb.collection("email_verification")
+                            .add(emailVerification)
+                            .addOnSuccessListener {
+                                checkIfEmailRegistered.postValue("OK")
+                            }
+                            .addOnFailureListener {
+                                checkIfEmailRegistered.postValue("Failed")
+                            }
+                    }else{
+                        checkIfEmailRegistered.postValue("ALREADY REGISTERED")
+                    }
+                }
+            }
     }
 
     suspend fun verifyOtpEmail(emailVerification: EmailVerification){
@@ -151,20 +221,20 @@ class UserRepository {
             }
     }
 
-    suspend fun getProfile(userId: String) {
-        firestoreDb.collection("user_profile")
-            .document(currentUser.value!!.uid)
-            .get()
-            .addOnSuccessListener { snapshot ->
-                val profile = snapshot.toObject(UserProfile::class.java)
-                currentUserProfile.value = profile
-            }
-            .addOnFailureListener {
-                currentUserProfile.value = null
-            }
-    }
+//    suspend fun getProfile(userId: String) {
+//        firestoreDb.collection("user_profile")
+//            .document(currentUser.value!!.uid)
+//            .get()
+//            .addOnSuccessListener { snapshot ->
+//                val profile = snapshot.toObject(UserProfile::class.java)
+//                currentUserProfile.value = profile
+//            }
+//            .addOnFailureListener {
+//                currentUserProfile.value = null
+//            }
+//    }
 
-    suspend fun getALlUser(){
+    suspend fun getAllUser(){
         firestoreDb.collection("user_profile")
             .get()
             .addOnSuccessListener { result ->

@@ -6,18 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_view_pager_testimoni.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
-import repo.pattimuradev.fsearch.view.adapter.TestimoniAdapter
+import repo.pattimuradev.fsearch.view.adapter.TestimoniViewPagerAdapter
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
 class ViewPagerTestimoniFragment : Fragment() {
 
-    private lateinit var testimoniAdapter: TestimoniAdapter
+    private lateinit var testimoniViewPagerAdapter: TestimoniViewPagerAdapter
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
@@ -34,14 +31,14 @@ class ViewPagerTestimoniFragment : Fragment() {
     }
 
     private fun initTestimoniAdapter() {
-        testimoniAdapter = TestimoniAdapter()
+        testimoniViewPagerAdapter = TestimoniViewPagerAdapter()
         viewpager_profile_rv_testimoni.layoutManager = LinearLayoutManager(requireContext())
-        viewpager_profile_rv_testimoni.adapter = testimoniAdapter
+        viewpager_profile_rv_testimoni.adapter = testimoniViewPagerAdapter
 
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
             if(userProfile.testimoni != null){
-                testimoniAdapter.setListTestimoni(userProfile.testimoni)
-                testimoniAdapter.notifyDataSetChanged()
+                testimoniViewPagerAdapter.setListTestimoni(userProfile.testimoni)
+                testimoniViewPagerAdapter.notifyDataSetChanged()
             }
         }
     }

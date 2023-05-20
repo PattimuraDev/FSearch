@@ -1,10 +1,12 @@
 package repo.pattimuradev.fsearch.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import repo.pattimuradev.fsearch.model.Account
 import repo.pattimuradev.fsearch.model.DataLogin
 import repo.pattimuradev.fsearch.model.EmailVerification
+import repo.pattimuradev.fsearch.model.UserProfile
 import repo.pattimuradev.fsearch.repository.UserRepository
 
 class UserViewModel : ViewModel(){
@@ -12,6 +14,10 @@ class UserViewModel : ViewModel(){
     val currentUser = userRepository.currentUserLiveData
     val currentUserProfile = userRepository.currentUserProfileLiveData
     val allUser = userRepository.allUserLiveData
+    val currentUserFotoProfileUrl = userRepository.currentUserFotoProfilUrlLiveData
+    val updateUserStatus = userRepository.updateProfilLiveData
+    val emailRegistrationStatus = userRepository.checkIfEmailRegisteredLiveData
+    val loginStatus = userRepository.loginStatusLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)
@@ -20,6 +26,7 @@ class UserViewModel : ViewModel(){
         return userRepository.otpEmailVerificationResultLiveData
     }
     suspend fun login(dataLogin: DataLogin) = userRepository.login(dataLogin)
-    suspend fun getUserProfile(id: String) = userRepository.getProfile(id)
-    suspend fun getAllUser() = userRepository.getALlUser()
+    suspend fun updateProfile(userProfile: UserProfile) = userRepository.updateUser(userProfile)
+    suspend fun getAllUser() = userRepository.getAllUser()
+    suspend fun getFotoProfilUrl(fileUri: Uri?, isUploading: Boolean, namaFileLama: String?, namaFileBaru: String?) = userRepository.getUserProfilePhotoUrl(fileUri, isUploading, namaFileLama, namaFileBaru)
 }

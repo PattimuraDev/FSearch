@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 import uk.co.jakebreen.sendgridandroid.SendGrid
@@ -62,46 +63,48 @@ class RegisterActivity : AppCompatActivity() {
         email.setContent(emailBody)
         email.setReplyTo(devEmail, devName)
 
-        try {
-            val sendtask = SendTask(sendgrid)
-            val sendOtpStatus = sendtask.send(email)
-            if(sendOtpStatus.isSuccessful){
-                Toast.makeText(this@RegisterActivity, "Check email anda", Toast.LENGTH_LONG).show()
-                val recipientEmailField = register_field_email.text.toString().trim()
-                val passwordFIeld = register_field_password.text.toString().trim()
-                val namaField = register_field_nama.text.toString().trim()
+        lifecycleScope.launch(Dispatchers.IO){
+            val recipientEmailField = register_field_email.text.toString().trim()
+            userViewModel.saveOtpEmail(EmailVerification(recipientEmailField, otp))
+        }
 
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val result = userViewModel.saveOtpEmail(EmailVerification(recipientEmailField, otp))
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        result.observe(this@RegisterActivity){
-                            if(it.equals("OK")){
-                                startActivity(Intent(
-                                    this@RegisterActivity,
-                                    RegisterCodeVerificationActivity::class.java
-                                ).putExtra(
-                                    "register_email",
-                                    recipientEmailField
-                                ).putExtra(
-                                    "register_password",
-                                    passwordFIeld
-                                ).putExtra(
-                                    "register_nama",
-                                    namaField
-                                ))
-                            }else if(it.equals("ALREADY REGISTERED")){
-
-                                // cari solusinya
-                                Toast.makeText(this@RegisterActivity, "Email sudah terdaftar", Toast.LENGTH_LONG).show()
-                            }else{
-                                Toast.makeText(this@RegisterActivity, "Failed, something wrong", Toast.LENGTH_SHORT).show()
-                            }
+        userViewModel.emailRegistrationStatus.observe(this){ status ->
+            val recipientEmailField = register_field_email.text.toString().trim()
+            val passwordFIeld = register_field_password.text.toString().trim()
+            val namaField = register_field_nama.text.toString().trim()
+            when (status) {
+                "OK" -> {
+                    try {
+                        val sendtask = SendTask(sendgrid)
+                        val sendOtpStatus = sendtask.send(email)
+                        if(sendOtpStatus.isSuccessful){
+                            startActivity(Intent(
+                                this@RegisterActivity,
+                                RegisterCodeVerificationActivity::class.java
+                            ).putExtra(
+                                "register_email",
+                                recipientEmailField
+                            ).putExtra(
+                                "register_password",
+                                passwordFIeld
+                            ).putExtra(
+                                "register_nama",
+                                namaField
+                            ))
+                        }else{
+                            Toast.makeText(this, "Gagal mengirimkan kode OTP", Toast.LENGTH_SHORT).show()
                         }
+                    }catch (e: Exception){
+                        Toast.makeText(this, "Gagal mengirimkan kode OTP", Toast.LENGTH_SHORT).show()
                     }
                 }
+                "ALREADY REGISTERED" -> {
+                    Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                }
             }
-        }catch (e: Exception){
-            Toast.makeText(this@RegisterActivity, "Registrasi akun gagal, kode OTP tidak dapat dikirim", Toast.LENGTH_SHORT).show()
         }
     }
 

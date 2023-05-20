@@ -3,13 +3,11 @@ package repo.pattimuradev.fsearch.view.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
 import kotlinx.android.synthetic.main.custom_profile_menu_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import repo.pattimuradev.fsearch.R

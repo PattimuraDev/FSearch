@@ -53,31 +53,39 @@ class FormBuatPengumumanFragment : Fragment() {
     }
 
     private fun handlePostPengumuman() {
-        userViewModel.currentUser.observeOnce(viewLifecycleOwner){currentUser ->
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                userViewModel.getUserProfile(currentUser.uid)
-                if(posterImageUri != null){
-                    pengumumanViewModel.postImageToStorage(posterImageUri!!, true)
-                }else{
-                    pengumumanViewModel.postImageToStorage(null, false)
-                }
+//        userViewModel.currentUser.observeOnce(viewLifecycleOwner){currentUser ->
+//            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+//                //userViewModel.getUserProfile(currentUser.uid)
+//                if(posterImageUri != null){
+//                    pengumumanViewModel.postImageToStorage(posterImageUri!!, true)
+//                }else{
+//                    pengumumanViewModel.postImageToStorage(null, false)
+//                }
+//            }
+//        }
+
+        lifecycleScope.launch(Dispatchers.IO){
+            if(posterImageUri != null){
+                pengumumanViewModel.postImageToStorage(posterImageUri!!, true)
+            }else{
+                pengumumanViewModel.postImageToStorage(null, false)
             }
         }
 
         userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ currentUserProfile ->
             val fotoProfilUrl = currentUserProfile.urlFoto
             val namaPengirim = currentUserProfile.nama
-            val asalProgramStudi = if(currentUserProfile.dataDiri?.programStudi.isNullOrEmpty()){
+            val asalProgramStudi = if(currentUserProfile.dataDiri == null){
                 null
             }else{
-                currentUserProfile.dataDiri?.programStudi
+                currentUserProfile.dataDiri.programStudi
             }
-            val asalUniversitas = if(currentUserProfile.dataDiri?.asalUniversitas.isNullOrEmpty()){
+            val asalUniversitas = if(currentUserProfile.dataDiri == null){
                 null
             }else{
-                currentUserProfile.dataDiri?.asalUniversitas
+                currentUserProfile.dataDiri.asalUniversitas
             }
-            val tahunAngkatan = if(currentUserProfile.dataDiri?.tahunAngkatan == null){
+            val tahunAngkatan = if(currentUserProfile.dataDiri == null){
                 null
             }else{
                 currentUserProfile.dataDiri.tahunAngkatan

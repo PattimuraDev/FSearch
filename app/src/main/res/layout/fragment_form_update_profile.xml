@@ -31,7 +31,7 @@
                 android:layout_centerVertical="true"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/form_update_profil_button_publish"
+                android:id="@+id/form_update_profil_button_simpan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="10dp"
-            android:inputType="text"
+            android:inputType="textCapSentences|textMultiLine"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:id="@+id/form_update_profil_bio"/>

@@ -11,5 +11,6 @@ data class UserProfile(
     val dataDiri: DataDiriUser? = null,
     val testimoni: ArrayList<Testimoni>? = null,
     val ratingKeseluruhan: Float? = null,
-    val statusBersediaMenerimaAjakan: Boolean? = null
+    val statusBersediaMenerimaAjakan: Boolean? = null,
+    val profilePhotoFileName: String? = null
 )

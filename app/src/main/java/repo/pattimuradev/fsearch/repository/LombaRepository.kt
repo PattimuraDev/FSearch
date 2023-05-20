@@ -60,7 +60,7 @@ class LombaRepository {
                 if(getDownloadTaskStatus.isSuccessful){
                     getPosterLombaImageUrl.postValue(getDownloadTaskStatus.result.toString())
                 }else{
-                    getPosterLombaImageUrl.postValue(null)
+                    getPosterLombaImageUrl.postValue("")
                 }
             }
         }else{

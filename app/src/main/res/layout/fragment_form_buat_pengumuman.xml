@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back_icon"
             android:backgroundTint="@color/white"
             android:layout_alignParentStart="true"
             android:id="@+id/form_buat_pengumuman_button_back"/>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buat Pengumuman"
@@ -34,7 +34,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="3dp"/>
     </RelativeLayout>
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Deskripsi pengumuman"
@@ -45,14 +45,14 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="20dp">
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="500"
             android:id="@+id/form_buat_pengumuman_deskpripsi"
             android:layout_alignParentTop="true"/>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0/500"
@@ -60,7 +60,7 @@
             android:layout_below="@+id/form_buat_pengumuman_deskpripsi"
             android:id="@+id/form_buat_pengumuman_word_count"/>
     </RelativeLayout>
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload File"
@@ -69,7 +69,7 @@
         android:clickable="true"
         android:id="@+id/form_buat_pengumuman_button_upload_file"
         android:focusable="true"/>
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
