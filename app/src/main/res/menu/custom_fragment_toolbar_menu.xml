@@ -9,7 +9,7 @@
     <item
         android:id="@+id/go_to_favorit"
         android:title="Favorite"
-        android:icon="@drawable/like_icon"
+        android:icon="@drawable/like_icon_favorited"
         app:showAsAction="always"/>
     <item
         android:id="@+id/go_to_notification"

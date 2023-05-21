@@ -17,5 +17,6 @@ data class Lomba(
     val tanggalPosting: Date? = null,
     val biayaPendaftaran: String = "",
     val deskripsiLomba: String = "",
-    val linkLomba: String? = null
+    val linkLomba: String? = null,
+    val likedByUserId: ArrayList<String>? = null
 ) : Parcelable

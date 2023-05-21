@@ -99,10 +99,17 @@
             android:textSize="20sp"
             android:id="@+id/profil_nama_pengguna"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ini adalah contoh bio"
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/profile_bio_pengguna"
+        app:layout_constraintTop_toBottomOf="@id/profile_container_data_utama_pengguna"/>
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profile_container_data_utama_pengguna"
+        app:layout_constraintTop_toBottomOf="@id/profile_bio_pengguna"
         android:background="@color/white"
         app:tabIconTint="@color/secondary_four"
         app:tabIndicatorFullWidth="true"

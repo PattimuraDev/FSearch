@@ -18,6 +18,7 @@ class UserRepository {
     private val firebaseAuth = Firebase.auth
     private val firestoreDb = FirebaseFirestore.getInstance()
     private val firebaseCloudStorage = Firebase.storage
+
     private val checkIfEmailRegistered = MutableLiveData<String>()
     val checkIfEmailRegisteredLiveData : LiveData<String> = checkIfEmailRegistered
     private val otpEmailVerificationResult = MutableLiveData<String>()
@@ -34,6 +35,8 @@ class UserRepository {
     val updateProfilLiveData : LiveData<String> = updateProfilStatus
     private val loginStatus = MutableLiveData<String>()
     val loginStatusLiveData: LiveData<String> = loginStatus
+    private val getSpesificUserById = MutableLiveData<UserProfile>()
+    val getSpesificUserByIdLiveData : LiveData<UserProfile> = getSpesificUserById
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -59,7 +62,7 @@ class UserRepository {
                                     null,
                                     null,
                                     null,
-                                    null
+                                    null,
                                 )
                                 firestoreDb.collection("user_profile")
                                     .document(profilUser.id!!)
@@ -99,13 +102,19 @@ class UserRepository {
                 "dataDiri.umur" to userProfile.dataDiri.umur,
                 "dataDiri.asalKota" to userProfile.dataDiri.asalKota,
                 "dataDiri.kepribadian" to userProfile.dataDiri.kepribadian,
-                "urlFoto" to userProfile.urlFoto,
-                "profilePhotoFileName" to userProfile.profilePhotoFileName
+                "urlFoto" to userProfile.urlFoto
             )
         )
             .addOnSuccessListener {
-                currentUserProfile.postValue(userProfile)
-                updateProfilStatus.postValue("OK")
+                //currentUserProfile.postValue(userProfile)
+                firestoreDb.collection("user_profile")
+                    .document(currentUser.value!!.uid)
+                    .get()
+                    .addOnSuccessListener { snapshot ->
+                        val profile = snapshot.toObject(UserProfile::class.java)
+                        currentUserProfile.value = profile
+                        updateProfilStatus.postValue("OK")
+                    }
             }
             .addOnFailureListener {
                 updateProfilStatus.postValue("FAILED")
@@ -135,51 +144,34 @@ class UserRepository {
             }
     }
 
-    suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFileFotoLama: String?, namaFileFotoBaru: String?){
+    suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFile: String?){
         if(isUploadingImage){
-            if(namaFileFotoLama != null){
-                val storageRef = firebaseCloudStorage.reference
-                val fotoLamaRef = storageRef.child("foto_profil_user/$namaFileFotoLama")
-                fotoLamaRef.delete()
-                    .addOnSuccessListener {
-                        val fotoBaruRef = storageRef.child("foto_profil_user/$namaFileFotoBaru")
-                        val uploadTask = fotoBaruRef.putFile(fileUri!!)
-                        uploadTask.continueWithTask { getDownloadUrlTask ->
-                            if(!getDownloadUrlTask.isSuccessful){
-                                getDownloadUrlTask.exception?.let {
-                                    throw it
-                                }
-                            }
-                            fotoBaruRef.downloadUrl
-                        }.addOnCompleteListener {  getDownloadTaskStatus ->
-                            if(getDownloadTaskStatus.isSuccessful){
-                                currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
-                            }else{
-                                currentUserFotoProfilUrl.postValue(null)
-                            }
-                        }
-                    }
-            }else{
-                val storageRef = firebaseCloudStorage.reference
-                val fotoBaruRef = storageRef.child("foto_profil_user/$namaFileFotoBaru")
-                val uploadTask = fotoBaruRef.putFile(fileUri!!)
-                uploadTask.continueWithTask { getDownloadUrlTask ->
-                    if(!getDownloadUrlTask.isSuccessful){
-                        getDownloadUrlTask.exception?.let {
-                            throw it
-                        }
-                    }
-                    fotoBaruRef.downloadUrl
-                }.addOnCompleteListener {  getDownloadTaskStatus ->
-                    if(getDownloadTaskStatus.isSuccessful){
-                        currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
-                    }else{
-                        currentUserFotoProfilUrl.postValue(null)
+            val storageRef = firebaseCloudStorage.reference
+            val fotoBaruRef = storageRef.child("foto_profil_user/$namaFile")
+            val uploadTask = fotoBaruRef.putFile(fileUri!!)
+            uploadTask.continueWithTask { getDownloadUrlTask ->
+                if(!getDownloadUrlTask.isSuccessful){
+                    getDownloadUrlTask.exception?.let {
+                        throw it
                     }
                 }
+                fotoBaruRef.downloadUrl
+            }.addOnCompleteListener {  getDownloadTaskStatus ->
+                if(getDownloadTaskStatus.isSuccessful){
+                    currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
+                }else{
+                    currentUserFotoProfilUrl.postValue(null)
+                }
             }
+
         }else{
-            currentUserFotoProfilUrl.postValue(null)
+            firestoreDb.collection("user_profile")
+                .document(currentUser.value!!.uid)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    val userProfile = snapshot.toObject(UserProfile::class.java)
+                    currentUserFotoProfilUrl.postValue(userProfile!!.urlFoto)
+                }
         }
     }
 
@@ -221,18 +213,18 @@ class UserRepository {
             }
     }
 
-//    suspend fun getProfile(userId: String) {
-//        firestoreDb.collection("user_profile")
-//            .document(currentUser.value!!.uid)
-//            .get()
-//            .addOnSuccessListener { snapshot ->
-//                val profile = snapshot.toObject(UserProfile::class.java)
-//                currentUserProfile.value = profile
-//            }
-//            .addOnFailureListener {
-//                currentUserProfile.value = null
-//            }
-//    }
+    suspend fun getSpesificUserById(userId: String) {
+        firestoreDb.collection("user_profile")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val profile = snapshot.toObject(UserProfile::class.java)
+                getSpesificUserById.postValue(profile)
+            }
+            .addOnFailureListener {
+                getSpesificUserById.value = null
+            }
+    }
 
     suspend fun getAllUser(){
         firestoreDb.collection("user_profile")

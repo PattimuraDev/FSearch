@@ -18,6 +18,7 @@ class UserViewModel : ViewModel(){
     val updateUserStatus = userRepository.updateProfilLiveData
     val emailRegistrationStatus = userRepository.checkIfEmailRegisteredLiveData
     val loginStatus = userRepository.loginStatusLiveData
+    val spesificUserById = userRepository.getSpesificUserByIdLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)
@@ -28,5 +29,8 @@ class UserViewModel : ViewModel(){
     suspend fun login(dataLogin: DataLogin) = userRepository.login(dataLogin)
     suspend fun updateProfile(userProfile: UserProfile) = userRepository.updateUser(userProfile)
     suspend fun getAllUser() = userRepository.getAllUser()
-    suspend fun getFotoProfilUrl(fileUri: Uri?, isUploading: Boolean, namaFileLama: String?, namaFileBaru: String?) = userRepository.getUserProfilePhotoUrl(fileUri, isUploading, namaFileLama, namaFileBaru)
+    suspend fun getFotoProfilUrl(fileUri: Uri?, isUploading: Boolean, namaFile: String?) = userRepository.getUserProfilePhotoUrl(fileUri, isUploading, namaFile)
+    suspend fun getSpesificUserById(userId: String) = userRepository.getSpesificUserById(userId)
+
+
 }

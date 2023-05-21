@@ -3,18 +3,20 @@ package repo.pattimuradev.fsearch.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_adapter_lomba.view.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.LombaClickListener
 import repo.pattimuradev.fsearch.model.Lomba
-import java.util.*
 
 class LombaAdapter(private val lombaClickListener: LombaClickListener): RecyclerView.Adapter<LombaAdapter.ViewHolder>(){
     private var listLomba: List<Lomba>? = null
+    private var currentUserId: String? = null
+    fun setCurrentUserIdInAdapter(idUser: String){
+        currentUserId = idUser
+        notifyDataSetChanged()
+    }
     fun setListLomba(listLomba: List<Lomba>){
         this.listLomba = listLomba
         notifyDataSetChanged()
@@ -46,6 +48,12 @@ class LombaAdapter(private val lombaClickListener: LombaClickListener): Recycler
                 .load(listLomba!![position].posterLombaUrl)
                 .error(R.drawable.no_image_available)
                 .into(rv_lomba_poster_lomba)
+
+            rv_lomba_button_like.isSelected = if(listLomba!![position].likedByUserId == null){
+                false
+            }else{
+                listLomba!![position].likedByUserId!!.contains(currentUserId)
+            }
 
             rv_lomba_container.setOnClickListener {
                 lombaClickListener.clickOnDaftarLombaBody(listLomba!![position], position)

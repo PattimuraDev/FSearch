@@ -1,5 +1,9 @@
 package repo.pattimuradev.fsearch.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UserProfile(
     val id: String? = null,
     val nama: String = "",
@@ -12,5 +16,5 @@ data class UserProfile(
     val testimoni: ArrayList<Testimoni>? = null,
     val ratingKeseluruhan: Float? = null,
     val statusBersediaMenerimaAjakan: Boolean? = null,
-    val profilePhotoFileName: String? = null
-)
+    val likedByUserId: ArrayList<String>? = null
+) : Parcelable

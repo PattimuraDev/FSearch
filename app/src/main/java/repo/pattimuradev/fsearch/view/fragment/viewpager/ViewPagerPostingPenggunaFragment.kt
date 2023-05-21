@@ -1,4 +1,4 @@
-package repo.pattimuradev.fsearch.view.fragment
+package repo.pattimuradev.fsearch.view.fragment.viewpager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.fragment_view_pager_posting_pengguna.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.model.Pengumuman
-import repo.pattimuradev.fsearch.view.adapter.DaftarPenggunaAdapter
 import repo.pattimuradev.fsearch.view.adapter.PengumumanAdapter
 import repo.pattimuradev.fsearch.viewmodel.PengumumanViewModel
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel

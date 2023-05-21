@@ -25,12 +25,12 @@
                 android:id="@+id/rv_lomba_button_like"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="3dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/like_icon"
+                android:padding="3dp"
+                android:src="@drawable/adapter_like_button_selector"
                 app:civ_circle_background_color="@color/white" />
         </RelativeLayout>
         <LinearLayout

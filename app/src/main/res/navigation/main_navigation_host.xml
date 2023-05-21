@@ -30,7 +30,11 @@
         android:id="@+id/penggunaFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.PenggunaFragment"
         android:label="fragment_pengguna"
-        tools:layout="@layout/fragment_pengguna" />
+        tools:layout="@layout/fragment_pengguna" >
+        <action
+            android:id="@+id/action_penggunaFragment_to_detailPenggunaLainFagment"
+            app:destination="@id/detailPenggunaLainFagment" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.ChatFragment"
@@ -80,5 +84,14 @@
         <action
             android:id="@+id/action_formUpdateProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPenggunaLainFagment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.DetailPenggunaLainFagment"
+        android:label="fragment_detail_pengguna_lain_fagment"
+        tools:layout="@layout/fragment_detail_pengguna_lain_fagment" >
+        <action
+            android:id="@+id/action_detailPenggunaLainFagment_to_penggunaFragment"
+            app:destination="@id/penggunaFragment" />
     </fragment>
 </navigation>

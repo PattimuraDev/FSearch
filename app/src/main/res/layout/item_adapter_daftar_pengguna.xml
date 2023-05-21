@@ -20,15 +20,16 @@
                 android:layout_height="120dp"
                 android:id="@+id/rv_pengguna_foto_profile"
                 android:src="@drawable/standard_user_photo"/>
+
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rv_pengguna_button_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:src="@drawable/like_icon"
-                app:civ_circle_background_color="@color/white"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/rv_pengguna_button_like"/>
+                android:layout_alignParentBottom="true"
+                android:padding="3dp"
+                android:src="@drawable/adapter_like_button_selector"
+                app:civ_circle_background_color="@color/white" />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"

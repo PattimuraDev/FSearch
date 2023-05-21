@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
         for(i in 1..4){
             otp += (0..9).random().toString()
         }
-        val emailBody = "Berikut kode verifikasi akun anda adalah $otp"
+        val emailBody = "Berikut kode verifikasi akun anda: $otp"
         val sendgrid = SendGrid.create(apiKey)
         val email = SendGridMail()
 

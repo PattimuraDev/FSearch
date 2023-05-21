@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_pengguna.*
 import kotlinx.coroutines.Dispatchers
@@ -82,6 +83,11 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
             userViewModel.getAllUser()
         }
 
+        userViewModel.currentUserProfile.observe(viewLifecycleOwner){
+            daftarPenggunaAdapter.setUserId(it.id!!)
+            daftarPenggunaAdapter.notifyDataSetChanged()
+        }
+
         userViewModel.allUser.observe(viewLifecycleOwner){
             daftarPenggunaAdapter.setListPengguna(it)
             daftarPenggunaAdapter.notifyDataSetChanged()
@@ -93,6 +99,14 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
     }
 
     override fun clickOnDaftarPenggunaBody(item: UserProfile, position: Int) {
-        // edit
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+            userViewModel.getSpesificUserById(item.id!!)
+        }
+
+        userViewModel.spesificUserById.observe(viewLifecycleOwner){ spesificUser ->
+            if(spesificUser != null){
+                Navigation.findNavController(requireView()).navigate(R.id.action_penggunaFragment_to_detailPenggunaLainFagment)
+            }
+        }
     }
 }

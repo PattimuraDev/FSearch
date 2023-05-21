@@ -197,7 +197,8 @@ class FormTambahLombaFragment : Fragment() {
                         DateAndTimeHandler.currentDate(),
                         biayaPendaftaran,
                         deskripsiLomba,
-                        linkLomba
+                        linkLomba,
+                        null
                     ))
                 }
             }

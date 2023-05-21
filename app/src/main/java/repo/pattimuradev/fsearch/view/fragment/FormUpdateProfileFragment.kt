@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -29,8 +30,7 @@ class FormUpdateProfileFragment : Fragment() {
 
     private val userViewModel: UserViewModel by viewModels()
     private var fotoUserUri: Uri? = null
-    private var namaFileFotoUserAwal: String? = null
-    private var namaFileFotoUserUpdate: String = ""
+    private var namaFileFoto: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,12 +105,14 @@ class FormUpdateProfileFragment : Fragment() {
                 val kepribadian = form_update_profil_kepribadian.text.toString().ifEmpty {
                     null
                 }
+                val fotoProfilUri = fotoUserUri
+                val namaFileFotoBaru = namaFileFoto
 
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                    if(fotoUserUri != null){
-                        userViewModel.getFotoProfilUrl(fotoUserUri, true, namaFileFotoUserAwal, namaFileFotoUserUpdate)
+                    if(fotoProfilUri != null){
+                        userViewModel.getFotoProfilUrl(fotoProfilUri, true, namaFileFotoBaru)
                     }else{
-                        userViewModel.getFotoProfilUrl(null, false, null, null)
+                        userViewModel.getFotoProfilUrl(null, false, null)
                     }
                 }
 
@@ -139,7 +141,7 @@ class FormUpdateProfileFragment : Fragment() {
                             testimoni = null,
                             ratingKeseluruhan = null,
                             statusBersediaMenerimaAjakan = statusBersediaMenerimaAjakan,
-                            profilePhotoFileName = namaFileFotoUserUpdate
+                            likedByUserId = null
                         ))
                     }
                 }
@@ -162,13 +164,16 @@ class FormUpdateProfileFragment : Fragment() {
 
     private val getContext = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         fotoUserUri = uri
-        form_update_profil_foto_user.setImageURI(uri)
+        Glide.with(form_update_profil_foto_user.context)
+            .load(uri)
+            .error(R.drawable.standard_user_photo)
+            .into(form_update_profil_foto_user)
         val contentResolver: ContentResolver = context!!.contentResolver
         val cursor = contentResolver.query(uri!!, null, null, null, null)
         cursor?.moveToFirst()
         val fileName = cursor?.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
         cursor?.close()
-        namaFileFotoUserUpdate = fileName!!
+        namaFileFoto = fileName!!
     }
 
     private fun checkField() {
@@ -201,6 +206,12 @@ class FormUpdateProfileFragment : Fragment() {
                 }
 
             })
+        }
+        // edit terakhir
+        if(form_update_profil_button_simpan.isEnabled){
+            form_update_profil_button_simpan.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_enabled_layout, null)
+        }else{
+            form_update_profil_button_simpan.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_not_enabled_layout, null)
         }
     }
 
@@ -270,7 +281,6 @@ class FormUpdateProfileFragment : Fragment() {
             }else{
                 userProfileAwal.dataDiri.kepribadian ?: ""
             })
-            namaFileFotoUserAwal = userProfileAwal.profilePhotoFileName
         }
     }
 

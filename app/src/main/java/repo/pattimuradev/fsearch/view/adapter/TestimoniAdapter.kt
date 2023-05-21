@@ -10,7 +10,7 @@ import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Testimoni
 
-class TestimoniViewPagerAdapter: RecyclerView.Adapter<TestimoniViewPagerAdapter.ViewHolder>() {
+class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
 
     private var listTestimoni: ArrayList<Testimoni>? = null
     fun setListTestimoni(listTestimoni: ArrayList<Testimoni>){
@@ -19,7 +19,7 @@ class TestimoniViewPagerAdapter: RecyclerView.Adapter<TestimoniViewPagerAdapter.
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestimoniViewPagerAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestimoniAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_adapter_testimoni, parent, false)
         return ViewHolder(view)

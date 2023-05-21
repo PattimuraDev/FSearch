@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail_lomba.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Lomba
+import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
 class DetailLombaFragment : Fragment() {
+
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +60,14 @@ class DetailLombaFragment : Fragment() {
             "Rp " + biaya.substring(0, biaya.lastIndex - 1)
         }else {
             "Rp $biaya"
+        }
+
+        userViewModel.currentUserProfile.observe(viewLifecycleOwner){
+            detail_lomba_button_like.isSelected = if(lomba.likedByUserId == null){
+                false
+            }else{
+                lomba.likedByUserId.contains(it.id)
+            }
         }
     }
 }

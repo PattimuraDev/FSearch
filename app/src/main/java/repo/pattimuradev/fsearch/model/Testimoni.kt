@@ -1,7 +1,10 @@
 package repo.pattimuradev.fsearch.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Testimoni(
     val riwayatPosting: Date? = null,
     val urlFoto: String? = null,
@@ -11,4 +14,4 @@ data class Testimoni(
     val tahunAngkatan: Int? = null,
     val rating: Float? = null,
     val deskripsi: String? = null,
-)
+): Parcelable

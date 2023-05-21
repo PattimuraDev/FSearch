@@ -17,10 +17,12 @@ import repo.pattimuradev.fsearch.misc.LombaClickListener
 import repo.pattimuradev.fsearch.model.Lomba
 import repo.pattimuradev.fsearch.view.adapter.LombaAdapter
 import repo.pattimuradev.fsearch.viewmodel.LombaViewModel
+import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
 class LombaFragment : Fragment(), LombaClickListener {
     private lateinit var lombaAdapter: LombaAdapter
     private val lombaViewModel: LombaViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,6 +81,11 @@ class LombaFragment : Fragment(), LombaClickListener {
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
             lombaViewModel.getAllLomba()
+        }
+
+        userViewModel.currentUserProfile.observe(viewLifecycleOwner){
+            lombaAdapter.setCurrentUserIdInAdapter(it.id!!)
+            lombaAdapter.notifyDataSetChanged()
         }
 
         lombaViewModel.listLomba.observe(viewLifecycleOwner){

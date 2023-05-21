@@ -14,9 +14,16 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
     RecyclerView.Adapter<DaftarPenggunaAdapter.ViewHolder>()
 {
     private var listPengguna: List<UserProfile>? = null
+    private var currentUserProfile: String? = null
+
+    fun setUserId(idUser: String?){
+        currentUserProfile = idUser
+        notifyDataSetChanged()
+    }
 
     fun setListPengguna(listPengguna: List<UserProfile>){
         this.listPengguna = listPengguna
+        notifyDataSetChanged()
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
@@ -75,6 +82,12 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
                 0.0.toFloat()
             }else{
                 listPengguna!![position].ratingKeseluruhan!!
+            }
+
+            rv_pengguna_button_like.isSelected = if(listPengguna!![position].likedByUserId == null){
+                false
+            }else{
+                listPengguna!![position].likedByUserId!!.contains(currentUserProfile)
             }
 
 
