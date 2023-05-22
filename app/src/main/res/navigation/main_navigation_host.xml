@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_formBuatPengumumanFragment"
             app:destination="@id/formBuatPengumumanFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_likeFragment"
+            app:destination="@id/likeFragment" />
     </fragment>
     <fragment
         android:id="@+id/lombaFragment"
@@ -25,6 +28,9 @@
         <action
             android:id="@+id/action_lombaFragment_to_detailLombaFragment"
             app:destination="@id/detailLombaFragment" />
+        <action
+            android:id="@+id/action_lombaFragment_to_likeFragment"
+            app:destination="@id/likeFragment" />
     </fragment>
     <fragment
         android:id="@+id/penggunaFragment"
@@ -34,6 +40,9 @@
         <action
             android:id="@+id/action_penggunaFragment_to_detailPenggunaLainFagment"
             app:destination="@id/detailPenggunaLainFagment" />
+        <action
+            android:id="@+id/action_penggunaFragment_to_likeFragment"
+            app:destination="@id/likeFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -93,5 +102,14 @@
         <action
             android:id="@+id/action_detailPenggunaLainFagment_to_penggunaFragment"
             app:destination="@id/penggunaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likeFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.LikeFragment"
+        android:label="fragment_like"
+        tools:layout="@layout/fragment_like" >
+        <action
+            android:id="@+id/action_likeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

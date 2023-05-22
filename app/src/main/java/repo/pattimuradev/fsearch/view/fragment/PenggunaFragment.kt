@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_pengguna.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.misc.DaftarPenggunaClickListener
 import repo.pattimuradev.fsearch.model.UserProfile
 import repo.pattimuradev.fsearch.view.adapter.DaftarPenggunaAdapter
@@ -44,25 +45,25 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
         pengguna_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.search_view -> {
-                    val searchView: SearchView = menuItem.actionView as SearchView
-                    searchView.maxWidth = Int.MAX_VALUE
-                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-                        override fun onQueryTextSubmit(p0: String?): Boolean {
-                            return true
-                        }
-
-                        override fun onQueryTextChange(p0: String?): Boolean {
-                            // nanti
-
+//                    val searchView: SearchView = menuItem.actionView as SearchView
+//                    searchView.maxWidth = Int.MAX_VALUE
+//                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+//                        override fun onQueryTextSubmit(p0: String?): Boolean {
+//                            return true
+//                        }
+//
+//                        override fun onQueryTextChange(p0: String?): Boolean {
+//                            // nanti
+//
 //                            daftarPenggunaAdapter.filter.filter(p0)
 //                            daftarPenggunaAdapter.notifyDataSetChanged()
-                            return true
-                        }
-                    })
+//                            return true
+//                        }
+//                    })
                     true
                 }
                 R.id.go_to_favorit -> {
-                    //
+                    Navigation.findNavController(requireView()).navigate(R.id.action_penggunaFragment_to_likeFragment)
                     true
                 }
                 R.id.go_to_notification -> {
@@ -95,7 +96,9 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
     }
 
     override fun clickOnLikeButton(item: UserProfile, position: Int) {
-        // edit
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+            userViewModel.addUserLike(item.id!!)
+        }
     }
 
     override fun clickOnDaftarPenggunaBody(item: UserProfile, position: Int) {

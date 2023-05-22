@@ -6,6 +6,7 @@ import java.util.*
 
 @Parcelize
 data class Lomba(
+    var idLomba: String? = null,
     val posterLombaUrl: String? = null,
     val kategoriTingkatLomba: String = "",
     val kategoriPembuatLomba: String = "",

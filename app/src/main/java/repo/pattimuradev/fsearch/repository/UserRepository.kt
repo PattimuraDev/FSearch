@@ -6,13 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Account
 import repo.pattimuradev.fsearch.model.DataLogin
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.model.UserProfile
+import java.lang.reflect.Field
 
 class UserRepository {
     private val firebaseAuth = Firebase.auth
@@ -37,6 +40,8 @@ class UserRepository {
     val loginStatusLiveData: LiveData<String> = loginStatus
     private val getSpesificUserById = MutableLiveData<UserProfile>()
     val getSpesificUserByIdLiveData : LiveData<UserProfile> = getSpesificUserById
+    private val getAllFavoritedUser = MutableLiveData<List<UserProfile>>()
+    val getAllFavoritedUserLiveData: LiveData<List<UserProfile>> = getAllFavoritedUser
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -226,7 +231,7 @@ class UserRepository {
             }
     }
 
-    suspend fun getAllUser(){
+    fun getAllUser(){
         firestoreDb.collection("user_profile")
             .get()
             .addOnSuccessListener { result ->
@@ -238,6 +243,79 @@ class UserRepository {
                 allUser.postValue(hasil)
             }.addOnFailureListener {
                 allUser.postValue(null)
+            }
+    }
+
+    suspend fun getAllUserFavorited(){
+        firestoreDb.collection("user_profile")
+            .get()
+            .addOnSuccessListener { result ->
+                val hasil = mutableListOf<UserProfile>()
+                for(i in result){
+                    val userProfile = i.toObject(UserProfile::class.java)
+                    if(userProfile.likedByUserId != null && userProfile.likedByUserId.contains(currentUser.value!!.uid)){
+                        hasil += userProfile
+                    }
+                }
+                getAllFavoritedUser.postValue(hasil)
+            }
+            .addOnFailureListener {
+                getAllFavoritedUser.postValue(null)
+            }
+    }
+
+    suspend fun addUserLike(idUserSelected: String){
+        firestoreDb.collection("user_profile")
+            .document(idUserSelected)
+            .get()
+            .addOnSuccessListener { userProfile ->
+                val userProfileSelected = userProfile.toObject(UserProfile::class.java)
+                if(userProfileSelected!!.likedByUserId == null){
+                    firestoreDb.collection("user_profile")
+                        .document(idUserSelected)
+                        .update(mapOf(
+                                "likedByUserId" to arrayListOf(currentUser.value!!.uid),
+                                "jumlahLike" to FieldValue.increment(1)
+
+                        ))
+                        .addOnSuccessListener {
+                            getAllUser()
+                        }
+                }else{
+                    if(userProfileSelected.likedByUserId == emptyArray<String>()){
+                        firestoreDb.collection("user_profile")
+                            .document(idUserSelected)
+                            .update(mapOf(
+                                "likedByUserId" to FieldValue.arrayUnion(currentUser.value!!.uid),
+                                "jumlahLike" to FieldValue.increment(1)
+                            ))
+                            .addOnSuccessListener {
+                                getAllUser()
+                            }
+                    }else{
+                        if(userProfileSelected.likedByUserId!!.contains(currentUser.value!!.uid)){
+                            firestoreDb.collection("user_profile")
+                                .document(idUserSelected)
+                                .update(mapOf(
+                                    "likedByUserId" to FieldValue.arrayRemove(currentUser.value!!.uid),
+                                    "jumlahLike" to FieldValue.increment(-1)
+                                ))
+                                .addOnSuccessListener {
+                                    getAllUser()
+                                }
+                        }else{
+                            firestoreDb.collection("user_profile")
+                                .document(idUserSelected)
+                                .update(mapOf(
+                                    "likedByUserId" to FieldValue.arrayUnion(currentUser.value!!.uid),
+                                    "jumlahLike" to FieldValue.increment(1)
+                                ))
+                                .addOnSuccessListener {
+                                    getAllUser()
+                                }
+                        }
+                    }
+                }
             }
     }
 

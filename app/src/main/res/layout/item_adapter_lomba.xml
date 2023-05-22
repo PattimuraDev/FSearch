@@ -29,8 +29,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@drawable/adapter_like_button_selector"
                 android:padding="3dp"
-                android:src="@drawable/adapter_like_button_selector"
                 app:civ_circle_background_color="@color/white" />
         </RelativeLayout>
         <LinearLayout

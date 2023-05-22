@@ -3,6 +3,7 @@ package repo.pattimuradev.fsearch.repository
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -32,13 +33,49 @@ class LombaRepository {
             }
     }
 
-    suspend fun addLomba(lomba: Lomba){
+    suspend fun addUserLike(idUser: String, idLomba: String){
         firestoreDb.collection("lomba")
-            .add(lomba)
-            .addOnCompleteListener { addLombaTask ->
-                if(addLombaTask.isSuccessful){
-                    addLombaStatus.postValue("OK")
+            .document(idLomba)
+            .get()
+            .addOnSuccessListener {
+                val lomba = it.toObject(Lomba::class.java)
+                if(lomba!!.likedByUserId == null){
+                    firestoreDb.collection("lomba")
+                        .document(idLomba)
+                        .update("likedByUserId", arrayListOf(idUser))
                 }else{
+                    if(lomba.likedByUserId == emptyArray<String>()){
+                        firestoreDb.collection("lomba")
+                            .document(idLomba)
+                            .update("likedByUserId", FieldValue.arrayUnion(idUser))
+                    }else{
+                        if(lomba.likedByUserId!!.contains(idUser)){
+                            firestoreDb.collection("lomba")
+                                .document(idLomba)
+                                .update("likedByUserId", FieldValue.arrayRemove(idUser))
+                        }else{
+                            firestoreDb.collection("lomba")
+                                .document(idLomba)
+                                .update("likedByUserId", FieldValue.arrayUnion(idUser))
+
+                        }
+                    }
+                }
+
+            }
+    }
+
+    suspend fun addLomba(lomba: Lomba) {
+        val document = firestoreDb.collection("lomba").document()
+        val documentId = document.id
+        lomba.idLomba = documentId
+        firestoreDb.collection("lomba")
+            .document(documentId)
+            .set(lomba)
+            .addOnCompleteListener { addLombaTask ->
+                if (addLombaTask.isSuccessful) {
+                    addLombaStatus.postValue("OK")
+                } else {
                     addLombaStatus.postValue("FAILED")
                 }
             }

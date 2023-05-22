@@ -1,9 +1,11 @@
 package repo.pattimuradev.fsearch.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,8 +13,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_lomba.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.misc.LombaClickListener
 import repo.pattimuradev.fsearch.model.Lomba
 import repo.pattimuradev.fsearch.view.adapter.LombaAdapter
@@ -62,7 +66,7 @@ class LombaFragment : Fragment(), LombaClickListener {
                     true
                 }
                 R.id.go_to_favorit -> {
-                    //
+                    Navigation.findNavController(requireView()).navigate(R.id.action_lombaFragment_to_likeFragment)
                     true
                 }
                 R.id.go_to_notification -> {
@@ -95,7 +99,11 @@ class LombaFragment : Fragment(), LombaClickListener {
     }
 
     override fun clickOnLikeButton(item: Lomba, position: Int) {
-        // nothing to do
+        userViewModel.currentUser.observe(viewLifecycleOwner){ firebaseUser ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                lombaViewModel.addUserLike(firebaseUser.uid, item.idLomba!!)
+            }
+        }
     }
 
     override fun clickOnDaftarLombaBody(item: Lomba, position: Int) {

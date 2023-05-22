@@ -21,6 +21,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/custom_button_enabled_layout.xml" value="0.1255" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/custom_button_layout.xml" value="0.1665" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/custom_button_not_enabled_layout.xml" value="0.1255" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/favorite_icon_selected.xml" value="0.1255" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/gender_icon.xml" value="0.1255" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/home_icon.xml" value="0.188" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/drawable/home_icon_not_selected.xml" value="0.1255" />
@@ -54,12 +55,15 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_tambah_lomba.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_update_profile.xml" value="0.20985401459854014" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_home.xml" value="0.16077898550724637" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_like.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_lomba.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_pengguna.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_profile.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_test_fragment.xml" value="0.16077898550724637" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_daftar_pengguna_favorit.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_data_diri.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_data_diri_pengguna_lain.xml" value="0.16077898550724637" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_lomba_favorit.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_posting_pengguna.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_posting_pengguna_lain.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_testimoni.xml" value="0.16077898550724637" />

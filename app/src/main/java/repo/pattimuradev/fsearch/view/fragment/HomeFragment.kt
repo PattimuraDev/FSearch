@@ -59,10 +59,11 @@ class HomeFragment : Fragment() {
                     true
                 }
                 R.id.go_to_notification -> {
-//                    startActivity(Intent(context, LoginActivity::class.java))
+
                     true
                 }
                 R.id.go_to_favorit -> {
+                    Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_likeFragment)
                     true
                 }
                 else -> false

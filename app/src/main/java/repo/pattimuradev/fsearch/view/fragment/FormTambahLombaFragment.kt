@@ -186,6 +186,7 @@ class FormTambahLombaFragment : Fragment() {
             lombaViewModel.getPosterLombaImageUrl.observeOnce(viewLifecycleOwner){ posterLombaUrl ->
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                     lombaViewModel.addLomba(Lomba(
+                        null,
                         posterLombaUrl,
                         kategoriTingkatanLomba!!,
                         kategoriPembuatLomba!!,

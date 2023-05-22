@@ -14,4 +14,5 @@ class LombaViewModel: ViewModel() {
     suspend fun getAllLomba() = lombaRepository.getAllListLomba()
     suspend fun addLomba(lomba: Lomba) = lombaRepository.addLomba(lomba)
     suspend fun getPosterUrl(fileUri: Uri?, isUploading: Boolean) = lombaRepository.postImageToStorage(fileUri, isUploading)
+    suspend fun addUserLike(idUser: String, idLomba: String) = lombaRepository.addUserLike(idUser, idLomba)
 }

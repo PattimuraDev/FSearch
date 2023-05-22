@@ -60,9 +60,9 @@ class ProfileFragment : Fragment() {
                 userProfile.jumlahTeman.toString()
             }
             profile_bio_pengguna.text = if(userProfile.bio == null){
-                userProfile.bio.toString()
-            }else{
                 ""
+            }else{
+                userProfile.bio.toString()
             }
             Glide.with(profil_foto_profil_user.context)
                 .load(userProfile.urlFoto)
