@@ -1,7 +1,10 @@
 package repo.pattimuradev.fsearch.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Pengumuman(
     val fotoProfilUrl: String? = null,
     val namaPengirim: String = "",
@@ -12,4 +15,4 @@ data class Pengumuman(
     val deskripsiPengumuman: String = "",
     val posterUrl: String? = null,
     val idPengirim: String? = null
-)
+): Parcelable

@@ -27,6 +27,7 @@
         android:layout_marginTop="80dp"
         android:id="@+id/login_field_email"
         android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress"
         android:hint="Email"
         app:layout_constraintTop_toBottomOf="@+id/login_header" />
 

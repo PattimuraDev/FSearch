@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.fragment.FormBuatPengumumanFragment">
+    tools:context=".view.fragment.FormAjakanBergabungTimFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,31 +15,31 @@
             android:src="@drawable/back_icon"
             android:backgroundTint="@color/white"
             android:layout_alignParentStart="true"
-            android:id="@+id/form_buat_pengumuman_button_back"/>
+            android:id="@+id/form_ajakan_bergabung_tim_button_back"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buat Pengumuman"
+            android:text="Form Ajakan"
             android:textSize="16sp"
+            android:layout_marginStart="30dp"
             android:textColor="@color/primary"
-            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/form_ajakan_bergabung_tim_button_back"
             android:layout_centerVertical="true"/>
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/form_buat_pengumuman_button_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="3dp"
             android:background="@drawable/custom_button_not_enabled_layout"
-            android:text="Post"
+            android:textColor="@color/white"
+            android:text="Kirim"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:id="@+id/form_ajakan_bergabung_tim_button_kirim"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"/>
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deskripsi pengumuman"
+        android:text="Deskripsi Ajakan"
         android:layout_marginHorizontal="20dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,15 +52,16 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="500"
-            android:id="@+id/form_buat_pengumuman_deskpripsi"
+            android:id="@+id/form_ajakan_bergabung_tim_deskripsi"
             android:layout_alignParentTop="true"/>
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/form_ajakan_bergabung_tim_word_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/500"
+            android:layout_below="@+id/form_ajakan_bergabung_tim_deskripsi"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/form_buat_pengumuman_deskpripsi"
-            android:id="@+id/form_buat_pengumuman_word_count"/>
+            android:text="0/500" />
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -69,11 +70,11 @@
         android:textColor="@color/primary"
         android:layout_marginStart="20dp"
         android:clickable="true"
-        android:id="@+id/form_buat_pengumuman_button_upload_file"
+        android:id="@+id/form_ajakan_bergabung_tim_button_upload_file"
         android:focusable="true"/>
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:id="@+id/form_buat_pengumuman_nama_file"/>
+        android:id="@+id/form_ajakan_bergabung_tim_nama_file"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

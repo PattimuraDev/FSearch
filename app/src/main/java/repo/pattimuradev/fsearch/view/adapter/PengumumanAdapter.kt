@@ -30,7 +30,7 @@ class PengumumanAdapter(private val onClick: (Pengumuman) -> Unit): RecyclerView
             rv_pengumuman_program_studi.text = listPengumuman!![position].asalProgramStudi
             rv_pengumuman_nama_universitas.text = listPengumuman!![position].asalUniversitas
             rv_pengumuman_waktu_posting.text = DateAndTimeHandler.getTimeAgo(listPengumuman!![position].riwayatPosting!!.time)
-            rv_pengumuman_tahung_angkatan.text = if(listPengumuman!![position].tahunAngkatan == null){
+            rv_pengumuman_tahun_angkatan.text = if(listPengumuman!![position].tahunAngkatan == null){
                 ""
             }else{
                 listPengumuman!![position].tahunAngkatan.toString()

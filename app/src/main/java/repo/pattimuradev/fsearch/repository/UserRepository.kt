@@ -68,6 +68,8 @@ class UserRepository {
                                     null,
                                     null,
                                     null,
+                                    null,
+                                    null
                                 )
                                 firestoreDb.collection("user_profile")
                                     .document(profilUser.id!!)

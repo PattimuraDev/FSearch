@@ -67,7 +67,7 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
                     true
                 }
                 R.id.go_to_notification -> {
-                    // go to notification
+                    Navigation.findNavController(requireView()).navigate(R.id.action_penggunaFragment_to_notifikasiFragment)
                     true
                 }
                 else -> false

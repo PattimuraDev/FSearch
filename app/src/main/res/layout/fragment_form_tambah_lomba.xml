@@ -39,6 +39,7 @@
                 android:layout_marginEnd="3dp"
                 android:background="@drawable/custom_button_not_enabled_layout"
                 android:text="Publish"
+                android:textAllCaps="false"
                 android:textColor="@color/white" />
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatTextView

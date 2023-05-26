@@ -141,7 +141,9 @@ class FormUpdateProfileFragment : Fragment() {
                             testimoni = null,
                             ratingKeseluruhan = null,
                             statusBersediaMenerimaAjakan = statusBersediaMenerimaAjakan,
-                            likedByUserId = null
+                            likedByUserId = null,
+                            friendListUserId = null,
+                            teamHistory = null
                         ))
                     }
                 }

@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
                     true
                 }
                 R.id.go_to_notification -> {
-
+                    Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_notifikasiFragment)
                     true
                 }
                 R.id.go_to_favorit -> {
@@ -72,8 +72,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initPengumumanAdapter(){
-        pengumumanAdapter = PengumumanAdapter {
-            //edit nanti pindah ke halaman ajukan diri
+        pengumumanAdapter = PengumumanAdapter { pengumuman ->
+            val bundle = Bundle()
+            bundle.putParcelable("pengumuman", pengumuman)
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_formPengajuanDiriFragment, bundle)
         }
 
         home_rv_pengumuman.layoutManager = LinearLayoutManager(requireContext())

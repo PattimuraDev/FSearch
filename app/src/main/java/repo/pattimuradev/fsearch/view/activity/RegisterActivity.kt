@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun sendOtpViaEmail() {
-        val apiKey = getString(R.string.api_key)
+        val apiKey = getString(R.string.sendgrid_api_key)
         val devEmail = getString(R.string.developer_email)
         val devName = getString(R.string.developer_name)
         val emailField = register_field_email.text.toString()

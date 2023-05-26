@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_homeFragment_to_likeFragment"
             app:destination="@id/likeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notifikasiFragment"
+            app:destination="@id/notifikasiFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_formPengajuanDiriFragment"
+            app:destination="@id/formPengajuanDiriFragment" />
     </fragment>
     <fragment
         android:id="@+id/lombaFragment"
@@ -31,6 +37,9 @@
         <action
             android:id="@+id/action_lombaFragment_to_likeFragment"
             app:destination="@id/likeFragment" />
+        <action
+            android:id="@+id/action_lombaFragment_to_notifikasiFragment"
+            app:destination="@id/notifikasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/penggunaFragment"
@@ -43,6 +52,9 @@
         <action
             android:id="@+id/action_penggunaFragment_to_likeFragment"
             app:destination="@id/likeFragment" />
+        <action
+            android:id="@+id/action_penggunaFragment_to_notifikasiFragment"
+            app:destination="@id/notifikasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -96,12 +108,15 @@
     </fragment>
     <fragment
         android:id="@+id/detailPenggunaLainFagment"
-        android:name="repo.pattimuradev.fsearch.view.fragment.DetailPenggunaLainFagment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.DetailPenggunaLainFragment"
         android:label="fragment_detail_pengguna_lain_fagment"
         tools:layout="@layout/fragment_detail_pengguna_lain_fagment" >
         <action
             android:id="@+id/action_detailPenggunaLainFagment_to_penggunaFragment"
             app:destination="@id/penggunaFragment" />
+        <action
+            android:id="@+id/action_detailPenggunaLainFagment_to_formAjakanBergabungTimFragment"
+            app:destination="@id/formAjakanBergabungTimFragment" />
     </fragment>
     <fragment
         android:id="@+id/likeFragment"
@@ -111,5 +126,32 @@
         <action
             android:id="@+id/action_likeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifikasiFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.NotifikasiFragment"
+        android:label="fragment_notifikasi"
+        tools:layout="@layout/fragment_notifikasi" >
+        <action
+            android:id="@+id/action_notifikasiFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formPengajuanDiriFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormPengajuanDiriFragment"
+        android:label="fragment_form_pengajuan_diri"
+        tools:layout="@layout/fragment_form_pengajuan_diri" >
+        <action
+            android:id="@+id/action_formPengajuanDiriFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formAjakanBergabungTimFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormAjakanBergabungTimFragment"
+        android:label="fragment_form_ajakan_bergabung_tim"
+        tools:layout="@layout/fragment_form_ajakan_bergabung_tim" >
+        <action
+            android:id="@+id/action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment"
+            app:destination="@id/detailPenggunaLainFagment" />
     </fragment>
 </navigation>

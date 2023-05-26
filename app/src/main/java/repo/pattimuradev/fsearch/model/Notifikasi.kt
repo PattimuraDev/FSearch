@@ -7,6 +7,7 @@ import java.util.*
 @Parcelize
 data class Notifikasi(
     var idNotifikasi: String? = null,
+    val urlFotoPengirim: String? = null,
     val jenisNotifikasi: String = "",
     val idPengirim: String = "",
     val namaPengirim: String = "",
@@ -14,9 +15,11 @@ data class Notifikasi(
     val asalUniversitasPengirim: String? = null,
     val tahunAngkatanPengirim: Int? = null,
     val riwayatNotifikasi: Date? = null,
-    val deskprisi: String? = null,
+    val deskripsiLengkap: String? = null,
+    val jenisLampiran: String? = null,
+    val urlLampiran: String? = null,
     val idPenerima: String = "",
     val namaPenerima: String = "",
-    val isResponded: Boolean? = null,
-    val respon: String? = null
+    val responded: Boolean? = null,
+    val hasilRespon: String? = null,
 ): Parcelable

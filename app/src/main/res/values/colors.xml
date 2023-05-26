@@ -14,4 +14,5 @@
     <color name="secondary_two">#000000</color>
     <color name="secondary_three">#99000000</color>
     <color name="secondary_four">#C4C4C4</color>
+    <color name="notification_not_read">#260084FF</color>
 </resources>

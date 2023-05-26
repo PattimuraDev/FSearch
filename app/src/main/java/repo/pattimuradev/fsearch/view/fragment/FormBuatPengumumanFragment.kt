@@ -53,17 +53,6 @@ class FormBuatPengumumanFragment : Fragment() {
     }
 
     private fun handlePostPengumuman() {
-//        userViewModel.currentUser.observeOnce(viewLifecycleOwner){currentUser ->
-//            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-//                //userViewModel.getUserProfile(currentUser.uid)
-//                if(posterImageUri != null){
-//                    pengumumanViewModel.postImageToStorage(posterImageUri!!, true)
-//                }else{
-//                    pengumumanViewModel.postImageToStorage(null, false)
-//                }
-//            }
-//        }
-
         lifecycleScope.launch(Dispatchers.IO){
             if(posterImageUri != null){
                 pengumumanViewModel.postImageToStorage(posterImageUri!!, true)

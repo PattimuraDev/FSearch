@@ -16,5 +16,7 @@ data class UserProfile(
     val testimoni: ArrayList<Testimoni>? = null,
     val ratingKeseluruhan: Float? = null,
     val statusBersediaMenerimaAjakan: Boolean? = null,
-    val likedByUserId: ArrayList<String>? = null
+    val likedByUserId: ArrayList<String>? = null,
+    val friendListUserId: ArrayList<String>? = null,
+    val teamHistory: ArrayList<String>? = null
 ) : Parcelable
