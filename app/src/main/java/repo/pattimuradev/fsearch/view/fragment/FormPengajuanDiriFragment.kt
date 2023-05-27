@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_form_ajakan_bergabung_tim.*
 import kotlinx.android.synthetic.main.fragment_form_pengajuan_diri.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,15 +61,6 @@ class FormPengajuanDiriFragment : Fragment() {
         val idPenerima = pengumuman!!.idPengirim
         val namaPenerima = pengumuman.namaPengirim
 
-
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-            if(pdfFileUri != null){
-                notifikasiViewModel.postFileToStorage(pdfFileUri, true, "pdf")
-            }else{
-                notifikasiViewModel.postFileToStorage(null, false, null)
-            }
-        }
-
         userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ userProfile ->
             val urlFotoPengirim = userProfile.urlFoto
             val jenisNotifikasi = "pengajuan_bergabung_tim"
@@ -89,38 +81,63 @@ class FormPengajuanDiriFragment : Fragment() {
             }else{
                 userProfile.dataDiri.tahunAngkatan
             }
-            val deskripsiLengkap = form_pengajuan_diri_deskripsi.text.toString().trim()
+            val deskripsiAjakan = form_pengajuan_diri_deskripsi.text.toString().trim()
             val jenisLampiran = "pdf"
-            notifikasiViewModel.getFileDownloadUrl.observeOnce(viewLifecycleOwner){ fileUrl ->
-                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                    notifikasiViewModel.addNotifikasi(Notifikasi(
+
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                if(pdfFileUri != null){
+                    notifikasiViewModel.addNotifikasi(
+                        Notifikasi(null,
+                            urlFotoPengirim,
+                            jenisNotifikasi,
+                            idPengirim!!,
+                            namaPengirim,
+                            prodiPengirim,
+                            asalUniversitasPengirim,
+                            tahunAngkatanPengirim,
+                            DateAndTimeHandler.currentDate(),
+                            deskripsiAjakan,
+                            jenisLampiran,
+                            null,
+                            idPenerima!!,
+                            namaPenerima,
+                            false,
+                            null
+                        ),
+                        pdfFileUri,
+                        true,
+                        jenisLampiran)
+                }else{
+                    notifikasiViewModel.addNotifikasi(
+                        Notifikasi(null,
+                            urlFotoPengirim,
+                            jenisNotifikasi,
+                            idPengirim!!,
+                            namaPengirim,
+                            prodiPengirim,
+                            asalUniversitasPengirim,
+                            tahunAngkatanPengirim,
+                            DateAndTimeHandler.currentDate(),
+                            deskripsiAjakan,
+                            jenisLampiran,
+                            null,
+                            idPenerima!!,
+                            namaPenerima,
+                            false,
+                            null
+                        ),
                         null,
-                        urlFotoPengirim,
-                        jenisNotifikasi,
-                        idPengirim!!,
-                        namaPengirim,
-                        prodiPengirim,
-                        asalUniversitasPengirim,
-                        tahunAngkatanPengirim,
-                        DateAndTimeHandler.currentDate(),
-                        deskripsiLengkap,
-                        jenisLampiran,
-                        fileUrl,
-                        idPenerima!!,
-                        namaPenerima,
                         false,
-                        null
-                    ))
+                        null)
                 }
             }
-
-            notifikasiViewModel.addNotifikasiStatus.observeOnce(viewLifecycleOwner){
-                if(it == "OK"){
-                    Navigation.findNavController(requireView()).navigate(R.id.action_formPengajuanDiriFragment_to_homeFragment)
-                    showCustomDialog(namaPenerima)
-                }else{
-                    Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
-                }
+        }
+        notifikasiViewModel.addNotifikasiStatus.observeOnce(viewLifecycleOwner){ status ->
+            if(status== "OK"){
+                Navigation.findNavController(requireView()).navigate(R.id.action_formPengajuanDiriFragment_to_homeFragment)
+                showCustomDialog(namaPenerima)
+            }else{
+                Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
             }
         }
     }

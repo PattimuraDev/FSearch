@@ -13,29 +13,16 @@ class NotifikasiRepository {
     private val firebaseCloudStorage = Firebase.storage
     private val addNotifikasiStatus = MutableLiveData<String>()
     val addNotifikasiStatusLiveData : LiveData<String> = addNotifikasiStatus
-    private val getFileDownloadUrl = MutableLiveData<String>()
-    val getFileDownloadUrlLiveData: LiveData<String> = getFileDownloadUrl
     private val listNotifikasi = MutableLiveData<List<Notifikasi>>()
     val listNotifikasiLiveData: LiveData<List<Notifikasi>> = listNotifikasi
 
-    suspend fun addNotifikasi(notifikasi: Notifikasi){
+    suspend fun addNotifikasi(notifikasi: Notifikasi, fileUri: Uri?, isUploading: Boolean, fileType: String?){
         val document = firestoreDb.collection("notifikasi").document()
         val documentId = document.id
-        firestoreDb.collection("notifikasi")
-            .document(documentId)
-            .set(notifikasi)
-            .addOnCompleteListener { addNotifikasiTask ->
-                if (addNotifikasiTask.isSuccessful) {
-                    addNotifikasiStatus.postValue("OK")
-                } else {
-                    addNotifikasiStatus.postValue("FAILED")
-                }
-            }
-    }
+        val storageRef = firebaseCloudStorage.reference
+        notifikasi.idNotifikasi = documentId
 
-    suspend fun postFileToStorage(fileUri: Uri?, isUploading: Boolean, fileType: String?){
         if(isUploading){
-            val storageRef = firebaseCloudStorage.reference
             val storageFilePath = when (fileType) {
                 "pdf" -> {
                     "notifikasi/pdf/${fileUri!!.lastPathSegment}"
@@ -58,13 +45,43 @@ class NotifikasiRepository {
                 riversRef.downloadUrl
             }.addOnCompleteListener {  getDownloadTaskStatus ->
                 if(getDownloadTaskStatus.isSuccessful){
-                    getFileDownloadUrl.postValue(getDownloadTaskStatus.result.toString())
+                    notifikasi.urlLampiran = getDownloadTaskStatus.result.toString()
+                    firestoreDb.collection("notifikasi")
+                        .document(documentId)
+                        .set(notifikasi)
+                        .addOnCompleteListener { addNotifikasiTask ->
+                            if (addNotifikasiTask.isSuccessful) {
+                                addNotifikasiStatus.postValue("OK")
+                            } else {
+                                addNotifikasiStatus.postValue("FAILED")
+                            }
+                        }
                 }else{
-                    getFileDownloadUrl.postValue("")
+                    notifikasi.urlLampiran = ""
+                    firestoreDb.collection("notifikasi")
+                        .document(documentId)
+                        .set(notifikasi)
+                        .addOnCompleteListener { addNotifikasiTask ->
+                            if (addNotifikasiTask.isSuccessful) {
+                                addNotifikasiStatus.postValue("OK")
+                            } else {
+                                addNotifikasiStatus.postValue("FAILED")
+                            }
+                        }
                 }
             }
         }else{
-            getFileDownloadUrl.postValue("")
+            notifikasi.urlLampiran = ""
+            firestoreDb.collection("notifikasi")
+                .document(documentId)
+                .set(notifikasi)
+                .addOnCompleteListener { addNotifikasiTask ->
+                    if (addNotifikasiTask.isSuccessful) {
+                        addNotifikasiStatus.postValue("OK")
+                    } else {
+                        addNotifikasiStatus.postValue("FAILED")
+                    }
+                }
         }
     }
 
@@ -82,6 +99,14 @@ class NotifikasiRepository {
                 }
                 listNotifikasi.postValue(listNotifikasiResult)
             }
+    }
+
+    suspend fun updateNotifikasiIsResponded(hasilRespon: String, idNotifikasi: String){
+        val notifikasiPref = firestoreDb.collection("notifikasi").document(idNotifikasi)
+        notifikasiPref.update(mapOf(
+            "responded" to true,
+            "hasilRespon" to hasilRespon
+        ))
     }
 
     companion object {

@@ -8,14 +8,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Account
 import repo.pattimuradev.fsearch.model.DataLogin
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.model.UserProfile
-import java.lang.reflect.Field
 
 class UserRepository {
     private val firebaseAuth = Firebase.auth
@@ -42,6 +40,8 @@ class UserRepository {
     val getSpesificUserByIdLiveData : LiveData<UserProfile> = getSpesificUserById
     private val getAllFavoritedUser = MutableLiveData<List<UserProfile>>()
     val getAllFavoritedUserLiveData: LiveData<List<UserProfile>> = getAllFavoritedUser
+    private val addFriendResult = MutableLiveData<String>()
+    val addFriendResultLiveData : LiveData<String> = addFriendResult
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -113,7 +113,6 @@ class UserRepository {
             )
         )
             .addOnSuccessListener {
-                //currentUserProfile.postValue(userProfile)
                 firestoreDb.collection("user_profile")
                     .document(currentUser.value!!.uid)
                     .get()
@@ -263,6 +262,110 @@ class UserRepository {
             }
             .addOnFailureListener {
                 getAllFavoritedUser.postValue(null)
+            }
+    }
+
+    suspend fun addUserFriendList(idUserPengirim: String, idUserPenerima: String){
+        firestoreDb.collection("user_profile")
+            .document(idUserPenerima)
+            .get()
+            .addOnSuccessListener { userProfile ->
+                val userProfilePenerima = userProfile.toObject(UserProfile::class.java)
+                if(userProfilePenerima!!.friendListUserId == null){
+                    firestoreDb.collection("user_profile")
+                        .document(idUserPenerima)
+                        .update(mapOf(
+                            "friendListUserId" to arrayListOf(idUserPengirim),
+                            "jumlahTeman" to FieldValue.increment(1)
+                        ))
+                        .addOnSuccessListener {
+                            firestoreDb.collection("user_profile")
+                                .document(idUserPengirim)
+                                .get()
+                                .addOnSuccessListener { userProfilePengirim ->
+                                    val userProfilePengirimValue = userProfilePengirim.toObject(UserProfile::class.java)
+                                    if(userProfilePengirimValue!!.friendListUserId == null){
+                                        firestoreDb.collection("user_profile")
+                                            .document(idUserPengirim)
+                                            .update(mapOf(
+                                                "friendListUserId" to arrayListOf(idUserPenerima),
+                                                "jumlahTeman" to FieldValue.increment(1)
+                                            ))
+                                            .addOnSuccessListener {
+                                                addFriendResult.postValue("OK")
+                                            }
+                                            .addOnFailureListener {
+                                                addFriendResult.postValue("FAILED")
+                                            }
+                                    }else{
+                                        firestoreDb.collection("user_profile")
+                                            .document(idUserPengirim)
+                                            .update(mapOf(
+                                                "friendListUserId" to FieldValue.arrayUnion(idUserPenerima),
+                                                "jumlahTeman" to FieldValue.increment(1)
+                                            ))
+                                            .addOnSuccessListener {
+                                                addFriendResult.postValue("OK")
+                                            }
+                                            .addOnFailureListener {
+                                                addFriendResult.postValue("FAILED")
+                                            }
+                                    }
+                                }
+                        }
+                        .addOnFailureListener {
+                            addFriendResult.postValue("FAILED")
+                        }
+                }else{
+                    if(userProfilePenerima.friendListUserId!!.contains(idUserPengirim)){
+                        addFriendResult.postValue("ALREADY A FRIEND")
+                    }else{
+                        firestoreDb.collection("user_profile")
+                            .document(idUserPenerima)
+                            .update(mapOf(
+                                "friendListUserId" to FieldValue.arrayUnion(idUserPengirim),
+                                "jumlahTeman" to FieldValue.increment(1)
+                            ))
+                            .addOnSuccessListener {
+                                firestoreDb.collection("user_profile")
+                                    .document(idUserPengirim)
+                                    .get()
+                                    .addOnSuccessListener { userProfilePengirim ->
+                                        val userProfilePengirimValue = userProfilePengirim.toObject(UserProfile::class.java)
+                                        if(userProfilePengirimValue!!.friendListUserId == null){
+                                            firestoreDb.collection("user_profile")
+                                                .document(idUserPengirim)
+                                                .update(mapOf(
+                                                    "friendListUserId" to arrayListOf(idUserPenerima),
+                                                    "jumlahTeman" to FieldValue.increment(1)
+                                                ))
+                                                .addOnSuccessListener {
+                                                    addFriendResult.postValue("OK")
+                                                }
+                                                .addOnFailureListener {
+                                                    addFriendResult.postValue("FAILED")
+                                                }
+                                        }else{
+                                            firestoreDb.collection("user_profile")
+                                                .document(idUserPengirim)
+                                                .update(mapOf(
+                                                    "friendListUserId" to FieldValue.arrayUnion(idUserPenerima),
+                                                    "jumlahTeman" to FieldValue.increment(1)
+                                                ))
+                                                .addOnSuccessListener {
+                                                    addFriendResult.postValue("OK")
+                                                }
+                                                .addOnFailureListener {
+                                                    addFriendResult.postValue("FAILED")
+                                                }
+                                        }
+                                    }
+                            }
+                            .addOnFailureListener {
+                                addFriendResult.postValue("FAILED")
+                            }
+                    }
+                }
             }
     }
 

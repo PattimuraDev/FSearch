@@ -8,16 +8,15 @@ import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_form_ajakan_bergabung_tim.*
-import kotlinx.android.synthetic.main.fragment_form_pengajuan_diri.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
@@ -61,15 +60,7 @@ class FormAjakanBergabungTimFragment : Fragment() {
         val idPenerima = userProfilePenggunaLain!!.id
         val namaPenerima = userProfilePenggunaLain.nama
 
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-            if(imagePosterUri != null){
-                notifikasiViewModel.postFileToStorage(imagePosterUri, true, "image")
-            }else{
-                notifikasiViewModel.postFileToStorage(null, false, null)
-            }
-        }
-
-        userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
+        userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ userProfile ->
             val urlFotoPengirim = userProfile.urlFoto
             val jenisNotifikasi = "mengajak_bergabung_tim"
             val idPengirim = userProfile.id
@@ -91,36 +82,61 @@ class FormAjakanBergabungTimFragment : Fragment() {
             }
             val deskripsiAjakan = form_ajakan_bergabung_tim_deskripsi.text.toString().trim()
             val jenisLampiran = "image"
-            notifikasiViewModel.getFileDownloadUrl.observe(viewLifecycleOwner){ fileUrl ->
-                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                    notifikasiViewModel.addNotifikasi(Notifikasi(
+
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                if(imagePosterUri != null){
+                    notifikasiViewModel.addNotifikasi(
+                        Notifikasi(null,
+                            urlFotoPengirim,
+                            jenisNotifikasi,
+                            idPengirim!!,
+                            namaPengirim,
+                            prodiPengirim,
+                            asalUniversitasPengirim,
+                            tahunAngkatanPengirim,
+                            DateAndTimeHandler.currentDate(),
+                            deskripsiAjakan,
+                            jenisLampiran,
+                            null,
+                            idPenerima!!,
+                            namaPenerima,
+                            false,
+                            null
+                        ),
+                        imagePosterUri,
+                        true,
+                        jenisLampiran)
+                }else{
+                    notifikasiViewModel.addNotifikasi(
+                        Notifikasi(null,
+                            urlFotoPengirim,
+                            jenisNotifikasi,
+                            idPengirim!!,
+                            namaPengirim,
+                            prodiPengirim,
+                            asalUniversitasPengirim,
+                            tahunAngkatanPengirim,
+                            DateAndTimeHandler.currentDate(),
+                            deskripsiAjakan,
+                            jenisLampiran,
+                            null,
+                            idPenerima!!,
+                            namaPenerima,
+                            false,
+                            null
+                        ),
                         null,
-                        urlFotoPengirim,
-                        jenisNotifikasi,
-                        idPengirim!!,
-                        namaPengirim,
-                        prodiPengirim,
-                        asalUniversitasPengirim,
-                        tahunAngkatanPengirim,
-                        DateAndTimeHandler.currentDate(),
-                        deskripsiAjakan,
-                        jenisLampiran,
-                        fileUrl,
-                        idPenerima!!,
-                        namaPenerima,
                         false,
-                        null
-                    ))
+                        null)
                 }
             }
-
-            notifikasiViewModel.addNotifikasiStatus.observeOnce(viewLifecycleOwner){ status ->
-                if(status== "OK"){
-                    Navigation.findNavController(requireView()).navigate(R.id.action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment)
-                    showCustomDialog()
-                }else{
-                    Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
-                }
+        }
+        notifikasiViewModel.addNotifikasiStatus.observeOnce(viewLifecycleOwner){ status ->
+            if(status== "OK"){
+                Navigation.findNavController(requireView()).navigate(R.id.action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment)
+                showCustomDialog()
+            }else{
+                Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
             }
         }
     }

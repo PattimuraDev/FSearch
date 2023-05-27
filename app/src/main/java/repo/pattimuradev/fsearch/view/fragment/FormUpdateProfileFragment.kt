@@ -5,12 +5,9 @@ import android.content.ContentResolver
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +42,6 @@ class FormUpdateProfileFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_formUpdateProfileFragment_to_profileFragment)
         }
         initDataAwal()
-        checkField()
         form_update_profil_foto_user.setOnClickListener {
             handleTakeImage()
         }
@@ -57,7 +53,6 @@ class FormUpdateProfileFragment : Fragment() {
         var jenisKelamin: String? = null
 
         form_update_profil_radio_group_jenis_kelamin.setOnCheckedChangeListener { _, checkedId ->
-            form_update_profil_button_simpan.isEnabled = true
             jenisKelamin = if(checkedId == R.id.form_update_profil_radio_button_pria){
                 "Pria"
             }else{
@@ -67,7 +62,6 @@ class FormUpdateProfileFragment : Fragment() {
 
         form_update_profil_button_status_bersedia.setOnCheckedChangeListener { _, isChecked ->
             statusBersediaMenerimaAjakan = isChecked
-            form_update_profil_button_simpan.isEnabled = true
         }
 
         form_update_profil_button_simpan.setOnClickListener {
@@ -176,45 +170,6 @@ class FormUpdateProfileFragment : Fragment() {
         val fileName = cursor?.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
         cursor?.close()
         namaFileFoto = fileName!!
-    }
-
-    private fun checkField() {
-        form_update_profil_button_simpan.isEnabled = false
-        val fields = listOf(
-            form_update_profil_bio,
-            form_update_profil_nama,
-            form_update_profil_universitas,
-            form_update_profil_tahun_angkatan,
-            form_update_profil_fakultas,
-            form_update_profil_jurusan,
-            form_update_profil_prodi,
-            form_update_profil_keminatan,
-            form_update_profil_umur,
-            form_update_profil_kota_asal,
-            form_update_profil_kepribadian
-        )
-        for(field in fields){
-            field.addTextChangedListener(object: TextWatcher{
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    form_update_profil_button_simpan.isEnabled = false
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    form_update_profil_button_simpan.isEnabled = true
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                    form_update_profil_button_simpan.isEnabled = true
-                }
-
-            })
-        }
-        // edit terakhir
-        if(form_update_profil_button_simpan.isEnabled){
-            form_update_profil_button_simpan.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_enabled_layout, null)
-        }else{
-            form_update_profil_button_simpan.background = ResourcesCompat.getDrawable(resources, R.drawable.custom_button_not_enabled_layout, null)
-        }
     }
 
     private fun initDataAwal() {

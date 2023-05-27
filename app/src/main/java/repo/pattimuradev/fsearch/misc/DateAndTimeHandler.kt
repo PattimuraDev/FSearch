@@ -43,7 +43,7 @@ object DateAndTimeHandler {
         }
     }
 
-    private fun nameOfMonthFromNumber(monthNumber: Int): String{
+    fun nameOfMonthFromNumber(monthNumber: Int): String{
         val monthName = listOf(
             "Januari",
             "Februari",
@@ -61,7 +61,7 @@ object DateAndTimeHandler {
         return monthName[monthNumber]
     }
 
-    private fun nameOfDayIndonesian(dayName: String): String{
+    fun nameOfDayIndonesian(dayName: String): String{
         return when(dayName){
             "Monday" -> "Senin"
             "Tuesday" -> "Selasa"

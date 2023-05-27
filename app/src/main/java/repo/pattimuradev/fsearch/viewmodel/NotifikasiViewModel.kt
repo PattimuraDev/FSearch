@@ -8,10 +8,9 @@ import repo.pattimuradev.fsearch.repository.NotifikasiRepository
 class NotifikasiViewModel: ViewModel(){
     private val notifikasiRepository = NotifikasiRepository.getInstance()
     val listNotifikasi = notifikasiRepository.listNotifikasiLiveData
-    val getFileDownloadUrl = notifikasiRepository.getFileDownloadUrlLiveData
     val addNotifikasiStatus = notifikasiRepository.addNotifikasiStatusLiveData
 
-    suspend fun addNotifikasi(notifikasi: Notifikasi) = notifikasiRepository.addNotifikasi(notifikasi)
+    suspend fun addNotifikasi(notifikasi: Notifikasi, fileUri: Uri?, isUploadingFile: Boolean, fileType: String?) = notifikasiRepository.addNotifikasi(notifikasi, fileUri, isUploadingFile, fileType)
     suspend fun getAllNotifikasi(idPenerimaNotifikasi: String) = notifikasiRepository.getAllNotifikasi(idPenerimaNotifikasi)
-    suspend fun postFileToStorage(fileUri: Uri?, isUploading: Boolean, fileType: String?) = notifikasiRepository.postFileToStorage(fileUri, isUploading, fileType)
+    suspend fun updateNotifikasiIsResponded(hasilRespon: String, idNotifikasi: String) = notifikasiRepository.updateNotifikasiIsResponded(hasilRespon, idNotifikasi)
 }

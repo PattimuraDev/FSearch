@@ -21,7 +21,7 @@
                 android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
                 android:id="@+id/form_tambah_lomba_button_back"
-                android:layout_marginEnd="25dp"/>
+                android:layout_marginEnd="30dp"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

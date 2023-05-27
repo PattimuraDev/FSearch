@@ -39,7 +39,8 @@ class NotifikasiAdapter(private val onClick: (Notifikasi) -> Unit): RecyclerView
             }
             rv_notifikasi_deskripsi_singkat_notifikasi.text = when(listNotifikasi!![position].jenisNotifikasi){
                 "permintaan_pertemanan" -> NotificationType.PERMINTAAN_PERTEMANAN.pesanSingkatNotifikasi
-                "respon_pertemanan" -> NotificationType.RESPON_PERTEMANAN.pesanSingkatNotifikasi
+                "menerima_permintaan_pertemanan" -> NotificationType.MENERIMA_PERMINTAAN_PERTEMANAN.pesanSingkatNotifikasi
+                "menolak_permintaan_pertemanan" -> NotificationType.MENOLAK_PERMINTAAN_PERTEMANAN.pesanSingkatNotifikasi
                 "pengajuan_bergabung_tim" -> NotificationType.PENGAJUAN_BERGABUNG_TIM.pesanSingkatNotifikasi
                 "respon_pengajuan_bergabung_tim" -> NotificationType.RESPON_PENGAJUAN_BERGABUNG_TIM.pesanSingkatNotifikasi
                 "mengajak_bergabung_tim" -> NotificationType.MENGAJAK_BERGABUNG_TIM.pesanSingkatNotifikasi

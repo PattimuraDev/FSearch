@@ -67,7 +67,7 @@ class DetailPenggunaLainFragment : Fragment() {
     private fun tambahTemanHandler() {
         val dialogBuilder = AlertDialog.Builder(requireContext())
             .setMessage("Anda yakin ingin mengajak berteman pengguna ini?")
-            .setPositiveButton("ya"){dialogInterface, which ->
+            .setPositiveButton("ya"){ _, _ ->
                 userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ userProfile ->
                     val urlFotoPengirim = userProfile.urlFoto
                     val jenisNotifikasi = "permintaan_pertemanan"
@@ -91,24 +91,28 @@ class DetailPenggunaLainFragment : Fragment() {
 
                     userViewModel.spesificUserById.observeOnce(viewLifecycleOwner){ penggunaLain ->
                         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                            notifikasiViewModel.addNotifikasi(Notifikasi(
+                            notifikasiViewModel.addNotifikasi(
+                                Notifikasi(
+                                    null,
+                                    urlFotoPengirim,
+                                    jenisNotifikasi,
+                                    idPengirim!!,
+                                    namaPengirim,
+                                    prodiPengirim,
+                                    asalUniversitasPengirim,
+                                    tahunAngkatanPengirim,
+                                    DateAndTimeHandler.currentDate(),
+                                    null,
+                                    null,
+                                    null,
+                                    penggunaLain.id!!,
+                                    penggunaLain.nama,
+                                    false,
+                                    null
+                                ),
                                 null,
-                                urlFotoPengirim,
-                                jenisNotifikasi,
-                                idPengirim!!,
-                                namaPengirim,
-                                prodiPengirim,
-                                asalUniversitasPengirim,
-                                tahunAngkatanPengirim,
-                                DateAndTimeHandler.currentDate(),
-                                null,
-                                null,
-                                null,
-                                penggunaLain.id!!,
-                                penggunaLain.nama,
                                 false,
-                                null
-                            ))
+                                null)
                         }
                     }
 
@@ -121,7 +125,7 @@ class DetailPenggunaLainFragment : Fragment() {
                     }
                 }
             }
-            .setNegativeButton("Tidak"){dialogInterface, which ->
+            .setNegativeButton("Tidak"){ dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
         val alertDialog = dialogBuilder.create()

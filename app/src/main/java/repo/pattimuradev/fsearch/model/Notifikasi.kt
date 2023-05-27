@@ -17,7 +17,7 @@ data class Notifikasi(
     val riwayatNotifikasi: Date? = null,
     val deskripsiLengkap: String? = null,
     val jenisLampiran: String? = null,
-    val urlLampiran: String? = null,
+    var urlLampiran: String? = null,
     val idPenerima: String = "",
     val namaPenerima: String = "",
     val responded: Boolean? = null,

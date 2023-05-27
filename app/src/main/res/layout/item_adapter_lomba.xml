@@ -14,12 +14,13 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginEnd="20dp">
+
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/rv_lomba_poster_lomba"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/no_image_available"
                 android:scaleType="centerCrop"
-                android:id="@+id/rv_lomba_poster_lomba"/>
+                android:src="@drawable/no_image_available" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_lomba_button_like"

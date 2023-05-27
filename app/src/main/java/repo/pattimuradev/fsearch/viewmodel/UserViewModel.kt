@@ -20,6 +20,7 @@ class UserViewModel : ViewModel(){
     val loginStatus = userRepository.loginStatusLiveData
     val spesificUserById = userRepository.getSpesificUserByIdLiveData
     val AllUserFavorited = userRepository.getAllFavoritedUserLiveData
+    val addFriendStatus = userRepository.addFriendResultLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)
@@ -34,4 +35,5 @@ class UserViewModel : ViewModel(){
     suspend fun getSpesificUserById(userId: String) = userRepository.getSpesificUserById(userId)
     suspend fun addUserLike(idUserSelected: String) = userRepository.addUserLike(idUserSelected)
     suspend fun getAllFavoritedUser() = userRepository.getAllUserFavorited()
+    suspend fun addFriend(idUserPengirim: String, idUserPenerima: String) = userRepository.addUserFriendList(idUserPengirim, idUserPenerima)
 }

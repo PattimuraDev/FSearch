@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 
     // added plugin
+    // kotlin kapt
     id 'kotlin-kapt'
     //  add kotlin android extension plugin
     id 'kotlin-android-extensions'
@@ -96,7 +97,10 @@ dependencies {
     // firebase cloud storage
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    // currency edit text library
     implementation 'com.cottacush:CurrencyEditText:1.0.0'
+
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
 }
 
 kapt {

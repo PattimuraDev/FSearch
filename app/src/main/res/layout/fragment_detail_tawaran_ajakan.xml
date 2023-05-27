@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.DetailTawaranAjakanFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp">
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/detail_tawaran_ajakan_button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/back_icon" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textSize="16sp"
+                android:textColor="@color/primary"
+                android:layout_toEndOf="@+id/detail_tawaran_ajakan_button_back"
+                android:layout_centerVertical="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/detail_tawaran_ajakan_button_respon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/custom_button_enabled_layout"
+                android:text="Respon"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/standard_user_photo"
+                android:id="@+id/detail_tawaran_ajakan_foto_pengirim"
+                android:layout_marginEnd="20dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contoh Nama"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_toEndOf="@id/detail_tawaran_ajakan_foto_pengirim"
+                android:id="@+id/detail_tawaran_ajakan_nama_pengirim"
+                android:layout_alignParentTop="true"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teknik Informatika"
+                android:id="@+id/detail_tawaran_ajakan_asal_prodi_pengirim"
+                android:layout_toEndOf="@id/detail_tawaran_ajakan_foto_pengirim"
+                android:layout_below="@id/detail_tawaran_ajakan_nama_pengirim"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_tawaran_ajakan_asal_universitas_pengirim"
+                android:layout_toEndOf="@id/detail_tawaran_ajakan_foto_pengirim"
+                android:layout_below="@id/detail_tawaran_ajakan_asal_prodi_pengirim"
+                android:text="Universitas Brawijaya"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_tawaran_ajakan_tahun_angkatan_pengirim"
+                android:layout_toEndOf="@id/detail_tawaran_ajakan_asal_universitas_pengirim"
+                android:layout_below="@id/detail_tawaran_ajakan_asal_prodi_pengirim"
+                android:text="2018"
+                android:layout_marginStart="15dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_tawaran_ajakan_waktu_penerimaan_notifikasi"
+                android:layout_toEndOf="@id/detail_tawaran_ajakan_foto_pengirim"
+                android:layout_below="@id/detail_tawaran_ajakan_asal_universitas_pengirim"
+                android:text="May, 4 2020 // 1:40 PM"/>
+        </RelativeLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_tawaran_ajakan_deskripsi_lengkap"
+            android:text="Contoh deskripsi"
+            android:layout_margin="20dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_tawaran_ajakan_poster"
+                android:src="@drawable/no_image_available"
+                android:layout_alignParentTop="true"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/detail_tawaran_ajakan_button_buka_pdf"
+                android:textColor="@color/link_text_color"
+                android:text="Download CV pengguna (pdf)"/>
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

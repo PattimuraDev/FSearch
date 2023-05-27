@@ -10,13 +10,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="25dp"
         android:id="@+id/rv_notifikasi_body_container">
+
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/rv_notifikasi_foto_pengirim"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:src="@drawable/standard_user_photo"
-            android:id="@+id/rv_notifikasi_foto_pengirim"/>
+            android:layout_alignParentTop="true"
+            android:src="@drawable/standard_user_photo" />
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

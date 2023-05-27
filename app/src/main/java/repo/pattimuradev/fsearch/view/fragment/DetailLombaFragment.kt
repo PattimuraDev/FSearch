@@ -17,6 +17,8 @@ import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Lomba
 import repo.pattimuradev.fsearch.viewmodel.LombaViewModel
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailLombaFragment : Fragment() {
 
@@ -42,11 +44,16 @@ class DetailLombaFragment : Fragment() {
 
     private fun initDetailLombaData() {
         val lomba = arguments!!.getParcelable("lomba") as Lomba?
-        val tanggalPosting = DateAndTimeHandler.formatTanggalDaftarLombaPickerDialog(
-            lomba!!.tanggalPosting!!.year,
-            lomba.tanggalPosting!!.month,
-            lomba.tanggalPosting.day
-        )
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = lomba!!.tanggalPosting!!.time
+        val hariDateFormat = SimpleDateFormat("EEEE", Locale.US)
+        val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
+        val tahunDateFormat = SimpleDateFormat("y", Locale.US)
+        val namaHari = DateAndTimeHandler.nameOfDayIndonesian(hariDateFormat.format(calendar.time))
+        val namaBulan = DateAndTimeHandler.nameOfMonthFromNumber(calendar.get(Calendar.MONTH))
+        val tahun = tahunDateFormat.format(calendar.time)
+        val tanggal = tanggalDateFormat.format(calendar.time)
+        val tanggalPosting = "$namaHari, $tanggal $namaBulan $tahun"
 
         Glide.with(detail_lomba_poster.context)
             .load(lomba.posterLombaUrl)

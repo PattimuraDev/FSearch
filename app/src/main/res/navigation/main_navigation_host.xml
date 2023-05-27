@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_notifikasiFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_notifikasiFragment_to_detailTawaranAjakanFragment"
+            app:destination="@id/detailTawaranAjakanFragment" />
     </fragment>
     <fragment
         android:id="@+id/formPengajuanDiriFragment"
@@ -153,5 +156,26 @@
         <action
             android:id="@+id/action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment"
             app:destination="@id/detailPenggunaLainFagment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTawaranAjakanFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.DetailTawaranAjakanFragment"
+        android:label="fragment_detail_tawaran_ajakan"
+        tools:layout="@layout/fragment_detail_tawaran_ajakan" >
+        <action
+            android:id="@+id/action_detailTawaranAjakanFragment_to_notifikasiFragment"
+            app:destination="@id/notifikasiFragment" />
+        <action
+            android:id="@+id/action_detailTawaranAjakanFragment_to_formBalasanFragment"
+            app:destination="@id/formBalasanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formBalasanFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormBalasanFragment"
+        android:label="fragment_form_balasan"
+        tools:layout="@layout/fragment_form_balasan" >
+        <action
+            android:id="@+id/action_formBalasanFragment_to_detailTawaranAjakanFragment"
+            app:destination="@id/detailTawaranAjakanFragment" />
     </fragment>
 </navigation>
