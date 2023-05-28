@@ -36,10 +36,8 @@ class ViewPagerTestimoniFragment : Fragment() {
         viewpager_profile_rv_testimoni.adapter = testimoniAdapter
 
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
-            if(userProfile.testimoni != null){
-                testimoniAdapter.setListTestimoni(userProfile.testimoni)
-                testimoniAdapter.notifyDataSetChanged()
-            }
+            testimoniAdapter.setListTestimoni(userProfile.testimoni)
+            testimoniAdapter.notifyDataSetChanged()
         }
     }
 }

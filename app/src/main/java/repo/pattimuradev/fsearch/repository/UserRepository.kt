@@ -8,7 +8,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.*
@@ -222,7 +221,7 @@ class UserRepository {
             }
     }
 
-    suspend fun getSpesificUserById(userId: String) {
+    fun getSpesificUserById(userId: String) {
         firestoreDb.collection("user_profile")
             .document(userId)
             .get()
@@ -335,7 +334,7 @@ class UserRepository {
             .addOnSuccessListener { userProfile ->
                 val userProfileTarget = userProfile.toObject(UserProfile::class.java)
                 if(userProfileTarget!!.teamHistory.contains(currentUser.value!!.uid)){
-                    firestoreDb.collection("userProfile")
+                    firestoreDb.collection("user_profile")
                         .document(idUserTarget)
                         .update(mapOf(
                             "testimoni" to FieldValue.arrayUnion(testimoni)
@@ -348,7 +347,7 @@ class UserRepository {
                                     var totalJumlahAngkaRating = 0.0F
                                     val _userProfileTarget = _userProfile.toObject(UserProfile::class.java)
                                     for(i in _userProfileTarget!!.testimoni){
-                                        totalJumlahAngkaRating += i.rating!!
+                                        totalJumlahAngkaRating += i.rating
                                     }
                                     val ratingKeseluruhan = totalJumlahAngkaRating / _userProfileTarget.testimoni.size
                                     firestoreDb.collection("user_profile")
@@ -358,9 +357,10 @@ class UserRepository {
                                         ))
                                         .addOnSuccessListener {
                                             addTestimoni.postValue("OK")
+                                            getSpesificUserById(idUserTarget)
                                         }
                                         .addOnFailureListener {
-                                            addTestimoni.postValue("FAILED")
+                                            addTestimoni.postValue("FAILED2")
                                         }
                                 }
                             //

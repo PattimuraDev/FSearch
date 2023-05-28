@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.FormTestimoniFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_icon"
+            android:backgroundTint="@color/white"
+            android:layout_alignParentStart="true"
+            android:id="@+id/form_testimoni_button_back"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Form Testimoni"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:textColor="@color/primary"
+            android:layout_toRightOf="@id/form_testimoni_button_back"
+            android:layout_centerVertical="true"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_not_enabled_layout"
+            android:textColor="@color/white"
+            android:text="Post"
+            android:textAllCaps="false"
+            android:id="@+id/form_testimoni_button_post"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"/>
+    </RelativeLayout>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/form_testimoni_rating_bar"
+        android:numStars="5"
+        android:isIndicator="false"
+        android:stepSize="1"
+        android:progressTint="@color/rating_bar_star_color"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi Testimoni"
+        android:layout_marginHorizontal="20dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="500"
+            android:id="@+id/form_testimoni_deskripsi"
+            android:layout_alignParentTop="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/form_testimoni_word_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/form_testimoni_deskripsi"
+            android:layout_alignParentEnd="true"
+            android:text="0/500" />
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

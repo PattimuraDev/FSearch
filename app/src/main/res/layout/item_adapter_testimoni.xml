@@ -53,7 +53,7 @@
             android:id="@+id/viewpager_profile_rv_testimoni_riwayat_posting"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/viewpager_profile_rv_testimoni_nama_pengirim"
-            android:layout_marginStart="30dp"/>
+            android:layout_marginStart="15dp"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:id="@+id/viewpager_profile_rv_testimoni_tahun_angkatan_pengirim"
             app:layout_constraintTop_toBottomOf="@id/viewpager_profile_rv_testimoni_asal_prodi_pengirim"
             app:layout_constraintStart_toEndOf="@id/viewpager_profile_rv_testimoni_asal_universitas_pengirim"
-            android:layout_marginStart="30dp"/>
+            android:layout_marginStart="15dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <RatingBar
         android:id="@+id/viewpager_profile_rv_testimoni_rating_testimoni"
@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:isIndicator="true"
         android:numStars="5"
+        android:progressTint="@color/rating_bar_star_color"
         android:stepSize="0.1"
         android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"

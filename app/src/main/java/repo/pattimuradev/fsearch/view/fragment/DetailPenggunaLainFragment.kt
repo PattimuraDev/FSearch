@@ -64,7 +64,11 @@ class DetailPenggunaLainFragment : Fragment() {
         }
 
         detail_pengguna_lain_button_tulis_testimoni.setOnClickListener {
-            // edit
+            userViewModel.spesificUserById.observeOnce(viewLifecycleOwner){ userProfile ->
+                val bundle = Bundle()
+                bundle.putParcelable("profile_pengguna_lain", userProfile)
+                Navigation.findNavController(view).navigate(R.id.action_detailPenggunaLainFagment_to_formTestimoniFragment, bundle)
+            }
         }
     }
 

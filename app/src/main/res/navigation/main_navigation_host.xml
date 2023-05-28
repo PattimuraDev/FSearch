@@ -117,6 +117,9 @@
         <action
             android:id="@+id/action_detailPenggunaLainFagment_to_formAjakanBergabungTimFragment"
             app:destination="@id/formAjakanBergabungTimFragment" />
+        <action
+            android:id="@+id/action_detailPenggunaLainFagment_to_formTestimoniFragment"
+            app:destination="@id/formTestimoniFragment" />
     </fragment>
     <fragment
         android:id="@+id/likeFragment"
@@ -177,5 +180,14 @@
         <action
             android:id="@+id/action_formBalasanFragment_to_detailTawaranAjakanFragment"
             app:destination="@id/detailTawaranAjakanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formTestimoniFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.FormTestimoniFragment"
+        android:label="fragment_form_testimoni"
+        tools:layout="@layout/fragment_form_testimoni" >
+        <action
+            android:id="@+id/action_formTestimoniFragment_to_detailPenggunaLainFagment"
+            app:destination="@id/detailPenggunaLainFagment" />
     </fragment>
 </navigation>

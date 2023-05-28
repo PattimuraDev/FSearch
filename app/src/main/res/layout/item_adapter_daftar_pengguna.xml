@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:isIndicator="true"
                     android:numStars="5"
+                    android:progressTint="@color/rating_bar_star_color"
                     android:stepSize="0.1" />
 
                 <androidx.appcompat.widget.AppCompatTextView

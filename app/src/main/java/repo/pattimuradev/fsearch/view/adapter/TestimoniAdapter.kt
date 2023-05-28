@@ -19,7 +19,7 @@ class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestimoniAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_adapter_testimoni, parent, false)
         return ViewHolder(view)
@@ -27,15 +27,15 @@ class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.itemView){
-            viewpager_profile_rv_testimoni_nama_pengirim.text = listTestimoni!![position].nama
-            viewpager_profile_rv_testimoni_asal_prodi_pengirim.text = listTestimoni!![position].programStudi
-            viewpager_profile_rv_testimoni_asal_universitas_pengirim.text = listTestimoni!![position].asalUniversitas
-            viewpager_profile_rv_testimoni_tahun_angkatan_pengirim.text = listTestimoni!![position].tahunAngkatan.toString()
-            viewpager_profile_rv_testimoni_riwayat_posting.text = DateAndTimeHandler.getTimeAgo(listTestimoni!![position].riwayatPosting!!.time)
+            viewpager_profile_rv_testimoni_nama_pengirim.text = listTestimoni!![position].namaPengirim
+            viewpager_profile_rv_testimoni_asal_prodi_pengirim.text = listTestimoni!![position].programStudiPengirim
+            viewpager_profile_rv_testimoni_asal_universitas_pengirim.text = listTestimoni!![position].asalUniversitasPengirim
+            viewpager_profile_rv_testimoni_tahun_angkatan_pengirim.text = listTestimoni!![position].tahunAngkatanPengirim.toString()
+            viewpager_profile_rv_testimoni_riwayat_posting.text = DateAndTimeHandler.getTimeAgo(listTestimoni!![position].riwayatPosting!!)
             viewpager_profile_rv_testimoni_rating_testimoni.rating = listTestimoni!![position].rating!!
             viewpager_profile_rv_testimoni_deskripsi_testimoni.text = listTestimoni!![position].deskripsi
             Glide.with(viewpager_profile_rv_testimoni_foto_pengirim.context)
-                .load(listTestimoni!![position].urlFoto)
+                .load(listTestimoni!![position].urlFotoPengirim)
                 .error(R.drawable.standard_user_photo)
                 .into(viewpager_profile_rv_testimoni_foto_pengirim)
         }

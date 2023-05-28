@@ -7,7 +7,11 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_detail_tawaran_ajakan.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_ajakan_bergabung_tim.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_balasan.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_testimoni.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_form_update_profile.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/fragment_view_pager_testimoni.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/item_adapter_daftar_pengguna.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/repo/pattimuradev/FSearch/app/src/main/res/layout/item_adapter_testimoni.xml" value="0.14130434782608695" />
       </map>
     </option>
   </component>

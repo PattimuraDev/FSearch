@@ -42,10 +42,8 @@ class ViewPagerTestimoniPenggunaLainFragment : Fragment() {
         viewpager_detail_pengguna_lain_rv_testimoni.adapter = testimoniAdapter
 
         userViewModel.spesificUserById.observe(viewLifecycleOwner){ userProfile ->
-            if(userProfile.testimoni != null){
-                testimoniAdapter.setListTestimoni(userProfile.testimoni)
-                testimoniAdapter.notifyDataSetChanged()
-            }
+            testimoniAdapter.setListTestimoni(userProfile.testimoni)
+            testimoniAdapter.notifyDataSetChanged()
         }
     }
 }
