@@ -53,6 +53,16 @@ class NotifikasiFragment : Fragment() {
                 }
 
             }else if(notifikasi.jenisNotifikasi == "pengajuan_bergabung_tim" || notifikasi.jenisNotifikasi == "mengajak_bergabung_tim"){
+                if(notifikasi.responded == false){
+                    val bundle = Bundle()
+                    bundle.putParcelable("notifikasi", notifikasi)
+                    Navigation.findNavController(requireView()).navigate(R.id.action_notifikasiFragment_to_detailTawaranAjakanFragment, bundle)
+                }else{
+                    Toast.makeText(requireContext(), "Anda sudah merespon!", Toast.LENGTH_SHORT).show()
+                }
+
+            }else if(notifikasi.jenisNotifikasi == "respon_pengajuan_bergabung_tim" || notifikasi.jenisNotifikasi == "respon_ajakan_bergabung_tim"){
+                handleOnlyReadNotification(notifikasi)
                 val bundle = Bundle()
                 bundle.putParcelable("notifikasi", notifikasi)
                 Navigation.findNavController(requireView()).navigate(R.id.action_notifikasiFragment_to_detailTawaranAjakanFragment, bundle)
@@ -154,9 +164,57 @@ class NotifikasiFragment : Fragment() {
                 }
             }
             .setNegativeButton("Tolak"){ dialogInterface, _ ->
-                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                    notifikasiViewModel.updateNotifikasiIsResponded("Tolak", notifikasi.idNotifikasi!!)
+                userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ currentUserProfile ->
+                    val urlFotoPengirim = currentUserProfile.urlFoto
+                    val jenisNotifikasi = "menolak_permintaan_pertemanan"
+                    val idPengirim = currentUserProfile.id
+                    val namaPengirim = currentUserProfile.nama
+                    val prodiPengirim = if(currentUserProfile.dataDiri == null){
+                        null
+                    }else{
+                        currentUserProfile.dataDiri.programStudi
+                    }
+                    val asalUniversitasPengirim = if(currentUserProfile.dataDiri == null){
+                        null
+                    }else{
+                        currentUserProfile.dataDiri.asalUniversitas
+                    }
+                    val tahunAngkatanPengirim = if(currentUserProfile.dataDiri == null){
+                        null
+                    }else{
+                        currentUserProfile.dataDiri.tahunAngkatan
+                    }
+                    val riwayatNotifikasi = DateAndTimeHandler.currentDate()
+                    val idPenerima = notifikasi.idPengirim
+                    val namaPenerima = notifikasi.namaPengirim
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                        notifikasiViewModel.updateNotifikasiIsResponded("Tolak", notifikasi.idNotifikasi!!)
+                        notifikasiViewModel.addNotifikasi(
+                            Notifikasi(
+                                null,
+                                urlFotoPengirim,
+                                jenisNotifikasi,
+                                idPengirim!!,
+                                namaPengirim,
+                                prodiPengirim,
+                                asalUniversitasPengirim,
+                                tahunAngkatanPengirim,
+                                riwayatNotifikasi,
+                                null,
+                                null,
+                                null,
+                                idPenerima,
+                                namaPenerima,
+                                false,
+                                null
+                            ),
+                            null,
+                            false,
+                            null
+                        )
+                    }
                 }
+                Toast.makeText(requireContext(), "Respon berhasil dikirimkan", Toast.LENGTH_SHORT).show()
                 dialogInterface.dismiss()
             }
         val alertDialog = dialogBuilder.create()

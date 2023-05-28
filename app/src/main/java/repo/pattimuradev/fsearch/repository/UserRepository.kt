@@ -8,18 +8,17 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import repo.pattimuradev.fsearch.model.Account
-import repo.pattimuradev.fsearch.model.DataLogin
-import repo.pattimuradev.fsearch.model.EmailVerification
-import repo.pattimuradev.fsearch.model.UserProfile
+import repo.pattimuradev.fsearch.model.*
 
 class UserRepository {
     private val firebaseAuth = Firebase.auth
     private val firestoreDb = FirebaseFirestore.getInstance()
     private val firebaseCloudStorage = Firebase.storage
 
+    // live data
     private val checkIfEmailRegistered = MutableLiveData<String>()
     val checkIfEmailRegisteredLiveData : LiveData<String> = checkIfEmailRegistered
     private val otpEmailVerificationResult = MutableLiveData<String>()
@@ -42,6 +41,10 @@ class UserRepository {
     val getAllFavoritedUserLiveData: LiveData<List<UserProfile>> = getAllFavoritedUser
     private val addFriendResult = MutableLiveData<String>()
     val addFriendResultLiveData : LiveData<String> = addFriendResult
+    private val addTeamUpHistory = MutableLiveData<String>()
+    val addTeamUpHistoryLiveData: LiveData<String> = addTeamUpHistory
+    private val addTestimoni = MutableLiveData<String>()
+    val addTestimoniLiveData: LiveData<String> = addTestimoni
 
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
@@ -64,12 +67,12 @@ class UserRepository {
                                     0,
                                     null,
                                     null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null
+                                    arrayListOf(),
+                                    0.0F,
+                                    true,
+                                    arrayListOf(),
+                                    arrayListOf(),
+                                    arrayListOf()
                                 )
                                 firestoreDb.collection("user_profile")
                                     .document(profilUser.id!!)
@@ -254,7 +257,7 @@ class UserRepository {
                 val hasil = mutableListOf<UserProfile>()
                 for(i in result){
                     val userProfile = i.toObject(UserProfile::class.java)
-                    if(userProfile.likedByUserId != null && userProfile.likedByUserId.contains(currentUser.value!!.uid)){
+                    if(userProfile.likedByUserId.contains(currentUser.value!!.uid)){
                         hasil += userProfile
                     }
                 }
@@ -265,106 +268,108 @@ class UserRepository {
             }
     }
 
-    suspend fun addUserFriendList(idUserPengirim: String, idUserPenerima: String){
+    suspend fun addUserFriendList(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String){
         firestoreDb.collection("user_profile")
-            .document(idUserPenerima)
+            .document(idUserPenerimaPermintaan)
             .get()
             .addOnSuccessListener { userProfile ->
                 val userProfilePenerima = userProfile.toObject(UserProfile::class.java)
-                if(userProfilePenerima!!.friendListUserId == null){
+                if(userProfilePenerima!!.friendListUserId.contains(idUserPengirimPermintaan)){
+                    addFriendResult.postValue("ALREADY A FRIEND")
+                }else{
                     firestoreDb.collection("user_profile")
-                        .document(idUserPenerima)
+                        .document(idUserPenerimaPermintaan)
                         .update(mapOf(
-                            "friendListUserId" to arrayListOf(idUserPengirim),
+                            "friendListUserId" to FieldValue.arrayUnion(idUserPengirimPermintaan),
                             "jumlahTeman" to FieldValue.increment(1)
                         ))
                         .addOnSuccessListener {
                             firestoreDb.collection("user_profile")
-                                .document(idUserPengirim)
-                                .get()
-                                .addOnSuccessListener { userProfilePengirim ->
-                                    val userProfilePengirimValue = userProfilePengirim.toObject(UserProfile::class.java)
-                                    if(userProfilePengirimValue!!.friendListUserId == null){
-                                        firestoreDb.collection("user_profile")
-                                            .document(idUserPengirim)
-                                            .update(mapOf(
-                                                "friendListUserId" to arrayListOf(idUserPenerima),
-                                                "jumlahTeman" to FieldValue.increment(1)
-                                            ))
-                                            .addOnSuccessListener {
-                                                addFriendResult.postValue("OK")
-                                            }
-                                            .addOnFailureListener {
-                                                addFriendResult.postValue("FAILED")
-                                            }
-                                    }else{
-                                        firestoreDb.collection("user_profile")
-                                            .document(idUserPengirim)
-                                            .update(mapOf(
-                                                "friendListUserId" to FieldValue.arrayUnion(idUserPenerima),
-                                                "jumlahTeman" to FieldValue.increment(1)
-                                            ))
-                                            .addOnSuccessListener {
-                                                addFriendResult.postValue("OK")
-                                            }
-                                            .addOnFailureListener {
-                                                addFriendResult.postValue("FAILED")
-                                            }
-                                    }
+                                .document(idUserPengirimPermintaan)
+                                .update(mapOf(
+                                    "friendListUserId" to FieldValue.arrayUnion(idUserPenerimaPermintaan),
+                                    "jumlahTeman" to FieldValue.increment(1)
+                                ))
+                                .addOnSuccessListener {
+                                    addFriendResult.postValue("OK")
+                                }
+                                .addOnFailureListener {
+                                    addFriendResult.postValue("FAILED")
                                 }
                         }
                         .addOnFailureListener {
                             addFriendResult.postValue("FAILED")
                         }
-                }else{
-                    if(userProfilePenerima.friendListUserId!!.contains(idUserPengirim)){
-                        addFriendResult.postValue("ALREADY A FRIEND")
-                    }else{
-                        firestoreDb.collection("user_profile")
-                            .document(idUserPenerima)
-                            .update(mapOf(
-                                "friendListUserId" to FieldValue.arrayUnion(idUserPengirim),
-                                "jumlahTeman" to FieldValue.increment(1)
-                            ))
-                            .addOnSuccessListener {
-                                firestoreDb.collection("user_profile")
-                                    .document(idUserPengirim)
-                                    .get()
-                                    .addOnSuccessListener { userProfilePengirim ->
-                                        val userProfilePengirimValue = userProfilePengirim.toObject(UserProfile::class.java)
-                                        if(userProfilePengirimValue!!.friendListUserId == null){
-                                            firestoreDb.collection("user_profile")
-                                                .document(idUserPengirim)
-                                                .update(mapOf(
-                                                    "friendListUserId" to arrayListOf(idUserPenerima),
-                                                    "jumlahTeman" to FieldValue.increment(1)
-                                                ))
-                                                .addOnSuccessListener {
-                                                    addFriendResult.postValue("OK")
-                                                }
-                                                .addOnFailureListener {
-                                                    addFriendResult.postValue("FAILED")
-                                                }
-                                        }else{
-                                            firestoreDb.collection("user_profile")
-                                                .document(idUserPengirim)
-                                                .update(mapOf(
-                                                    "friendListUserId" to FieldValue.arrayUnion(idUserPenerima),
-                                                    "jumlahTeman" to FieldValue.increment(1)
-                                                ))
-                                                .addOnSuccessListener {
-                                                    addFriendResult.postValue("OK")
-                                                }
-                                                .addOnFailureListener {
-                                                    addFriendResult.postValue("FAILED")
-                                                }
-                                        }
-                                    }
-                            }
-                            .addOnFailureListener {
-                                addFriendResult.postValue("FAILED")
-                            }
+                }
+            }
+    }
+
+    suspend fun addUserTeamUpHistory(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String){
+        firestoreDb.collection("user_profile")
+            .document(idUserPenerimaPermintaan)
+            .update(mapOf(
+                "teamHistory" to FieldValue.arrayUnion(idUserPengirimPermintaan)
+            ))
+            .addOnSuccessListener {
+                firestoreDb.collection("user_profile")
+                    .document(idUserPengirimPermintaan)
+                    .update(mapOf(
+                        "teamHistory" to FieldValue.arrayUnion(idUserPenerimaPermintaan)
+                    ))
+                    .addOnSuccessListener {
+                        addTeamUpHistory.postValue("OK")
                     }
+                    .addOnFailureListener {
+                        addTeamUpHistory.postValue("FAILED")
+                    }
+            }
+            .addOnFailureListener {
+                addTeamUpHistory.postValue("FAILED")
+            }
+    }
+
+    suspend fun addTestimoniToAnUser(idUserTarget: String, testimoni: Testimoni){
+        firestoreDb.collection("user_profile")
+            .document(idUserTarget)
+            .get()
+            .addOnSuccessListener { userProfile ->
+                val userProfileTarget = userProfile.toObject(UserProfile::class.java)
+                if(userProfileTarget!!.teamHistory.contains(currentUser.value!!.uid)){
+                    firestoreDb.collection("userProfile")
+                        .document(idUserTarget)
+                        .update(mapOf(
+                            "testimoni" to FieldValue.arrayUnion(testimoni)
+                        ))
+                        .addOnSuccessListener {
+                            firestoreDb.collection("user_profile")
+                                .document(idUserTarget)
+                                .get()
+                                .addOnSuccessListener { _userProfile ->
+                                    var totalJumlahAngkaRating = 0.0F
+                                    val _userProfileTarget = _userProfile.toObject(UserProfile::class.java)
+                                    for(i in _userProfileTarget!!.testimoni){
+                                        totalJumlahAngkaRating += i.rating!!
+                                    }
+                                    val ratingKeseluruhan = totalJumlahAngkaRating / _userProfileTarget.testimoni.size
+                                    firestoreDb.collection("user_profile")
+                                        .document(idUserTarget)
+                                        .update(mapOf(
+                                            "ratingKeseluruhan" to ratingKeseluruhan
+                                        ))
+                                        .addOnSuccessListener {
+                                            addTestimoni.postValue("OK")
+                                        }
+                                        .addOnFailureListener {
+                                            addTestimoni.postValue("FAILED")
+                                        }
+                                }
+                            //
+                        }
+                        .addOnFailureListener {
+                            addTestimoni.postValue("FAILED")
+                        }
+                }else{
+                    addTestimoni.postValue("BELUM PERNAH SATU TEAM")
                 }
             }
     }
@@ -375,51 +380,26 @@ class UserRepository {
             .get()
             .addOnSuccessListener { userProfile ->
                 val userProfileSelected = userProfile.toObject(UserProfile::class.java)
-                if(userProfileSelected!!.likedByUserId == null){
+                if(userProfileSelected!!.likedByUserId.contains(currentUser.value!!.uid)){
                     firestoreDb.collection("user_profile")
                         .document(idUserSelected)
                         .update(mapOf(
-                                "likedByUserId" to arrayListOf(currentUser.value!!.uid),
-                                "jumlahLike" to FieldValue.increment(1)
-
+                            "likedByUserId" to FieldValue.arrayRemove(currentUser.value!!.uid),
+                            "jumlahLike" to FieldValue.increment(-1)
                         ))
                         .addOnSuccessListener {
                             getAllUser()
                         }
                 }else{
-                    if(userProfileSelected.likedByUserId == emptyArray<String>()){
-                        firestoreDb.collection("user_profile")
-                            .document(idUserSelected)
-                            .update(mapOf(
-                                "likedByUserId" to FieldValue.arrayUnion(currentUser.value!!.uid),
-                                "jumlahLike" to FieldValue.increment(1)
-                            ))
-                            .addOnSuccessListener {
-                                getAllUser()
-                            }
-                    }else{
-                        if(userProfileSelected.likedByUserId!!.contains(currentUser.value!!.uid)){
-                            firestoreDb.collection("user_profile")
-                                .document(idUserSelected)
-                                .update(mapOf(
-                                    "likedByUserId" to FieldValue.arrayRemove(currentUser.value!!.uid),
-                                    "jumlahLike" to FieldValue.increment(-1)
-                                ))
-                                .addOnSuccessListener {
-                                    getAllUser()
-                                }
-                        }else{
-                            firestoreDb.collection("user_profile")
-                                .document(idUserSelected)
-                                .update(mapOf(
-                                    "likedByUserId" to FieldValue.arrayUnion(currentUser.value!!.uid),
-                                    "jumlahLike" to FieldValue.increment(1)
-                                ))
-                                .addOnSuccessListener {
-                                    getAllUser()
-                                }
+                    firestoreDb.collection("user_profile")
+                        .document(idUserSelected)
+                        .update(mapOf(
+                            "likedByUserId" to FieldValue.arrayUnion(currentUser.value!!.uid),
+                            "jumlahLike" to FieldValue.increment(1)
+                        ))
+                        .addOnSuccessListener {
+                            getAllUser()
                         }
-                    }
                 }
             }
     }

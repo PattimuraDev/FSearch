@@ -13,10 +13,10 @@ data class UserProfile(
     val jumlahLike: Int? = null,
     val bio: String? = null,
     val dataDiri: DataDiriUser? = null,
-    val testimoni: ArrayList<Testimoni>? = null,
-    val ratingKeseluruhan: Float? = null,
-    val statusBersediaMenerimaAjakan: Boolean? = null,
-    val likedByUserId: ArrayList<String>? = null,
-    val friendListUserId: ArrayList<String>? = null,
-    val teamHistory: ArrayList<String>? = null
+    val testimoni: ArrayList<Testimoni> = arrayListOf(),
+    val ratingKeseluruhan: Float = 0.0F,
+    var statusBersediaMenerimaAjakan: Boolean = true,
+    val likedByUserId: ArrayList<String> = arrayListOf(),
+    val friendListUserId: ArrayList<String> = arrayListOf(),
+    val teamHistory: ArrayList<String> = arrayListOf()
 ) : Parcelable

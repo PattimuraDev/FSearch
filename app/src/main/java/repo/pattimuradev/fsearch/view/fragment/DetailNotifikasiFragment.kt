@@ -11,26 +11,26 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_detail_tawaran_ajakan.*
+import kotlinx.android.synthetic.main.fragment_detail_notifikasi.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.model.Notifikasi
 
-class DetailTawaranAjakanFragment : Fragment() {
+class DetailNotifikasiFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detail_tawaran_ajakan, container, false)
+        return inflater.inflate(R.layout.fragment_detail_notifikasi, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initData()
-        detail_tawaran_ajakan_button_back.setOnClickListener {
+        detail_notifikasi_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_detailTawaranAjakanFragment_to_notifikasiFragment)
         }
-        detail_tawaran_ajakan_button_respon.setOnClickListener {
+        detail_notifikasi_button_respon.setOnClickListener {
             showDialog()
         }
     }
@@ -44,9 +44,6 @@ class DetailTawaranAjakanFragment : Fragment() {
             alertDialogBuilder.setMessage("Bagaimana respon kamu terhadap ajakan dari ${notifikasi.namaPengirim}?")
         }
         alertDialogBuilder.setPositiveButton("Ya"){_, _ ->
-
-            // opsional: nanti tambahin fungsi untuk menandai kalo notifikasi udah direspon
-
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
             bundle.putString("respon", "Terima")
@@ -66,7 +63,13 @@ class DetailTawaranAjakanFragment : Fragment() {
 
     private fun initData() {
         val notifikasi = arguments!!.getParcelable("notifikasi") as Notifikasi?
-        val nama = notifikasi!!.namaPengirim
+        if(notifikasi!!.jenisNotifikasi == "respon_pengajuan_bergabung_tim" || notifikasi.jenisNotifikasi == "respon_ajakan_bergabung_tim"){
+            detail_notifikasi_button_respon.isVisible = false
+            detail_notifikasi_title.text = "Detail Notifikasi"
+        }else{
+            detail_notifikasi_title.text = "Tawaran Ajakan"
+        }
+        val nama = notifikasi.namaPengirim
         val asalProdiPengirim = notifikasi.prodiPengirim
         val asalUniversitasPengirim = notifikasi.asalUniversitasPengirim
         val tahunAngkatanPengirim = notifikasi.tahunAngkatanPengirim
@@ -75,33 +78,33 @@ class DetailTawaranAjakanFragment : Fragment() {
         val urlFotoPengirim = notifikasi.urlFotoPengirim
         val fileUrl = notifikasi.urlLampiran
 
-        detail_tawaran_ajakan_nama_pengirim.text = nama
-        detail_tawaran_ajakan_asal_prodi_pengirim.text = asalProdiPengirim
-        detail_tawaran_ajakan_asal_universitas_pengirim.text = asalUniversitasPengirim
-        detail_tawaran_ajakan_tahun_angkatan_pengirim.text = tahunAngkatanPengirim?.toString() ?: ""
-        detail_tawaran_ajakan_deskripsi_lengkap.text = deskripsiNotifikasi
-        Glide.with(detail_tawaran_ajakan_foto_pengirim.context)
+        detail_notifikasi_nama_pengirim.text = nama
+        detail_notifikasi_asal_prodi_pengirim.text = asalProdiPengirim
+        detail_notifikasi_asal_universitas_pengirim.text = asalUniversitasPengirim
+        detail_notifikasi_tahun_angkatan_pengirim.text = tahunAngkatanPengirim?.toString() ?: ""
+        detail_notifikasi_deskripsi_lengkap.text = deskripsiNotifikasi
+        Glide.with(detail_notifikasi_foto_pengirim.context)
             .load(urlFotoPengirim)
             .error(R.drawable.standard_user_photo)
-            .into(detail_tawaran_ajakan_foto_pengirim)
+            .into(detail_notifikasi_foto_pengirim)
 
         when(jenisLampiran){
             "pdf" -> {
-                detail_tawaran_ajakan_poster.isVisible = false
-                detail_tawaran_ajakan_button_buka_pdf.setOnClickListener {
+                detail_notifikasi_poster.isVisible = false
+                detail_notifikasi_button_buka_pdf.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl)))
                 }
             }
             "image" -> {
-                detail_tawaran_ajakan_button_buka_pdf.isVisible = false
-                Glide.with(detail_tawaran_ajakan_poster.context)
+                detail_notifikasi_button_buka_pdf.isVisible = false
+                Glide.with(detail_notifikasi_poster.context)
                     .load(fileUrl)
                     .error(R.drawable.no_image_available)
-                    .into(detail_tawaran_ajakan_poster)
+                    .into(detail_notifikasi_poster)
             }
             else -> {
-                detail_tawaran_ajakan_poster.isVisible = false
-                detail_tawaran_ajakan_button_buka_pdf.isVisible = false
+                detail_notifikasi_poster.isVisible = false
+                detail_notifikasi_button_buka_pdf.isVisible = false
             }
         }
     }

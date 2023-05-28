@@ -3,10 +3,7 @@ package repo.pattimuradev.fsearch.viewmodel
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import repo.pattimuradev.fsearch.model.Account
-import repo.pattimuradev.fsearch.model.DataLogin
-import repo.pattimuradev.fsearch.model.EmailVerification
-import repo.pattimuradev.fsearch.model.UserProfile
+import repo.pattimuradev.fsearch.model.*
 import repo.pattimuradev.fsearch.repository.UserRepository
 
 class UserViewModel : ViewModel(){
@@ -19,8 +16,10 @@ class UserViewModel : ViewModel(){
     val emailRegistrationStatus = userRepository.checkIfEmailRegisteredLiveData
     val loginStatus = userRepository.loginStatusLiveData
     val spesificUserById = userRepository.getSpesificUserByIdLiveData
-    val AllUserFavorited = userRepository.getAllFavoritedUserLiveData
+    val allUserFavorited = userRepository.getAllFavoritedUserLiveData
     val addFriendStatus = userRepository.addFriendResultLiveData
+    val addTestimoniStatus = userRepository.addTestimoniLiveData
+    val addTeamUpHistoryStatus = userRepository.addTeamUpHistoryLiveData
 
     suspend fun registerAccount(account: Account) = userRepository.registerAccount(account)
     suspend fun saveOtpEmail(emailVerification: EmailVerification) = userRepository.saveOtpEmail(emailVerification)
@@ -35,5 +34,9 @@ class UserViewModel : ViewModel(){
     suspend fun getSpesificUserById(userId: String) = userRepository.getSpesificUserById(userId)
     suspend fun addUserLike(idUserSelected: String) = userRepository.addUserLike(idUserSelected)
     suspend fun getAllFavoritedUser() = userRepository.getAllUserFavorited()
-    suspend fun addFriend(idUserPengirim: String, idUserPenerima: String) = userRepository.addUserFriendList(idUserPengirim, idUserPenerima)
+    suspend fun addFriend(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String) = userRepository.addUserFriendList(idUserPengirimPermintaan, idUserPenerimaPermintaan)
+    suspend fun addTeamUpHistory(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String) = userRepository.addUserTeamUpHistory(idUserPengirimPermintaan, idUserPenerimaPermintaan)
+    suspend fun addTestimoni(idUserTarget: String, testimoni: Testimoni) = userRepository.addTestimoniToAnUser(idUserTarget, testimoni)
+
+
 }

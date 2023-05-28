@@ -159,9 +159,9 @@
     </fragment>
     <fragment
         android:id="@+id/detailTawaranAjakanFragment"
-        android:name="repo.pattimuradev.fsearch.view.fragment.DetailTawaranAjakanFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.DetailNotifikasiFragment"
         android:label="fragment_detail_tawaran_ajakan"
-        tools:layout="@layout/fragment_detail_tawaran_ajakan" >
+        tools:layout="@layout/fragment_detail_notifikasi" >
         <action
             android:id="@+id/action_detailTawaranAjakanFragment_to_notifikasiFragment"
             app:destination="@id/notifikasiFragment" />

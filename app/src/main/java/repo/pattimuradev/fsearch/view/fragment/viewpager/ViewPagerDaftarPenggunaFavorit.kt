@@ -50,7 +50,7 @@ class ViewPagerDaftarPenggunaFavorit : Fragment(), DaftarPenggunaClickListener {
         }
 
         userViewModel.currentUser.observe(viewLifecycleOwner){ currentUser ->
-            userViewModel.AllUserFavorited.observe(viewLifecycleOwner){ listFavoritedUser ->
+            userViewModel.allUserFavorited.observe(viewLifecycleOwner){ listFavoritedUser ->
                 daftarPenggunaAdapter.setUserId(currentUser.uid)
                 daftarPenggunaAdapter.setListPengguna(listFavoritedUser)
                 daftarPenggunaAdapter.notifyDataSetChanged()

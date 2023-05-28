@@ -49,7 +49,7 @@ class FormUpdateProfileFragment : Fragment() {
     }
 
     private fun handleUpdateProfil() {
-        var statusBersediaMenerimaAjakan: Boolean? = null
+        var statusBersediaMenerimaAjakan = true
         var jenisKelamin: String? = null
 
         form_update_profil_radio_group_jenis_kelamin.setOnCheckedChangeListener { _, checkedId ->
@@ -113,13 +113,11 @@ class FormUpdateProfileFragment : Fragment() {
                 userViewModel.currentUserFotoProfileUrl.observe(viewLifecycleOwner){ fotoProfilUrl ->
                     lifecycleScope.launch(Dispatchers.IO){
                         userViewModel.updateProfile(UserProfile(
-                            id = null,
                             nama = nama,
                             email = "",
                             urlFoto = fotoProfilUrl,
-                            jumlahTeman = null,
-                            jumlahLike = null,
                             bio = bio,
+                            statusBersediaMenerimaAjakan = statusBersediaMenerimaAjakan,
                             dataDiri = DataDiriUser(
                                 asalUniversitas = universitas,
                                 tahunAngkatan = tahunAngkatan!!.toInt(),
@@ -131,13 +129,7 @@ class FormUpdateProfileFragment : Fragment() {
                                 asalKota = kotaAsal,
                                 fakultas = fakultas,
                                 kepribadian = kepribadian
-                            ),
-                            testimoni = null,
-                            ratingKeseluruhan = null,
-                            statusBersediaMenerimaAjakan = statusBersediaMenerimaAjakan,
-                            likedByUserId = null,
-                            friendListUserId = null,
-                            teamHistory = null
+                            )
                         ))
                     }
                 }

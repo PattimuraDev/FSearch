@@ -60,11 +60,7 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
             }
 
 
-            rv_pengguna_jumlah_testimoni.text = if(listPengguna!![position].testimoni == null){
-                ""
-            }else{
-                "(${listPengguna!![position].testimoni!!.size})"
-            }
+            rv_pengguna_jumlah_testimoni.text = "(${listPengguna!![position].testimoni.size})"
 
 
             rv_pengguna_tahun_angkatan.text = if(listPengguna!![position].dataDiri == null){
@@ -78,17 +74,9 @@ class DaftarPenggunaAdapter(private val daftarPenggunaClickListener: DaftarPengg
             }
 
 
-            rv_pengguna_rating.rating = if(listPengguna!![position].ratingKeseluruhan == null){
-                0.0.toFloat()
-            }else{
-                listPengguna!![position].ratingKeseluruhan!!
-            }
+            rv_pengguna_rating.rating = listPengguna!![position].ratingKeseluruhan
 
-            rv_pengguna_button_like.isSelected = if(listPengguna!![position].likedByUserId == null){
-                false
-            }else{
-                listPengguna!![position].likedByUserId!!.contains(currentUserProfile)
-            }
+            rv_pengguna_button_like.isSelected = listPengguna!![position].likedByUserId.contains(currentUserProfile)
 
 
             rv_pengguna_button_like.setOnClickListener {
