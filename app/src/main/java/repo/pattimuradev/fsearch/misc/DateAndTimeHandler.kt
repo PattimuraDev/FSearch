@@ -43,7 +43,7 @@ object DateAndTimeHandler {
         }
     }
 
-    fun nameOfMonthFromNumber(monthNumber: Int): String{
+    private fun nameOfMonthFromNumber(monthNumber: Int): String{
         val monthName = listOf(
             "Januari",
             "Februari",
@@ -61,7 +61,7 @@ object DateAndTimeHandler {
         return monthName[monthNumber]
     }
 
-    fun nameOfDayIndonesian(dayName: String): String{
+    private fun nameOfDayIndonesian(dayName: String): String{
         return when(dayName){
             "Monday" -> "Senin"
             "Tuesday" -> "Selasa"
@@ -79,5 +79,44 @@ object DateAndTimeHandler {
         val date = Date(year, monthOfYear, dayOfMonth - 1)
         val dayString = simpleDateFormat.format(date)
         return "${nameOfDayIndonesian(dayString)}, $dayOfMonth ${nameOfMonthFromNumber(monthOfYear)} $year"
+    }
+
+    fun formatTanggalPostingDetailLomba(calendar: Calendar): String{
+        val hariDateFormat = SimpleDateFormat("EEEE", Locale.US)
+        val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
+        val tahunDateFormat = SimpleDateFormat("y", Locale.US)
+        val namaHari = nameOfDayIndonesian(hariDateFormat.format(calendar.time))
+        val namaBulan = nameOfMonthFromNumber(calendar.get(Calendar.MONTH))
+        val tahun = tahunDateFormat.format(calendar.time)
+        val tanggal = tanggalDateFormat.format(calendar.time)
+        return "$namaHari, $tanggal $namaBulan $tahun"
+    }
+
+    fun formatTanggalPostingDetailNotifikasi(milisecond: Long): String{
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milisecond
+        val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
+        val tahunDateFormat = SimpleDateFormat("y", Locale.US)
+        val jamMenitDateFormat = SimpleDateFormat("HH:mm")
+        val jamDateFormat = SimpleDateFormat("HH")
+        var jam = jamDateFormat.format(calendar.time)
+        if(jam.startsWith('0')){
+            jam = jam[1].toString()
+        }
+
+        val tanggal = tanggalDateFormat.format(calendar.time)
+        val namaBulan = nameOfMonthFromNumber(calendar.get(Calendar.MONTH))
+        val tahun = tahunDateFormat.format(calendar.time)
+        val jamMenit = jamMenitDateFormat.format(calendar.time)
+
+
+        val hasilAmPm = if(jam.toInt() >= 12){
+            "PM"
+        }else{
+            "AM"
+        }
+
+        return "$tanggal $namaBulan $tahun // $jamMenit $hasilAmPm"
+
     }
 }

@@ -1,16 +1,21 @@
 package repo.pattimuradev.fsearch.view.fragment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.custom_profile_menu_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.view.activity.LoginActivity
 import repo.pattimuradev.fsearch.view.adapter.ProfileViewPagerAdapter
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
@@ -93,7 +98,10 @@ class ProfileFragment : Fragment() {
             customDialog.dismiss()
         }
         dialogView.custom_profil_menu_dialog_button_keluar.setOnClickListener {
-            // edit nanti
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                userViewModel.logout()
+            }
+            startActivity(Intent(activity!!.applicationContext, LoginActivity::class.java))
             customDialog.dismiss()
         }
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

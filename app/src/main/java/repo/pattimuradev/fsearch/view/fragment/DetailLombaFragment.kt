@@ -46,26 +46,18 @@ class DetailLombaFragment : Fragment() {
         val lomba = arguments!!.getParcelable("lomba") as Lomba?
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = lomba!!.tanggalPosting!!.time
-        val hariDateFormat = SimpleDateFormat("EEEE", Locale.US)
-        val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
-        val tahunDateFormat = SimpleDateFormat("y", Locale.US)
-        val namaHari = DateAndTimeHandler.nameOfDayIndonesian(hariDateFormat.format(calendar.time))
-        val namaBulan = DateAndTimeHandler.nameOfMonthFromNumber(calendar.get(Calendar.MONTH))
-        val tahun = tahunDateFormat.format(calendar.time)
-        val tanggal = tanggalDateFormat.format(calendar.time)
-        val tanggalPosting = "$namaHari, $tanggal $namaBulan $tahun"
 
-        Glide.with(detail_lomba_poster.context)
-            .load(lomba.posterLombaUrl)
-            .error(R.drawable.no_image_available)
-            .into(detail_lomba_poster)
-        detail_lomba_tanggal_posting.text = tanggalPosting
+        detail_lomba_tanggal_posting.text = DateAndTimeHandler.formatTanggalPostingDetailLomba(calendar)
         detail_lomba_judul_lomba.text = lomba.judulLomba
         detail_lomba_nama_penyelenggara.text = lomba.penyelenggaraLomba
         detail_lomba_lokasi_lomba.text = lomba.lokasi
         detail_lomba_tanggal_lomba.text = lomba.tanggalPelaksanaan
         detail_lomba_deskripsi_lomba.text = lomba.deskripsiLomba
         detail_lomba_link_lomba.text = lomba.linkLomba ?: ""
+        Glide.with(detail_lomba_poster.context)
+            .load(lomba.posterLombaUrl)
+            .error(R.drawable.no_image_available)
+            .into(detail_lomba_poster)
 
         val biaya = lomba.biayaPendaftaran
         detail_lomba_biaya_pendaftaran.text = if(biaya.substring(biaya.lastIndex - 1, biaya.lastIndex + 1) == ".0"){

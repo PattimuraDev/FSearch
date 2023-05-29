@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail_notifikasi.*
 import repo.pattimuradev.fsearch.R
+import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Notifikasi
 
 class DetailNotifikasiFragment : Fragment() {
@@ -77,12 +78,14 @@ class DetailNotifikasiFragment : Fragment() {
         val jenisLampiran = notifikasi.jenisLampiran
         val urlFotoPengirim = notifikasi.urlFotoPengirim
         val fileUrl = notifikasi.urlLampiran
+        val waktuPosting = notifikasi.riwayatNotifikasi
 
         detail_notifikasi_nama_pengirim.text = nama
         detail_notifikasi_asal_prodi_pengirim.text = asalProdiPengirim
         detail_notifikasi_asal_universitas_pengirim.text = asalUniversitasPengirim
         detail_notifikasi_tahun_angkatan_pengirim.text = tahunAngkatanPengirim?.toString() ?: ""
         detail_notifikasi_deskripsi_lengkap.text = deskripsiNotifikasi
+        detail_notifikasi_waktu_penerimaan_notifikasi.text = DateAndTimeHandler.formatTanggalPostingDetailNotifikasi(waktuPosting!!.time)
         Glide.with(detail_notifikasi_foto_pengirim.context)
             .load(urlFotoPengirim)
             .error(R.drawable.standard_user_photo)

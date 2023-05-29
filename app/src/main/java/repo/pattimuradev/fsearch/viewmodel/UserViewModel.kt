@@ -37,6 +37,6 @@ class UserViewModel : ViewModel(){
     suspend fun addFriend(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String) = userRepository.addUserFriendList(idUserPengirimPermintaan, idUserPenerimaPermintaan)
     suspend fun addTeamUpHistory(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String) = userRepository.addUserTeamUpHistory(idUserPengirimPermintaan, idUserPenerimaPermintaan)
     suspend fun addTestimoni(idUserTarget: String, testimoni: Testimoni) = userRepository.addTestimoniToAnUser(idUserTarget, testimoni)
-
+    suspend fun logout() = userRepository.logout()
 
 }

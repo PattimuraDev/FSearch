@@ -152,6 +152,10 @@ class UserRepository {
             }
     }
 
+    suspend fun logout(){
+        firebaseAuth.signOut()
+    }
+
     suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFile: String?){
         if(isUploadingImage){
             val storageRef = firebaseCloudStorage.reference
