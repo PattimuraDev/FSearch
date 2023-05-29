@@ -42,6 +42,10 @@ class DetailLombaFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi data lomba sehingga bisa ditampilkan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initDetailLombaData() {
         val lomba = arguments!!.getParcelable("lomba") as Lomba?
         val calendar = Calendar.getInstance()

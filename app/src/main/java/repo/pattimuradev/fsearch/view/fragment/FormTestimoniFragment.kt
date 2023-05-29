@@ -45,6 +45,10 @@ class FormTestimoniFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengirimkan testimoni
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handlePostTestimoni() {
         val profilePenggunaLain = arguments!!.getParcelable("profile_pengguna_lain") as UserProfile?
         val deskripsiTestimoni = form_testimoni_deskripsi.text.toString().trim()
@@ -96,6 +100,10 @@ class FormTestimoniFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika berhasil mengirimkan testimoni
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog(){
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
@@ -109,6 +117,10 @@ class FormTestimoniFragment : Fragment() {
         customDialog.show()
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field/data sebelum dapat mengirimkan testimoni
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkDeskripsiField() {
         form_testimoni_button_post.isEnabled = false
         form_testimoni_deskripsi.addTextChangedListener(object: TextWatcher{

@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="160dp"
         android:paddingHorizontal="50dp"
-        android:text="Kode verifikasi telah dikirim ke email kamu"
+        android:text="@string/verifikasi_title"
         android:textColor="@color/secondary_three"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -21,7 +21,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Masukkan kode 4 digit tersebut"
+        android:text="@string/masukkan_kode_otp_title"
         android:textColor="@color/secondary_three"
         app:layout_constraintTop_toBottomOf="@+id/register_code_verification_header"
         android:paddingHorizontal="50dp"
@@ -73,7 +73,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/custom_button_not_enabled_layout"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@color/white"
         android:id="@+id/register_code_verification_button_submit"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

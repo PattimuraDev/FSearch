@@ -42,6 +42,10 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas mengirimkan kode OTP ke email tertentu
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun sendOtpViaEmail() {
         val apiKey = getString(R.string.sendgrid_api_key)
         val devEmail = getString(R.string.developer_email)
@@ -108,6 +112,10 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan data sebelum dapat melakukan registrasi
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkFields(){
         register_button_daftar.isEnabled = false
         val registerFields = listOf(

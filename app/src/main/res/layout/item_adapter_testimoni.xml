@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="20dp"
     android:id="@+id/viewpager_profile_rv_testimoni_container">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Nama"
+            android:text="@string/contoh_nama"
             android:id="@+id/viewpager_profile_rv_testimoni_nama_pengirim"
             android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +32,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teknik Informatika"
+            android:text="@string/contoh_prodi"
             android:id="@+id/viewpager_profile_rv_testimoni_asal_prodi_pengirim"
             app:layout_constraintTop_toBottomOf="@id/viewpager_profile_rv_testimoni_nama_pengirim"
             app:layout_constraintLeft_toRightOf="@id/viewpager_profile_rv_testimoni_foto_pengirim"
@@ -41,7 +40,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Universitas Brawijaya"
+            android:text="@string/contoh_universitas"
             android:id="@+id/viewpager_profile_rv_testimoni_asal_universitas_pengirim"
             app:layout_constraintLeft_toRightOf="@id/viewpager_profile_rv_testimoni_foto_pengirim"
             app:layout_constraintTop_toBottomOf="@id/viewpager_profile_rv_testimoni_asal_prodi_pengirim"
@@ -49,7 +48,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16h"
+            android:text="@string/contoh_riwayat_posting"
             android:id="@+id/viewpager_profile_rv_testimoni_riwayat_posting"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/viewpager_profile_rv_testimoni_nama_pengirim"
@@ -57,7 +56,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2016"
+            android:text="@string/contoh_angkatan"
             android:id="@+id/viewpager_profile_rv_testimoni_tahun_angkatan_pengirim"
             app:layout_constraintTop_toBottomOf="@id/viewpager_profile_rv_testimoni_asal_prodi_pengirim"
             app:layout_constraintStart_toEndOf="@id/viewpager_profile_rv_testimoni_asal_universitas_pengirim"
@@ -82,7 +81,7 @@
         android:id="@+id/viewpager_profile_rv_testimoni_deskripsi_testimoni"
         app:layout_constraintTop_toBottomOf="@id/viewpager_profile_rv_testimoni_rating_testimoni"
         android:layout_marginHorizontal="25dp"
-        android:text="Ini deskripsi testimoni"/>
+        android:text="@string/contoh_deskripsi"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

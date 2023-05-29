@@ -32,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas login
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun processLogin() {
         val emailField = login_field_email.text.toString().trim()
         val passwordField = login_field_password.text.toString().trim()
@@ -50,6 +54,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan data sebelum dapat melakukan login
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkFields(){
         login_button_masuk.isEnabled = false
         val loginFields = listOf(login_field_email, login_field_password)

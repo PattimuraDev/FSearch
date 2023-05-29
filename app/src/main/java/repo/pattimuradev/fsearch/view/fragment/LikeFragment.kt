@@ -32,6 +32,10 @@ class LikeFragment : Fragment() {
         initRecyclerView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi tab layout dan juga viewpager pada halaman like
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initRecyclerView() {
         likeViewPagerAdapter = LikeViewPagerAdapter(this)
         like_view_pager.adapter = likeViewPagerAdapter

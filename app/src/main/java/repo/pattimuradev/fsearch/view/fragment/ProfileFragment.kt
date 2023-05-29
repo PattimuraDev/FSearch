@@ -38,6 +38,10 @@ class ProfileFragment : Fragment() {
         initViewPagerAdapter()
     }
 
+    /**
+     * Fungsi untuk menginisiasi view pager dan tab layout pada halaman profile
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initViewPagerAdapter() {
         profileViewPagerAdapter = ProfileViewPagerAdapter(this)
         profile_view_pager.adapter = profileViewPagerAdapter
@@ -51,6 +55,10 @@ class ProfileFragment : Fragment() {
         }.attach()
     }
 
+    /**
+     * Fungsi untuk menginisiasi data dari user untuk ditampilkan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initProfileData() {
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
             profil_nama_pengguna.text = userProfile.nama
@@ -86,7 +94,11 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Fungsi untuk menampilkan dialog sebagai UI untuk memberikan pilihan kepada
+     * pengguna atas apa yang ibgin dilakukan (update profil atau log out)
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog() {
         val dialogView = layoutInflater.inflate(R.layout.custom_profile_menu_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())

@@ -20,11 +20,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Form Testimoni"
+            android:text="@string/form_testimoni_title"
             android:textSize="16sp"
             android:layout_marginStart="30dp"
             android:textColor="@color/primary"
-            android:layout_toRightOf="@id/form_testimoni_button_back"
+            android:layout_toEndOf="@id/form_testimoni_button_back"
             android:layout_centerVertical="true"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deskripsi Testimoni"
+        android:text="@string/deskripsi_testimoni"
         android:layout_marginHorizontal="20dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/form_testimoni_deskripsi"
             android:layout_alignParentEnd="true"
-            android:text="0/500" />
+            android:text="@string/contoh_word_counter" />
     </RelativeLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

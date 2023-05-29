@@ -10,7 +10,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="25dp"
         android:id="@+id/rv_notifikasi_body_container">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/rv_notifikasi_foto_pengirim"
             android:layout_width="60dp"
@@ -24,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/rv_notifikasi_foto_pengirim"
             android:layout_toStartOf="@id/rv_notifikasi_riwayat_posting"
-            android:text="Contoh nama"
+            android:text="@string/contoh_nama"
             android:id="@+id/rv_notifikasi_nama_pengirim"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -35,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_notifikasi_nama_pengirim"
             android:layout_toEndOf="@id/rv_notifikasi_foto_pengirim"
-            android:text="Teknik Informatika"
+            android:text="@string/contoh_prodi"
             android:layout_marginStart="15dp"
             android:id="@+id/rv_notifikasi_asal_prodi_pengirim"/>
         <androidx.appcompat.widget.AppCompatTextView
@@ -44,7 +43,7 @@
             android:layout_below="@id/rv_notifikasi_asal_prodi_pengirim"
             android:layout_toEndOf="@id/rv_notifikasi_foto_pengirim"
             android:layout_marginStart="15dp"
-            android:text="Universitas Brawijaya"
+            android:text="@string/contoh_universitas"
             android:id="@+id/rv_notifikasi_asal_universitas_pengirim"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -52,20 +51,20 @@
             android:layout_toEndOf="@id/rv_notifikasi_asal_universitas_pengirim"
             android:layout_below="@id/rv_notifikasi_asal_prodi_pengirim"
             android:layout_marginStart="15dp"
-            android:text="2019"
+            android:text="@string/contoh_angkatan"
             android:id="@+id/rv_notifikasi_tahun_angkatan_pengirim"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="10h"
+            android:text="@string/contoh_riwayat_posting"
             android:id="@+id/rv_notifikasi_riwayat_posting"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_notifikasi_asal_universitas_pengirim"
             android:layout_toEndOf="@id/rv_notifikasi_foto_pengirim"
-            android:text="Deskripsi singkat"
+            android:text="@string/contoh_deskripsi"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:id="@+id/rv_notifikasi_deskripsi_singkat_notifikasi"/>

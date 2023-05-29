@@ -72,6 +72,10 @@ class DetailPenggunaLainFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas tambah teman
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun tambahTemanHandler() {
         val dialogBuilder = AlertDialog.Builder(requireContext())
             .setMessage("Anda yakin ingin mengajak berteman pengguna ini?")
@@ -141,6 +145,10 @@ class DetailPenggunaLainFragment : Fragment() {
         alertDialog.show()
     }
 
+    /**
+     * Fungsi untuk menginisiasi data pengguna lain sehingga bisa ditampilkan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initDetailPengguna() {
         userViewModel.spesificUserById.observe(viewLifecycleOwner){ userProfile ->
             detail_pengguna_lain_nama_pengguna.text = userProfile.nama
@@ -166,6 +174,11 @@ class DetailPenggunaLainFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi tab layout dan view pager pada halaman
+     * profil pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initViewPagerAdapter() {
         detailPenggunaLainViewPagerAdapter = DetailPenggunaLainViewPagerAdapter(this)
         detail_pengguna_lain_view_pager.adapter = detailPenggunaLainViewPagerAdapter

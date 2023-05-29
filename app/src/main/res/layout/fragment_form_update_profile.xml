@@ -24,9 +24,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile_title"
                 android:textSize="16sp"
                 android:textColor="@color/primary"
+                android:layout_toStartOf="@+id/form_update_profil_button_simpan"
                 android:layout_toEndOf="@+id/form_update_profil_button_back"
                 android:layout_centerVertical="true"/>
 
@@ -37,7 +38,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="3dp"
                 android:background="@drawable/custom_button_enabled_layout"
-                android:text="Simpan"
+                android:text="@string/simpan"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </RelativeLayout>
@@ -51,7 +52,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama"
+            android:text="@string/nama"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -65,7 +66,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bio"
+            android:text="@string/bio"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -88,7 +89,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_toStartOf="@+id/form_update_profil_button_status_bersedia"
-                android:text="Menerima ajakan bergabung dengan tim lomba"/>
+                android:text="@string/menerima_ajakan_bergabung_dengan_tim_lomba"/>
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/form_update_profil_button_status_bersedia"
                 android:layout_width="wrap_content"
@@ -102,7 +103,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginStart="20dp"
-            android:text="Akademik"
+            android:text="@string/akademik"
             android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -118,7 +119,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Universitas"/>
+                    android:text="@string/universitas"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,7 +136,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tahun Angkatan"/>
+                    android:text="@string/tahun_angkatan"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,7 +160,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fakultas"/>
+                    android:text="@string/fakultas"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,7 +188,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Jurusan"/>
+                    android:text="@string/jurusan"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -215,7 +216,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Program Studi"/>
+                    android:text="@string/program_studi"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -243,7 +244,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Keminatan/Konsentrasi"/>
+                    android:text="@string/keminatan_title"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -265,11 +266,11 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
             android:textColor="@color/black"
-            android:text="Biodata"/>
+            android:text="@string/biodata"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jenis Kelamin"
+            android:text="@string/jenis_kelamin"
             android:layout_marginStart="20dp"/>
         <RadioGroup
             android:layout_width="wrap_content"
@@ -302,7 +303,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Umur"/>
+                    android:text="@string/umur"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
@@ -312,10 +313,10 @@
                     android:inputType="number"
                     android:layout_marginEnd="10dp"/>
             </LinearLayout>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tahun"
+                android:text="@string/tahun"
                 android:layout_toEndOf="@+id/form_update_profil_container_umur"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
@@ -333,7 +334,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kota Asal"/>
+                    android:text="@string/kota_asal"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -350,7 +351,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kepribadian"
+            android:text="@string/kepribadian"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"

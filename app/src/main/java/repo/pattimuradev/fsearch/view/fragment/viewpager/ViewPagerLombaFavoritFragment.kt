@@ -35,6 +35,10 @@ class ViewPagerLombaFavoritFragment : Fragment(), LombaClickListener {
         initRecyclerView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar lomba favorit
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initRecyclerView() {
         lombaAdapter = LombaAdapter(this)
         viewpager_like_rv_lomba_favorit.layoutManager = LinearLayoutManager(requireContext())
@@ -58,10 +62,10 @@ class ViewPagerLombaFavoritFragment : Fragment(), LombaClickListener {
     }
 
     override fun clickOnLikeButton(item: Lomba, position: Int) {
-        // override nanti
+        // opsional edit
     }
 
     override fun clickOnDaftarLombaBody(item: Lomba, position: Int) {
-        // edit nanti
+        // opsional edit
     }
 }

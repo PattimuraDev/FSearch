@@ -44,6 +44,10 @@ class LombaFragment : Fragment(), LombaClickListener {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi action bar
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initView() {
         initLombaAdapter()
         lomba_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
@@ -78,6 +82,10 @@ class LombaFragment : Fragment(), LombaClickListener {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar lomba beserta adapternya
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initLombaAdapter() {
         lombaAdapter = LombaAdapter(this@LombaFragment)
         lomba_rv_lomba.layoutManager = LinearLayoutManager(requireContext())

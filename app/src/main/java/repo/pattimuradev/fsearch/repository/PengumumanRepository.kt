@@ -8,6 +8,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Pengumuman
 
+/**
+ * Repository berisi transaksi terkait pengumuman/post dengan layanan firebase
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 class PengumumanRepository {
     private val firestoreDb = FirebaseFirestore.getInstance()
     private val firebaseCloudStorage = Firebase.storage
@@ -18,6 +22,10 @@ class PengumumanRepository {
     private val getPosterPengumumanImageUrl = MutableLiveData<String>()
     val getPosterPengumumanImageUrlLiveData: LiveData<String> = getPosterPengumumanImageUrl
 
+    /**
+     * Fungsi untuk mendapatkan list pengumuman dari firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     suspend fun getAllPengumuman(){
         firestoreDb.collection("pengumuman")
             .addSnapshotListener { value, _ ->
@@ -32,6 +40,13 @@ class PengumumanRepository {
             }
     }
 
+    /**
+     * Fungsi untuk mengunggah foto/poster ke cloud storage
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param fileUri URI dari file image/poster
+     * @param isUploadingImage Status yang menandakan aapakah ingin mengunggah image
+     * atau tidak
+     */
     suspend fun postImageToStorage(fileUri: Uri?, isUploadingImage: Boolean){
         if(isUploadingImage){
             val storageRef = firebaseCloudStorage.reference
@@ -56,6 +71,11 @@ class PengumumanRepository {
         }
     }
 
+    /**
+     * Fungsi untuk mendapatkan menambah pengumuman ke firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param pengumuman objek pengumuman yang ingin ditambahkan
+     */
     suspend fun addPengumuman(pengumuman: Pengumuman){
         firestoreDb.collection("pengumuman")
             .add(pengumuman)

@@ -12,6 +12,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.*
 
+/**
+ * Repository berisi transaksi terkait user/pengguna dengan layanan firebase
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 class UserRepository {
     private val firebaseAuth = Firebase.auth
     private val firestoreDb = FirebaseFirestore.getInstance()
@@ -45,6 +49,11 @@ class UserRepository {
     private val addTestimoni = MutableLiveData<String>()
     val addTestimoniLiveData: LiveData<String> = addTestimoni
 
+    /**
+     * Fungsi untuk meregistrasikan user ke firebase authentication
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param account objek akun yang berisi email, password, dan nama
+     */
     suspend fun registerAccount(account: Account): MutableLiveData<String>{
         val resultMessage = MutableLiveData<String>()
         firebaseAuth.createUserWithEmailAndPassword(account.email, account.password)
@@ -93,6 +102,11 @@ class UserRepository {
         return resultMessage
     }
 
+    /**
+     * Fungsi untuk mengupdate user/pengguna
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param userProfile objek userProfile yang berisi data penting terkait pengguna/user
+     */
     suspend fun updateUser(userProfile: UserProfile){
         val user = firebaseAuth.currentUser
         val userProfileRef = firestoreDb.collection("user_profile").document(user!!.uid)
@@ -129,6 +143,11 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas login dari pengguna/user
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param dataLogin objek data login yang berisi email dan password dari user
+     */
     suspend fun login(dataLogin: DataLogin){
         firebaseAuth.signInWithEmailAndPassword(dataLogin.email!!, dataLogin.password!!)
             .addOnCompleteListener{ loginTask ->
@@ -152,10 +171,19 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas logout oleh pengguna/user
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     suspend fun logout(){
         firebaseAuth.signOut()
     }
 
+    /**
+     * Fungsi untuk mengunggah foto profil user kemudian mendapatkan link downloadnya
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param fileUri URI dari file foto profil user/pengguna
+     */
     suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFile: String?){
         if(isUploadingImage){
             val storageRef = firebaseCloudStorage.reference
@@ -187,6 +215,12 @@ class UserRepository {
         }
     }
 
+    /**
+     * Fungsi untuk menyimpan kode OTP untuk keperluan verifikasi akun pengguna
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param emailVerification objek yang berisi informasi email dan kode OTP
+     * untuk mengaktivasi dan mendaftarkan email tersebut ke dalam sistem
+     */
     suspend fun saveOtpEmail(emailVerification: EmailVerification){
 
         firebaseAuth.fetchSignInMethodsForEmail(emailVerification.email)
@@ -209,6 +243,12 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas memverifikasi apakah kode OTP sudah sesuai
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param emailVerification objek yang berisi informasi email dan kode OTP
+     * untuk mengaktivasi dan mendaftarkan email tersebut ke dalam sistem
+     */
     suspend fun verifyOtpEmail(emailVerification: EmailVerification){
         firestoreDb.collection("email_verification")
             .addSnapshotListener { value, _ ->
@@ -225,6 +265,11 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk mendapatkan data user berdasarkan id nya
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param userId id dari user yang dimaksud
+     */
     fun getSpesificUserById(userId: String) {
         firestoreDb.collection("user_profile")
             .document(userId)
@@ -238,6 +283,10 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk mendapatkan list pengguna yang terdaftar di dalam sistem
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     fun getAllUser(){
         firestoreDb.collection("user_profile")
             .get()
@@ -253,6 +302,11 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk mendapatkan list semua pengguna yang difavoritekan atau mendapat
+     * like dari pengguna aplikasi saat ini
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     suspend fun getAllUserFavorited(){
         firestoreDb.collection("user_profile")
             .get()
@@ -271,6 +325,12 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan user ke dalam daftar teman dari pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idUserPengirimPermintaan id dari user yang meminta pertemanan
+     * @param idUserPenerimaPermintaan id dari user yang menerima permintaan pertemanan
+     */
     suspend fun addUserFriendList(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String){
         firestoreDb.collection("user_profile")
             .document(idUserPenerimaPermintaan)
@@ -307,6 +367,12 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan user ke dalam daftar pernah satu tim milik pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idUserPengirimPermintaan id dari user yang mengirimkan permintaan menjadi satu tim
+     * @param idUserPenerimaPermintaan id dari user yang menerima permintaan untuk menjadi satu tim
+     */
     suspend fun addUserTeamUpHistory(idUserPengirimPermintaan: String, idUserPenerimaPermintaan: String){
         firestoreDb.collection("user_profile")
             .document(idUserPenerimaPermintaan)
@@ -331,6 +397,12 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan satu testimoni ke daftar testimoni pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idUserTarget id dari user yang akan ditambahkan daftar testimoninya
+     * @param testimoni objek testimoni yang akan ditambahkan
+     */
     suspend fun addTestimoniToAnUser(idUserTarget: String, testimoni: Testimoni){
         firestoreDb.collection("user_profile")
             .document(idUserTarget)
@@ -378,6 +450,11 @@ class UserRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan user tertentu ke daftar user yang menyukai pengguna yang dimaksud
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idUserSelected id dari user tujuan
+     */
     suspend fun addUserLike(idUserSelected: String){
         firestoreDb.collection("user_profile")
             .document(idUserSelected)

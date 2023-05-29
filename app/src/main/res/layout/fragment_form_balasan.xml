@@ -20,18 +20,19 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Form Balasan"
+            android:text="@string/form_balasan_title"
             android:textSize="16sp"
             android:layout_marginStart="30dp"
             android:textColor="@color/primary"
-            android:layout_toRightOf="@id/form_balasan_button_back"
+            android:layout_toStartOf="@id/form_balasan_button_kirim"
+            android:layout_toEndOf="@id/form_balasan_button_back"
             android:layout_centerVertical="true"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button_not_enabled_layout"
             android:textColor="@color/white"
-            android:text="Kirim"
+            android:text="@string/kirim"
             android:textAllCaps="false"
             android:id="@+id/form_balasan_button_kirim"
             android:layout_alignParentEnd="true"
@@ -40,7 +41,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deskripsi Balasan"
+        android:text="@string/deskripsi_balasan"
         android:layout_marginHorizontal="20dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -62,6 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/form_balasan_deskripsi"
             android:layout_alignParentEnd="true"
-            android:text="0/500" />
+            android:text="@string/contoh_word_counter"/>
     </RelativeLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

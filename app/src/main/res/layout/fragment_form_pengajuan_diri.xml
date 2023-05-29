@@ -19,18 +19,19 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ajukan Diri"
+            android:text="@string/ajukan_diri_title"
             android:textSize="16sp"
             android:layout_marginStart="30dp"
             android:textColor="@color/primary"
-            android:layout_toRightOf="@id/form_pengajuan_diri_button_back"
-            android:layout_centerVertical="true"/>
+            android:layout_toEndOf="@id/form_pengajuan_diri_button_back"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/form_pengajuan_diri_button_kirim"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button_not_enabled_layout"
             android:textColor="@color/white"
-            android:text="Kirim"
+            android:text="@string/kirim"
             android:textAllCaps="false"
             android:id="@+id/form_pengajuan_diri_button_kirim"
             android:layout_alignParentEnd="true"
@@ -39,7 +40,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deskripsi Pengajuan"
+        android:text="@string/deskripsi_pengajuan"
         android:layout_marginHorizontal="20dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,12 +62,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/form_pengajuan_diri_deskripsi"
             android:layout_alignParentEnd="true"
-            android:text="0/500" />
+            android:text="@string/contoh_word_counter" />
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload File"
+        android:text="@string/upload_file"
         android:textColor="@color/primary"
         android:layout_marginStart="20dp"
         android:clickable="true"

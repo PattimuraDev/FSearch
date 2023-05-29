@@ -38,6 +38,10 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
         initView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi action bar pada halaman pengguna
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initView() {
         initAdapter()
 
@@ -75,6 +79,10 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar pengguna
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initAdapter() {
         daftarPenggunaAdapter = DaftarPenggunaAdapter(this@PenggunaFragment)
         pengguna_rv_daftar_pengguna.layoutManager = LinearLayoutManager(requireContext())

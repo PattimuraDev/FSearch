@@ -2,11 +2,10 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/rv_pengguna_container">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -20,7 +19,6 @@
                 android:layout_height="120dp"
                 android:id="@+id/rv_pengguna_foto_profile"
                 android:src="@drawable/standard_user_photo"/>
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_pengguna_button_like"
                 android:layout_width="wrap_content"
@@ -30,7 +28,7 @@
                 android:padding="3dp"
                 android:background="@drawable/adapter_like_button_selector" />
         </RelativeLayout>
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -38,25 +36,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Nama pengguna"
+                android:text="@string/contoh_nama"
                 android:textSize="20sp"
                 android:id="@+id/rv_pengguna_nama_pengguna"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Asal prodi"
+                android:text="@string/contoh_prodi"
                 android:id="@+id/rv_pengguna_asal_prodi"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Asal universitas"
+                android:text="@string/contoh_universitas"
                 android:id="@+id/rv_pengguna_asal_universitas"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2019"
+                android:text="@string/contoh_angkatan"
                 android:id="@+id/rv_pengguna_tahun_angkatan"/>
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -69,16 +67,15 @@
                     android:numStars="5"
                     android:progressTint="@color/rating_bar_star_color"
                     android:stepSize="0.1" />
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/rv_pengguna_jumlah_testimoni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="(10)" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+                    android:text="@string/contoh_jumlah_testimoni" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

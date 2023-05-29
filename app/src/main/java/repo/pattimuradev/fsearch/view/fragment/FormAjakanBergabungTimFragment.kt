@@ -55,6 +55,10 @@ class FormAjakanBergabungTimFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengirimkan ajakan kepada pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleKirimAjakan() {
         val userProfilePenggunaLain = arguments!!.getParcelable("profile_pengguna_lain") as UserProfile?
         val idPenerima = userProfilePenggunaLain!!.id
@@ -141,6 +145,10 @@ class FormAjakanBergabungTimFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika ajakan berhasil disampaikan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog() {
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
@@ -154,6 +162,10 @@ class FormAjakanBergabungTimFragment : Fragment() {
         customDialog.show()
     }
 
+    /**
+     * Fungsi untuk menghandle aksi mengambil image dari penyimpanan lokal
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleTakeImage() {
         getContext.launch("image/*")
     }
@@ -168,6 +180,11 @@ class FormAjakanBergabungTimFragment : Fragment() {
         form_ajakan_bergabung_tim_nama_file.text = fileName
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field sebelum mengirim ajakan kepada
+     * pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkDeskripsiField() {
         form_ajakan_bergabung_tim_button_kirim.isEnabled = false
         form_ajakan_bergabung_tim_deskripsi.addTextChangedListener(object: TextWatcher{

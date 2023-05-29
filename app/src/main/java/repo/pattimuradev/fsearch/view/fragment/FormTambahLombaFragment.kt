@@ -53,6 +53,10 @@ class FormTambahLombaFragment : Fragment() {
         handlePublishLomba()
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field/data sebelum menambahkan lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkFields(){
         form_tambah_lomba_button_publish.isEnabled = false
         val fields = listOf(
@@ -104,6 +108,10 @@ class FormTambahLombaFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk menambah lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handlePublishLomba() {
         var kategoriTingkatanLomba: String? = null
         var kategoriPembuatLomba: String? = null
@@ -199,7 +207,7 @@ class FormTambahLombaFragment : Fragment() {
                         biayaPendaftaran,
                         deskripsiLomba,
                         linkLomba,
-                        null
+                        arrayListOf()
                     ))
                 }
             }
@@ -215,6 +223,11 @@ class FormTambahLombaFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika berhasil menambahkan lomba
+     * ke daftar lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog() {
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
@@ -229,6 +242,10 @@ class FormTambahLombaFragment : Fragment() {
         customDialog.show()
     }
 
+    /**
+     * Fungsi untuk menghandle aksi mengambil image dari penyimpanan lokal
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleTakeImage() {
         getContext.launch("image/*")
     }

@@ -13,11 +13,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Pengguna"
+                android:text="@string/pengguna_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary"/>

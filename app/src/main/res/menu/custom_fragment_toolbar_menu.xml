@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search_view"
-        android:title="Search View"
+        android:title="@string/search_view_toolbar_title"
         android:icon="@drawable/search_icon"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/go_to_favorit"
-        android:title="Favorite"
+        android:title="@string/favorite_toolbar_title"
         android:icon="@drawable/like_icon_favorited"
         app:showAsAction="always"/>
     <item
         android:id="@+id/go_to_notification"
-        android:title="Notification"
+        android:title="@string/notification_toolbar_title"
         android:icon="@drawable/notification_icon"
         app:showAsAction="always"/>
 </menu>

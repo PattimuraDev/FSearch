@@ -34,6 +34,10 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aktivitas memverifikasi kode OTP yang dimasukkan user
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun processVerificationCode() {
         val registerEmail = intent.getStringExtra("register_email")!!
         val registerPassword = intent.getStringExtra("register_password")!!
@@ -71,6 +75,11 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle bagaimana semua edit text berperilaku sesuai kebutuhan
+     * sistem
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun otpFieldHandler() {
         // memindahkan kursor ketika satu edit text sudah terisi oleh nomor
         register_code_verification_one.addTextChangedListener(OTPEditTextHandler.OtpTextWatcher(
@@ -105,6 +114,10 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
         ))
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan data sebelum dapat melakukan verifikasi kode OTP
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkFields() {
         register_code_verification_button_submit.isEnabled = false
         val verificationFields = listOf(

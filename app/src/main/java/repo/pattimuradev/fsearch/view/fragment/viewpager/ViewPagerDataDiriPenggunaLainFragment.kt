@@ -32,6 +32,10 @@ class ViewPagerDataDiriPenggunaLainFragment : Fragment() {
         initView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi data diri pada profil pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initView() {
         userViewModel.spesificUserById.observe(viewLifecycleOwner){ userProfile ->
             viewpager_detail_pengguna_lain_angkatan.text = if(userProfile.dataDiri == null){

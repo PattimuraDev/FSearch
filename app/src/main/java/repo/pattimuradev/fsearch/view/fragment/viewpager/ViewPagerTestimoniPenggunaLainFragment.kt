@@ -36,6 +36,10 @@ class ViewPagerTestimoniPenggunaLainFragment : Fragment() {
         initTestimoniAdapter()
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar testimoni pada profile pengguna lain
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initTestimoniAdapter() {
         testimoniAdapter = TestimoniAdapter()
         viewpager_detail_pengguna_lain_rv_testimoni.layoutManager = LinearLayoutManager(requireContext())

@@ -4,6 +4,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+/**
+ * Representasi data class dari objek lomba
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 @Parcelize
 data class Lomba(
     var idLomba: String? = null,
@@ -19,5 +23,5 @@ data class Lomba(
     val biayaPendaftaran: String = "",
     val deskripsiLomba: String = "",
     val linkLomba: String? = null,
-    val likedByUserId: ArrayList<String>? = null
+    val likedByUserId: ArrayList<String> = arrayListOf()
 ) : Parcelable

@@ -40,6 +40,10 @@ class ViewPagerDaftarPenggunaFavorit : Fragment(), DaftarPenggunaClickListener {
         initRecyclerView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar pengguna favorit di halaman favorit
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initRecyclerView() {
         daftarPenggunaAdapter = DaftarPenggunaAdapter(this)
         viewpager_like_rv_daftar_pengguna_favorit.layoutManager = LinearLayoutManager(requireContext())
@@ -59,11 +63,11 @@ class ViewPagerDaftarPenggunaFavorit : Fragment(), DaftarPenggunaClickListener {
     }
 
     override fun clickOnLikeButton(item: UserProfile, position: Int) {
-        // edit
+        // opsional edit
     }
 
     override fun clickOnDaftarPenggunaBody(item: UserProfile, position: Int) {
-        // edit
+        // opsional edit
     }
 
 }

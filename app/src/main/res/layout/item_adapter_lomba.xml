@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/rv_lomba_container">
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -14,14 +14,12 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginEnd="20dp">
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/rv_lomba_poster_lomba"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/no_image_available" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_lomba_button_like"
                 android:layout_width="30dp"
@@ -34,7 +32,7 @@
                 android:padding="3dp"
                 app:civ_circle_background_color="@color/white" />
         </RelativeLayout>
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -45,12 +43,12 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Contoh judul"
+                android:text="@string/contoh_judul"
                 android:maxLines="2"
                 android:minLines="1"
                 android:id="@+id/rv_lomba_judul_lomba"
                 android:ellipsize="end"/>
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -62,10 +60,10 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Penyelenggara"
+                    android:text="@string/contoh_nama_penyelenggara"
                     android:id="@+id/rv_lomba_nama_penyelenggara"/>
-            </LinearLayout>
-            <LinearLayout
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginBottom="5dp"
@@ -79,9 +77,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/rv_lomba_lokasi_lomba"
-                    android:text="Lokasi lomba"/>
-            </LinearLayout>
-            <LinearLayout
+                    android:text="@string/contoh_lokasi"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -94,19 +92,19 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Minggu, 2 Juni 2019"
+                    android:text="@string/contoh_tanggal_adapter_lomba"
                     android:id="@+id/rv_lomba_tanggal_lomba"/>
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Rp 200.000"
+                android:text="@string/contoh_biaya"
                 android:id="@+id/rv_lomba_biaya_pendaftaran"/>
-        </LinearLayout>
-    </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

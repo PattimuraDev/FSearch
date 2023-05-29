@@ -34,6 +34,11 @@ class ViewPagerPostingPenggunaFragment : Fragment() {
         initPotPenggunaAdapter()
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar postingan pengguna saat ini di halaman
+     * profil pengguna itu sendiri
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initPotPenggunaAdapter() {
         pengumumanAdapter = PengumumanAdapter {
             // edit

@@ -27,6 +27,10 @@ class ViewPagerDataDiriFragment : Fragment() {
         initView()
     }
 
+    /**
+     * Fungsi untuk menginisiasi tampilan data diri dari profil sendiri
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initView() {
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
             viewpager_profile_angkatan.text = if(userProfile.dataDiri == null){

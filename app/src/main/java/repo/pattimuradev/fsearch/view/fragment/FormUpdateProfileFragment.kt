@@ -48,6 +48,10 @@ class FormUpdateProfileFragment : Fragment() {
         handleUpdateProfil()
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengupdate profil
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleUpdateProfil() {
         var statusBersediaMenerimaAjakan = true
         var jenisKelamin: String? = null
@@ -146,6 +150,10 @@ class FormUpdateProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aksi untuk mengambil image dari penyimpanan lokal
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleTakeImage() {
         getContext.launch("image/*")
     }
@@ -164,6 +172,10 @@ class FormUpdateProfileFragment : Fragment() {
         namaFileFoto = fileName!!
     }
 
+    /**
+     * Fungsi untuk menginisiasi data user awal pada field-field yang tersedia
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initDataAwal() {
         userViewModel.currentUserProfile.observeOnce(viewLifecycleOwner){ userProfileAwal ->
             Glide.with(form_update_profil_foto_user.context)
@@ -233,6 +245,10 @@ class FormUpdateProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika profil berhasil diupdate
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog() {
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())

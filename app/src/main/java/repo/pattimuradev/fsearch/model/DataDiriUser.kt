@@ -3,6 +3,10 @@ package repo.pattimuradev.fsearch.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Representasi data class dari objek data diri user (bagian dari user profile)
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 @Parcelize
 data class DataDiriUser(
     val asalUniversitas: String? = null,

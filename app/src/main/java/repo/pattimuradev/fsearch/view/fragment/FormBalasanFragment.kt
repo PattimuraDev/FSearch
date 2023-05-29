@@ -49,6 +49,12 @@ class FormBalasanFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengirimkan balasan atau respon
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param notifikasi objek notifikasi yang akan dibalas
+     * @param respon respon pengguna terhadap notifikasi
+     */
     private fun handleBalasan(notifikasi: Notifikasi, respon: String) {
         val idPenerima = notifikasi.idPengirim
         val namaPenerima = notifikasi.namaPengirim
@@ -119,6 +125,10 @@ class FormBalasanFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika berhasil mengirimkan balasan/respon
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog(){
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
@@ -132,6 +142,11 @@ class FormBalasanFragment : Fragment() {
         customDialog.show()
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field/data sebelum dapat mengirimkan
+     * balasan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkDeskripsiField() {
         form_balasan_button_kirim.isEnabled = false
         form_balasan_deskripsi.addTextChangedListener(object: TextWatcher{

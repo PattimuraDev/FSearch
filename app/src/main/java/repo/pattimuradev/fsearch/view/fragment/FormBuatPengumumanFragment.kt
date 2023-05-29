@@ -52,6 +52,10 @@ class FormBuatPengumumanFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk memposting pengumuman
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handlePostPengumuman() {
         lifecycleScope.launch(Dispatchers.IO){
             if(posterImageUri != null){
@@ -112,6 +116,10 @@ class FormBuatPengumumanFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aksi untuk mengambil image dari penyimpanan lokal
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleTakeImage() {
         getContext.launch("image/*")
     }
@@ -126,6 +134,10 @@ class FormBuatPengumumanFragment : Fragment() {
         form_buat_pengumuman_nama_file.text = fileName
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field/data sebelum dapat memposting pengumuman
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkDeskripsiField() {
         form_buat_pengumuman_button_post.isEnabled = false
         form_buat_pengumuman_deskpripsi.addTextChangedListener ( object: TextWatcher{
@@ -152,6 +164,10 @@ class FormBuatPengumumanFragment : Fragment() {
         })
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika berhasil memposting pengumuman
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showCustomDialog(){
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())

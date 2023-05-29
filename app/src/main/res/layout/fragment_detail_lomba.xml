@@ -26,8 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/detail_lomba_button_back"
-                android:text="Detail Lomba"
+                android:layout_toEndOf="@id/detail_lomba_button_back"
+                android:text="@string/detail_lomba_title"
                 android:textColor="@color/primary"
                 android:textSize="16sp" />
             <androidx.appcompat.widget.AppCompatImageButton
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/search_icon"
-                android:layout_toLeftOf="@id/detail_lomba_button_share"
+                android:layout_toStartOf="@id/detail_lomba_button_share"
                 android:backgroundTint="@color/white"/>
         </RelativeLayout>
         <RelativeLayout
@@ -71,7 +71,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/detail_lomba_tanggal_posting"
-                android:text="Minggu, 11 Januari 2023"/>
+                android:text="@string/contoh_format_tanggal_detil_lomba"/>
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:layout_marginHorizontal="20dp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="CONTOH JUDUL"
+            android:text="@string/contoh_judul"
             android:layout_marginBottom="10dp"
             android:textSize="20sp"
             android:id="@+id/detail_lomba_judul_lomba"/>
@@ -101,7 +101,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Penyelenggara"
+                    android:text="@string/nama_penyelenggara"
                     android:id="@+id/detail_lomba_nama_penyelenggara"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/detail_lomba_lokasi_lomba"
-                    android:text="Lokasi lomba"/>
+                    android:text="@string/lokasi_lomba"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Minggu, 2 Juni 2019"
+                    android:text="@string/contoh_format_tanggal_detil_lomba"
                     android:id="@+id/detail_lomba_tanggal_lomba"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.AppCompatTextView
@@ -142,7 +142,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Rp 200.000"
+                android:text="@string/contoh_biaya"
                 android:id="@+id/detail_lomba_biaya_pendaftaran"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <View
@@ -153,7 +153,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deskripsi lomba"
+            android:text="@string/deskripsi_lomba"
             android:textSize="16sp"
             android:layout_marginHorizontal="20dp"
             android:textColor="@color/black"
@@ -163,7 +163,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="Contoh deskripsi"
+            android:text="@string/contoh_deskripsi"
             android:layout_marginBottom="20dp"
             android:id="@+id/detail_lomba_deskripsi_lomba"/>
 
@@ -171,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="Link"
+            android:text="@string/link"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -180,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="https://www.google.com/"
+            android:text="@string/contoh_link"
             android:textColor="@color/link_text_color"
             android:layout_marginBottom="20dp"
             android:id="@+id/detail_lomba_link_lomba"/>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -12,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rv_pengumuman_foto_profile"
                 android:layout_width="50dp"
@@ -20,54 +19,54 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginEnd="15dp"
                 android:src="@drawable/standard_user_photo" />
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@+id/rv_pengumuman_right_side"
                 android:layout_toEndOf="@+id/rv_pengumuman_foto_profile"
                 android:orientation="vertical">
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:text="Patra"
+                    android:text="@string/contoh_nama"
                     android:id="@+id/rv_pengumuman_nama"/>
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Program Studi"
+                    android:text="@string/contoh_prodi"
                     android:id="@+id/rv_pengumuman_program_studi"/>
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Universitas"
+                    android:text="@string/contoh_universitas"
                     android:id="@+id/rv_pengumuman_nama_universitas"/>
-            </LinearLayout>
-            <LinearLayout
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:orientation="vertical"
                 android:layout_marginEnd="20dp"
                 android:id="@+id/rv_pengumuman_right_side">
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16H"
+                    android:text="@string/contoh_riwayat_posting"
                     android:layout_marginBottom="20dp"
                     android:id="@+id/rv_pengumuman_waktu_posting"/>
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2016"
+                    android:text="@string/contoh_angkatan"
                     android:id="@+id/rv_pengumuman_tahun_angkatan"/>
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </RelativeLayout>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deskripsi pengumuman"
+            android:text="@string/contoh_deskripsi"
             android:id="@+id/rv_pengumuman_deskripsi"
             android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.AppCompatImageView
@@ -80,11 +79,11 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ajukan Diri"
+            android:text="@string/ajukan_diri"
             android:id="@+id/rv_pengumuman_button_ajukan_diri"
             android:backgroundTint="@color/primary"
             android:textColor="@color/white" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

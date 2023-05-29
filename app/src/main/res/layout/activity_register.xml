@@ -16,11 +16,8 @@
         android:textColor="@color/primary"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:text="Mulailah miliki tim lomba yang kamu dambakan"
-
+        android:text="@string/login_title"
         app:layout_constraintTop_toTopOf="parent" />
-
-
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +26,7 @@
         android:layout_marginTop="80dp"
         android:id="@+id/register_field_nama"
         android:inputType="text"
-        android:hint="Nama"
+        android:hint="@string/nama"
         app:layout_constraintTop_toBottomOf="@+id/register_header" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -40,7 +37,7 @@
         android:id="@+id/register_field_email"
         android:inputType="textEmailAddress"
         android:layout_marginTop="30dp"
-        android:hint="Email"
+        android:hint="@string/email"
         app:layout_constraintTop_toBottomOf="@+id/register_field_nama" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -51,7 +48,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/register_field_password"
         android:inputType="number"
-        android:hint="Password"
+        android:hint="@string/password"
         app:layout_constraintTop_toBottomOf="@+id/register_field_email" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -61,7 +58,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="60dp"
         android:id="@+id/register_button_daftar"
-        android:text="Daftar"
+        android:text="@string/daftar"
         android:background="@drawable/custom_button_not_enabled_layout"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/register_field_password"/>

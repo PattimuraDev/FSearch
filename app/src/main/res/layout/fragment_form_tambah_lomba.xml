@@ -25,11 +25,12 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Form"
+                android:text="@string/form"
                 android:textSize="16sp"
                 android:textColor="@color/primary"
                 android:layout_toEndOf="@+id/form_tambah_lomba_button_back"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/form_tambah_lomba_button_publish"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/form_tambah_lomba_button_publish"
@@ -38,14 +39,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="3dp"
                 android:background="@drawable/custom_button_not_enabled_layout"
-                android:text="Publish"
+                android:text="@string/publish"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Foto Poster Lomba"
+            android:text="@string/foto_poster_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kategori Tingkatan Lomba"
+            android:text="@string/kategori_tingkatan_lomba"
             android:layout_marginStart="20dp"/>
         <RadioGroup
             android:layout_width="match_parent"
@@ -91,7 +92,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kategori Pembuat Lomba"
+            android:text="@string/kategori_pembuat_lomba"
             android:layout_marginStart="20dp"/>
         <RadioGroup
             android:layout_width="match_parent"
@@ -118,20 +119,20 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pembuat Lomba"
+            android:text="@string/pembuat_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:hint="Pembuat Lomba"
+            android:hint="@string/pembuat_lomba"
             android:layout_marginBottom="10dp"
             android:inputType="textCapSentences|textMultiLine"
             android:id="@+id/form_tambah_lomba_pembuat_lomba"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tema Lomba"
+            android:text="@string/tema_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -142,7 +143,7 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:hint="Tema Lomba"
+                android:hint="@string/tema_lomba"
                 android:id="@+id/form_tambah_lomba_tema_lomba"/>
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="wrap_content"
@@ -153,43 +154,43 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Judul lomba"
+            android:text="@string/judul_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:hint="Judul Lomba"
+            android:hint="@string/judul_lomba"
             android:layout_marginBottom="10dp"
             android:id="@+id/form_tambah_lomba_judul_lomba"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tanggal Pelaksanaan"
+            android:text="@string/tanggal_pelaksanaan"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tanggal Pelaksanaan"
+            android:hint="@string/tanggal_pelaksanaan"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="10dp"
             android:id="@+id/form_tambah_lomba_tanggal_pelaksanaan"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lokasi Lomba"
+            android:text="@string/lokasi_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:hint="Lokasi Lomba"
+            android:hint="@string/lokasi_lomba"
             android:layout_marginBottom="10dp"
             android:id="@+id/form_tambah_lomba_lokasi_lomba"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Biaya Pendaftaran"
+            android:text="@string/biaya_pendaftaran"
             android:layout_marginStart="20dp"/>
 <!--        <androidx.appcompat.widget.AppCompatEditText-->
 <!--            android:layout_width="match_parent"-->
@@ -205,31 +206,31 @@
             app:currencySymbol="Rp"
             app:maxNumberOfDecimalDigits="2"
             android:layout_marginBottom="10dp"
-            android:hint="Masukkan biaya (hanya angka)"
+            android:hint="@string/masukkan_biaya"
             android:id="@+id/form_tambah_lomba_biaya_pendaftaran"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deskripsi Pengumuman"
+            android:text="@string/deskripsi_pengumuman"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:id="@+id/form_tambah_lomba_deskripsi_pengumuman"
-            android:hint="Deskripsi Pengumuman"
+            android:hint="@string/deskripsi_pengumuman"
             android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Link Lomba"
+            android:text="@string/link_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:id="@+id/form_tambah_lomba_link_lomba"
-            android:hint="Link Lomba"
+            android:hint="@string/link_lomba"
             android:layout_marginBottom="10dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

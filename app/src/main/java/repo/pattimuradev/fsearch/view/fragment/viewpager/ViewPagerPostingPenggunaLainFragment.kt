@@ -38,6 +38,11 @@ class ViewPagerPostingPenggunaLainFragment : Fragment() {
         initPostPenggunaLainAdapter()
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar postingan pengguna lain
+     * pada halaman profil pengguna lain tab post
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initPostPenggunaLainAdapter() {
         pengumumanAdapter = PengumumanAdapter {
             // edit

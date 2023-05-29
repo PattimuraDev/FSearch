@@ -13,11 +13,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Home"
+                android:text="@string/home_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary"/>
@@ -31,7 +31,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Tambah pengumuman"
+        android:contentDescription="@string/tambah_pengumuman"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"

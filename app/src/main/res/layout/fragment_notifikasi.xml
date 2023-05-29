@@ -23,7 +23,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notifikasi"
+            android:text="@string/notifikasi_title"
             android:textSize="16sp"
             android:textColor="@color/primary"
             android:layout_toEndOf="@+id/notifikasi_button_back"

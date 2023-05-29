@@ -8,6 +8,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Notifikasi
 
+/**
+ * Repository berisi transaksi terkait notifikasi dengan layanan firebase
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 class NotifikasiRepository {
     private val firestoreDb = FirebaseFirestore.getInstance()
     private val firebaseCloudStorage = Firebase.storage
@@ -16,6 +20,14 @@ class NotifikasiRepository {
     private val listNotifikasi = MutableLiveData<List<Notifikasi>>()
     val listNotifikasiLiveData: LiveData<List<Notifikasi>> = listNotifikasi
 
+    /**
+     * Fungsi untuk menambahkan notifikasi ke firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param notifikasi objek notifikasi yang akan diinputkan
+     * @param fileUri URI dari file, bisa image atau pdf
+     * @param isUploading status yang menandai ingin mengunggah file atau tidak
+     * @param fileType tipe file, bisa image atau pdf
+     */
     suspend fun addNotifikasi(notifikasi: Notifikasi, fileUri: Uri?, isUploading: Boolean, fileType: String?){
         val document = firestoreDb.collection("notifikasi").document()
         val documentId = document.id
@@ -85,6 +97,11 @@ class NotifikasiRepository {
         }
     }
 
+    /**
+     * Fungsi untuk mendapatkan list notifikasi dari firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idPenerimaNotifikasi id dari user yang akan menerima notifikasi
+     */
     suspend fun getAllNotifikasi(idPenerimaNotifikasi: String){
         firestoreDb.collection("notifikasi")
             .addSnapshotListener{ value, _ ->
@@ -101,6 +118,12 @@ class NotifikasiRepository {
             }
     }
 
+    /**
+     * Fungsi untuk mengupdate status notifikasi sudah dibaca atau belum
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param hasilRespon hasil respon dari pengguna terhadap notifikasi tertentu
+     * @param idNotifikasi id dari notifikasi yang dimaksud
+     */
     suspend fun updateNotifikasiIsResponded(hasilRespon: String, idNotifikasi: String){
         val notifikasiPref = firestoreDb.collection("notifikasi").document(idNotifikasi)
         notifikasiPref.update(mapOf(

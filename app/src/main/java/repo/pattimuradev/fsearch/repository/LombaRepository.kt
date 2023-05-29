@@ -9,6 +9,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import repo.pattimuradev.fsearch.model.Lomba
 
+/**
+ * Repository berisi transaksi terkait lomba dengan layanan firebase
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 class LombaRepository {
     private val firestoreDb = FirebaseFirestore.getInstance()
     private val firebaseCloudStorage = Firebase.storage
@@ -19,6 +23,10 @@ class LombaRepository {
     private val getPosterLombaImageUrl = MutableLiveData<String>()
     val getPosterLombaImageUrlLiveData: LiveData<String> = getPosterLombaImageUrl
 
+    /**
+     * Fungsi untuk mendapatkan list lomba dari firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     suspend fun getAllListLomba(){
         firestoreDb.collection("lomba")
             .addSnapshotListener{ value, _ ->
@@ -33,38 +41,35 @@ class LombaRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan like dari user dengan id tertentu ke dalam suatu lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idUser id dari user yang melakukan like
+     * @param idLomba id dari lomba
+     */
     suspend fun addUserLike(idUser: String, idLomba: String){
         firestoreDb.collection("lomba")
             .document(idLomba)
             .get()
             .addOnSuccessListener {
                 val lomba = it.toObject(Lomba::class.java)
-                if(lomba!!.likedByUserId == null){
+                if(lomba!!.likedByUserId.contains(idUser)){
                     firestoreDb.collection("lomba")
                         .document(idLomba)
-                        .update("likedByUserId", arrayListOf(idUser))
+                        .update("likedByUserId", FieldValue.arrayRemove(idUser))
                 }else{
-                    if(lomba.likedByUserId == emptyArray<String>()){
-                        firestoreDb.collection("lomba")
-                            .document(idLomba)
-                            .update("likedByUserId", FieldValue.arrayUnion(idUser))
-                    }else{
-                        if(lomba.likedByUserId!!.contains(idUser)){
-                            firestoreDb.collection("lomba")
-                                .document(idLomba)
-                                .update("likedByUserId", FieldValue.arrayRemove(idUser))
-                        }else{
-                            firestoreDb.collection("lomba")
-                                .document(idLomba)
-                                .update("likedByUserId", FieldValue.arrayUnion(idUser))
-
-                        }
-                    }
+                    firestoreDb.collection("lomba")
+                        .document(idLomba)
+                        .update("likedByUserId", FieldValue.arrayUnion(idUser))
                 }
-
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan lomba ke firebase
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param lomba objek lomba yang akan diinputkan
+     */
     suspend fun addLomba(lomba: Lomba) {
         val document = firestoreDb.collection("lomba").document()
         val documentId = document.id
@@ -81,6 +86,12 @@ class LombaRepository {
             }
     }
 
+    /**
+     * Fungsi untuk menambahkan poster lomba ke cloud storage
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param fileUri URI dari poster lomba
+     * @param isUploadingImage status untuk menandai ingin mengunggah poster atau tidak
+     */
     suspend fun postImageToStorage(fileUri: Uri?, isUploadingImage: Boolean){
         if(isUploadingImage){
             val storageRef = firebaseCloudStorage.reference

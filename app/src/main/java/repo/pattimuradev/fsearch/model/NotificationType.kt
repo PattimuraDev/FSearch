@@ -1,5 +1,9 @@
 package repo.pattimuradev.fsearch.model
 
+/**
+ * Enum class yang mendefinisikan jenis-jenis notifikasi
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 enum class NotificationType(val pesanSingkatNotifikasi: String) {
     PERMINTAAN_PERTEMANAN("Mengajak kamu untuk berteman"),
     MENERIMA_PERMINTAAN_PERTEMANAN("Menerima permintaan pertemanan kamu"),

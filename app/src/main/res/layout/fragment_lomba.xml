@@ -13,11 +13,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Lomba"
+                android:text="@string/lomba_title"
                 android:textColor="@color/primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />

@@ -8,15 +8,15 @@ import android.widget.EditText
 import repo.pattimuradev.fsearch.R
 
 /**
- * @author PattimuraDev
  * Kelas yang dibuat khusus untuk menghandle edit text untuk field berjenis OTP (One Time Password)
+ * @author PattimuraDev (Dwi Satria Patra)
  */
 class OTPEditTextHandler {
     /**
-     * @author PattimuraDev
-     * @param currentView
-     * @param previousView
      * Kelas untuk menghandle edit text OTP ketika pengguna menekan tombol hapus (memundurkan kursor)
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param currentView view yang sedang berjalan sekarang
+     * @param previousView view yang berjalan sebelumnya
      */
     class OtpKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
         override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -30,10 +30,10 @@ class OTPEditTextHandler {
     }
 
     /**
-     * @author PattimuraDev
-     * @param currentView
-     * @param nextView
      * Kelas untuk menghandle edit text OTP ketika pengguna memasukkan kode otp (memajukan kursor)
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param currentView view yang sekarang sedang berjalan
+     * @param nextView view yang akan berjalan setelahnya
      */
     class OtpTextWatcher internal constructor(private val currentView: View, private val nextView: View?) :
         TextWatcher {

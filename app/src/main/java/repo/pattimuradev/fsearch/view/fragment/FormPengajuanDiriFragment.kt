@@ -56,6 +56,10 @@ class FormPengajuanDiriFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengirimkan pengajuan diri
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleKirimPengajuanDiri() {
         val pengumuman = arguments!!.getParcelable("pengumuman") as Pengumuman?
         val idPenerima = pengumuman!!.idPengirim
@@ -142,6 +146,11 @@ class FormPengajuanDiriFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog ketika berhasil mengirimkan pengajuan diri
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param namaPenerima nama user yang akan menerima form pengajuan diri
+     */
     private fun showCustomDialog(namaPenerima: String){
         val dialogView = layoutInflater.inflate(R.layout.custom_notification_dialog, null)
         val customDialog = AlertDialog.Builder(requireContext())
@@ -155,6 +164,10 @@ class FormPengajuanDiriFragment : Fragment() {
         customDialog.show()
     }
 
+    /**
+     * Fungsi untuk menghandle aksi untuk mengambil image dari penyimpanan lokal
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun handleTakePdfFile() {
         getContext.launch("application/pdf")
     }
@@ -169,6 +182,11 @@ class FormPengajuanDiriFragment : Fragment() {
         form_pengajuan_diri_nama_file.text = fileName
     }
 
+    /**
+     * Fungsi untuk mengecek kelengkapan field/data sebelum dapat mengirimkan
+     * pengajuan diri
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun checkDeskripsiField() {
         form_pengajuan_diri_button_kirim.isEnabled = false
         form_pengajuan_diri_deskripsi.addTextChangedListener(object: TextWatcher{

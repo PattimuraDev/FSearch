@@ -43,6 +43,10 @@ class NotifikasiFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar notifikasi
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initNotifikasiAdapter() {
         notifikasiAdapter = NotifikasiAdapter{ notifikasi ->
             if(notifikasi.jenisNotifikasi == "permintaan_pertemanan"){
@@ -85,12 +89,22 @@ class NotifikasiFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menghandle aksi ketika notifikasi bersifat read-only di klik
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param notifikasi objek notifikasi yang sedang diinteraksi
+     */
     private fun handleOnlyReadNotification(notifikasi: Notifikasi) {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
             notifikasiViewModel.updateNotifikasiIsResponded("", notifikasi.idNotifikasi!!)
         }
     }
 
+    /**
+     * Fungsi untuk menghandle request untuk mengirimkan respon permintaan pertemanan
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param notifikasi objek notifikasi yang sedang diinteraksi
+     */
     private fun handlePermintaanPertemananRespon(notifikasi: Notifikasi) {
         val dialogBuilder = AlertDialog.Builder(requireContext())
             .setMessage("Bagaimana respon kamu terhadap permintaan pertemaan dari ${notifikasi.namaPengirim}")

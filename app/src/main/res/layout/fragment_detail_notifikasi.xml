@@ -26,9 +26,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/detail_notifikasi_button_respon"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/detail_notifikasi_button_back"
-                android:text="Tawaran Ajakan"
+                android:text="@string/tawaran_ajakan_title"
                 android:id="@+id/detail_notifikasi_title"
                 android:textColor="@color/primary"
                 android:textSize="16sp" />
@@ -40,7 +41,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="3dp"
                 android:background="@drawable/custom_button_enabled_layout"
-                android:text="Respon"
+                android:text="@string/respon"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </RelativeLayout>
@@ -58,7 +59,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contoh Nama"
+                android:text="@string/contoh_nama"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -68,7 +69,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teknik Informatika"
+                android:text="@string/contoh_prodi"
                 android:id="@+id/detail_notifikasi_asal_prodi_pengirim"
                 android:layout_toEndOf="@id/detail_notifikasi_foto_pengirim"
                 android:layout_below="@id/detail_notifikasi_nama_pengirim"/>
@@ -78,14 +79,14 @@
                 android:id="@+id/detail_notifikasi_asal_universitas_pengirim"
                 android:layout_toEndOf="@id/detail_notifikasi_foto_pengirim"
                 android:layout_below="@id/detail_notifikasi_asal_prodi_pengirim"
-                android:text="Universitas Brawijaya"/>
+                android:text="@string/contoh_universitas"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_notifikasi_tahun_angkatan_pengirim"
                 android:layout_toEndOf="@id/detail_notifikasi_asal_universitas_pengirim"
                 android:layout_below="@id/detail_notifikasi_asal_prodi_pengirim"
-                android:text="2018"
+                android:text="@string/contoh_angkatan"
                 android:layout_marginStart="15dp"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -93,13 +94,13 @@
                 android:id="@+id/detail_notifikasi_waktu_penerimaan_notifikasi"
                 android:layout_toEndOf="@id/detail_notifikasi_foto_pengirim"
                 android:layout_below="@id/detail_notifikasi_asal_universitas_pengirim"
-                android:text="May, 4 2020 // 1:40 PM"/>
+                android:text="@string/contoh_format_tanggal_detail_notifikasi"/>
         </RelativeLayout>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/detail_notifikasi_deskripsi_lengkap"
-            android:text="Contoh deskripsi"
+            android:text="@string/contoh_deskripsi"
             android:layout_margin="20dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -119,7 +120,7 @@
                 android:layout_alignParentStart="true"
                 android:id="@+id/detail_notifikasi_button_buka_pdf"
                 android:textColor="@color/link_text_color"
-                android:text="Download CV pengguna (pdf)"/>
+                android:text="@string/download_cv_pengguna"/>
         </RelativeLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

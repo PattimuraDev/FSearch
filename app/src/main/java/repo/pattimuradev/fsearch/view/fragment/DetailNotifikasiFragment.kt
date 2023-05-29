@@ -36,6 +36,10 @@ class DetailNotifikasiFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menampilkan dialog untuk merespon notifikasi
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun showDialog() {
         val notifikasi = arguments!!.getParcelable("notifikasi") as Notifikasi?
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
@@ -62,6 +66,10 @@ class DetailNotifikasiFragment : Fragment() {
         alertDialog.show()
     }
 
+    /**
+     * Fungsi untuk menginisiasi data notifikasi sehingga bisa ditampilkan
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initData() {
         val notifikasi = arguments!!.getParcelable("notifikasi") as Notifikasi?
         if(notifikasi!!.jenisNotifikasi == "respon_pengajuan_bergabung_tim" || notifikasi.jenisNotifikasi == "respon_ajakan_bergabung_tim"){

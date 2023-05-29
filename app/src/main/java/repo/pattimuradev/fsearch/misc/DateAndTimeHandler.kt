@@ -3,16 +3,32 @@ package repo.pattimuradev.fsearch.misc
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Object untuk menampung fungsi custom tentang tanggal dan waktu
+ * @author PattimuraDev (Dwi Satria Patra)
+ */
 object DateAndTimeHandler {
     private const val SECOND_MILLIS = 1000
     private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
     private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
     private const val DAY_MILLIS = 24 * HOUR_MILLIS
+
+    /**
+     * Fungsi untuk mendapatkan Date berdasarkan waktu sekarang
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @return Date - object date berdasarkan waktu sekarang
+     */
     fun currentDate(): Date{
         val calendar: Calendar = Calendar.getInstance()
         return calendar.time
     }
 
+    /**
+     * Fungsi untuk mendapatkan berapa jam telah berlalu dibanding waktu sekarang
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param inputTime waktu posting dalam bentuk milisecond
+     * @return String - hasil perhitungan waktu berlalu dibanding waktu sekarang
+     */
     fun getTimeAgo(inputTime: Long): String{
         var time = inputTime
         if (time < 1000000000000L) {
@@ -43,6 +59,12 @@ object DateAndTimeHandler {
         }
     }
 
+    /**
+     * Fungsi untuk mendapatkan nama bulan dalam bahasa indonesia dari urutan nomor bulan
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param monthNumber urutan bulan (dari indeks 0)
+     * @return String - nama bulan
+     */
     private fun nameOfMonthFromNumber(monthNumber: Int): String{
         val monthName = listOf(
             "Januari",
@@ -61,6 +83,13 @@ object DateAndTimeHandler {
         return monthName[monthNumber]
     }
 
+    /**
+     * Fungsi untuk mendapatkan nama hari dalam bahasa indonesia dari nama hari dalam
+     * bahasa inggris
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param dayName nama hari dalam bahasa inggris
+     * @return String - nama hari dalam bahasa indonesia
+     */
     private fun nameOfDayIndonesian(dayName: String): String{
         return when(dayName){
             "Monday" -> "Senin"
@@ -74,6 +103,15 @@ object DateAndTimeHandler {
         }
     }
 
+    /**
+     * Fungsi untuk mendapatkan format tanggal yang benar hasil picker dialog di halaman
+     * menambah lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param year tahun (angka)
+     * @param monthOfYear bulan (angka)
+     * @param dayOfMonth hari (angka)
+     * @return String - hasil format tanggal
+     */
     fun formatTanggalDaftarLombaPickerDialog(year: Int, monthOfYear: Int, dayOfMonth: Int): String{
         val simpleDateFormat = SimpleDateFormat("EEEE")
         val date = Date(year, monthOfYear, dayOfMonth - 1)
@@ -81,6 +119,12 @@ object DateAndTimeHandler {
         return "${nameOfDayIndonesian(dayString)}, $dayOfMonth ${nameOfMonthFromNumber(monthOfYear)} $year"
     }
 
+    /**
+     * Fungsi untuk mendapatkan format tanggal posting yang benar pada halaman detail lomba
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param calendar object calendar yang sudah terdefinisi dengan milisecond
+     * @return String - hasil format tanggal
+     */
     fun formatTanggalPostingDetailLomba(calendar: Calendar): String{
         val hariDateFormat = SimpleDateFormat("EEEE", Locale.US)
         val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
@@ -92,9 +136,15 @@ object DateAndTimeHandler {
         return "$namaHari, $tanggal $namaBulan $tahun"
     }
 
-    fun formatTanggalPostingDetailNotifikasi(milisecond: Long): String{
+    /**
+     * Fungsi untuk mendapatkan format tanggal posting yang benar pada halaman detail notifikasi
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param millisecond nilai milisecond dari object Date
+     * @return String - hasil format tanggal
+     */
+    fun formatTanggalPostingDetailNotifikasi(millisecond: Long): String{
         val calendar = Calendar.getInstance()
-        calendar.timeInMillis = milisecond
+        calendar.timeInMillis = millisecond
         val tanggalDateFormat = SimpleDateFormat("dd", Locale.US)
         val tahunDateFormat = SimpleDateFormat("y", Locale.US)
         val jamMenitDateFormat = SimpleDateFormat("HH:mm")

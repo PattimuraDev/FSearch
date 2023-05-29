@@ -23,7 +23,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/profile_title"
             android:textSize="16sp"
             android:textColor="@color/primary"
             android:layout_toEndOf="@+id/like_button_back"

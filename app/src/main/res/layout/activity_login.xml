@@ -16,7 +16,7 @@
         android:textColor="@color/primary"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:text="Mulailah miliki tim lomba yang kamu dambakan"
+        android:text="@string/login_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -28,7 +28,7 @@
         android:id="@+id/login_field_email"
         android:inputType="textEmailAddress"
         android:autofillHints="emailAddress"
-        android:hint="Email"
+        android:hint="@string/email"
         app:layout_constraintTop_toBottomOf="@+id/login_header" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -39,7 +39,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/login_field_password"
         android:inputType="number"
-        android:hint="Password"
+        android:hint="@string/password"
         app:layout_constraintTop_toBottomOf="@+id/login_field_email" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -49,7 +49,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="60dp"
         android:id="@+id/login_button_masuk"
-        android:text="Masuk"
+        android:text="@string/masuk"
         android:textColor="@color/white"
         android:background="@drawable/custom_button_not_enabled_layout"
         app:layout_constraintTop_toBottomOf="@+id/login_field_password"/>
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button_masuk"
-        android:text="Belum punya akun?"
+        android:text="@string/belum_punya_akun"
         android:id="@+id/login_belum_punya_akun_text"
         android:layout_marginStart="100dp"
         android:textColor="@color/secondary_three"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/login_belum_punya_akun_text"
         app:layout_constraintTop_toBottomOf="@+id/login_button_masuk"
-        android:text="Daftar"
+        android:text="@string/daftar"
         android:layout_marginStart="5dp"
         android:layout_marginTop="30dp"
         android:textStyle="bold"

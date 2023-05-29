@@ -37,6 +37,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi action bar
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initView() {
         initPengumumanAdapter()
         home_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
@@ -71,6 +75,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Fungsi untuk menginisiasi daftar pengumuman beserta adapternya
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
     private fun initPengumumanAdapter(){
         pengumumanAdapter = PengumumanAdapter { pengumuman ->
             val bundle = Bundle()

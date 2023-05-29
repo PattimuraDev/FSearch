@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/more"
-        android:title="Search View"
+        android:title="@string/search_view_toolbar_title"
         android:icon="@drawable/more_icon"
         app:showAsAction="always" />
 </menu>

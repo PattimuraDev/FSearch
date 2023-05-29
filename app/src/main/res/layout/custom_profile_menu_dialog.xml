@@ -5,23 +5,23 @@
     android:padding="15dp"
     android:background="@color/primary">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:text="Edit Profil"
+        android:text="@string/edit_profil"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:id="@+id/custom_profil_menu_dialog_button_edit_profile"
         android:textStyle="bold"/>
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:text="Keluar"
+        android:text="@string/keluar"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/custom_profil_menu_dialog_button_edit_profile"
         android:layout_marginBottom="10dp"

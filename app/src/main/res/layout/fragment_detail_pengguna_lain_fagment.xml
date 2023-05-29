@@ -24,7 +24,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/profile_title"
             android:textSize="16sp"
             android:textColor="@color/primary"
             android:layout_toEndOf="@+id/detail_pengguna_lain_button_back"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_marginEnd="50dp"
-                android:layout_toRightOf="@id/detail_pengguna_lain_foto_profil_user"
+                android:layout_toEndOf="@id/detail_pengguna_lain_foto_profil_user"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -66,7 +66,7 @@
                     android:id="@+id/detail_pengguna_lain_jumlah_teman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
+                    android:text="@string/contoh_jumlah_teman_atau_like"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -74,7 +74,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Friends"
+                    android:text="@string/friends"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -84,7 +84,7 @@
                 android:id="@+id/detail_pengguna_lain_container_jumlah_like"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_toRightOf="@id/detail_pengguna_lain_container_jumlah_teman"
+                android:layout_toEndOf="@id/detail_pengguna_lain_container_jumlah_teman"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -92,7 +92,7 @@
                     android:id="@+id/detail_pengguna_lain_jumlah_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
+                    android:text="@string/contoh_jumlah_teman_atau_like"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -100,7 +100,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Likes"
+                    android:text="@string/likes"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -111,7 +111,7 @@
             android:id="@+id/detail_pengguna_lain_nama_pengguna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dwi Satria Patra"
+            android:text="@string/contoh_nama"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -120,7 +120,7 @@
             android:id="@+id/detail_pengguna_lain_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ini adalah contoh bio" />
+            android:text="@string/contoh_bio" />
     </androidx.appcompat.widget.LinearLayoutCompat>
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,7 +135,7 @@
             android:layout_weight="1"
             android:id="@+id/detail_pengguna_lain_button_ajak"
             android:background="@color/primary"
-            android:text="Ajak"
+            android:text="@string/ajak"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:layout_marginEnd="10dp"
@@ -146,7 +146,7 @@
             android:layout_weight="1"
             android:id="@+id/detail_pengguna_lain_button_tambah_teman"
             android:background="@color/primary"
-            android:text="Tambah teman"
+            android:text="@string/tambah_teman"
             android:textColor="@color/white"
             android:textAllCaps="false"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -155,7 +155,7 @@
             android:layout_weight="1"
             android:id="@+id/detail_pengguna_lain_button_tulis_testimoni"
             android:background="@color/primary"
-            android:text="Tulis testimoni"
+            android:text="@string/tulis_testimoni"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:layout_marginEnd="20dp"

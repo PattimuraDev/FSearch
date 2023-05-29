@@ -22,9 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/form_buat_pengumuman_button_back"
-            android:text="Buat Pengumuman"
+            android:text="@string/buat_pengumuman_title"
             android:layout_centerVertical="true"
             android:textColor="@color/primary"
+            android:layout_toStartOf="@id/form_buat_pengumuman_button_post"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -34,14 +35,14 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="3dp"
             android:background="@drawable/custom_button_not_enabled_layout"
-            android:text="Post"
+            android:text="@string/post"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deskripsi pengumuman"
+        android:text="@string/deskripsi_pengumuman"
         android:layout_marginHorizontal="20dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,7 +60,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/500"
+            android:text="@string/contoh_word_counter"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/form_buat_pengumuman_deskpripsi"
             android:id="@+id/form_buat_pengumuman_word_count"/>
@@ -67,7 +68,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload File"
+        android:text="@string/upload_file"
         android:textColor="@color/primary"
         android:layout_marginStart="20dp"
         android:clickable="true"
