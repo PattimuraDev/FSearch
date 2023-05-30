@@ -190,7 +190,7 @@ class FormUpdateProfileFragment : Fragment() {
             }else{
                 userProfileAwal.dataDiri.asalUniversitas ?: ""
             })
-            form_update_profil_button_status_bersedia.isChecked = userProfileAwal.statusBersediaMenerimaAjakan ?: false
+            form_update_profil_button_status_bersedia.isChecked = userProfileAwal.statusBersediaMenerimaAjakan
             form_update_profil_tahun_angkatan.setText(if(userProfileAwal.dataDiri == null){
                 ""
             }else{
@@ -258,8 +258,7 @@ class FormUpdateProfileFragment : Fragment() {
         dialogView.custom_notification_dialog_message.text = "Profile kamu berhasil diperbarui"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
-        customDialog.window!!.attributes.verticalMargin = 0.2F
+        customDialog.window!!.attributes.verticalMargin = 0.1F
         customDialog.show()
-        customDialog.window!!.setLayout(480, 190)
     }
 }

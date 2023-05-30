@@ -113,7 +113,7 @@ class FormTestimoniFragment : Fragment() {
         dialogView.custom_notification_dialog_message.text = "Testimoni kamu telah berhasil disampaikan"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
-        customDialog.window!!.attributes.verticalMargin = 0.2F
+        customDialog.window!!.attributes.verticalMargin = 0.1F
         customDialog.show()
     }
 

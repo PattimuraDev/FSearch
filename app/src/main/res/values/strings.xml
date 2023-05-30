@@ -119,6 +119,9 @@
     <string name="search_view_toolbar_title">Search View</string>
     <string name="favorite_toolbar_title">Favorite</string>
     <string name="notification_toolbar_title">Notification</string>
+    <string name="terima">Terima</string>
+    <string name="tolak">Tolak</string>
+    <string name="custom_respon_dialog_message_text">Bagaimana respon kamu terhadap ajakan dari Patra?</string>
 
     <!-- custom string array -->
     <string-array name="tema_lomba">

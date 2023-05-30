@@ -9,14 +9,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.custom_notification_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_form_ajakan_bergabung_tim.*
 import kotlinx.android.synthetic.main.fragment_form_pengajuan_diri.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -160,7 +159,7 @@ class FormPengajuanDiriFragment : Fragment() {
         dialogView.custom_notification_dialog_message.text = "Selamat! kamu telah berhasil mengirim pengajuan bergabung ke tim lomba $namaPenerima"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
-        customDialog.window!!.attributes.verticalMargin = 0.2F
+        customDialog.window!!.attributes.verticalMargin = 0.1F
         customDialog.show()
     }
 

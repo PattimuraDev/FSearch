@@ -4,13 +4,12 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.custom_respon_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_detail_notifikasi.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
@@ -42,28 +41,33 @@ class DetailNotifikasiFragment : Fragment() {
      */
     private fun showDialog() {
         val notifikasi = arguments!!.getParcelable("notifikasi") as Notifikasi?
-        val alertDialogBuilder = AlertDialog.Builder(requireContext())
-        if(notifikasi!!.jenisNotifikasi == "pengajuan_bergabung_tim"){
-            alertDialogBuilder.setMessage("Bagaimana respon kamu terhadap permintaan dari ${notifikasi.namaPengirim} untuk bergabung ke tim lombamu?")
-        }else if(notifikasi.jenisNotifikasi == "mengajak_bergabung_tim"){
-            alertDialogBuilder.setMessage("Bagaimana respon kamu terhadap ajakan dari ${notifikasi.namaPengirim}?")
+        val dialogView = layoutInflater.inflate(R.layout.custom_respon_dialog, null)
+        val customDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+        dialogView.custom_respon_dialog_message.text = if(notifikasi!!.jenisNotifikasi == "pengajuan_bergabung_tim"){
+            "Bagaimana respon kamu terhadap permintaan dari ${notifikasi.namaPengirim} untuk bergabung ke tim lombamu?"
+        }else{
+            "Bagaimana respon kamu terhadap ajakan dari ${notifikasi.namaPengirim}?"
         }
-        alertDialogBuilder.setPositiveButton("Ya"){_, _ ->
+        dialogView.custom_respon_dialog_button_terima.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
             bundle.putString("respon", "Terima")
             Navigation.findNavController(requireView()).navigate(R.id.action_detailTawaranAjakanFragment_to_formBalasanFragment, bundle)
+            customDialog.dismiss()
         }
-        alertDialogBuilder.setNegativeButton("Tidak"){ _, _ ->
+        dialogView.custom_respon_dialog_button_tolak.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
             bundle.putString("respon", "Tolak")
             Navigation.findNavController(requireView()).navigate(R.id.action_detailTawaranAjakanFragment_to_formBalasanFragment, bundle)
+            customDialog.dismiss()
         }
-
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.setCancelable(true)
-        alertDialog.show()
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        customDialog.window!!.attributes.gravity = Gravity.CENTER
+        customDialog.show()
     }
 
     /**

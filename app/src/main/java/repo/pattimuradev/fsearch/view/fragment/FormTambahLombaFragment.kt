@@ -237,8 +237,7 @@ class FormTambahLombaFragment : Fragment() {
         dialogView.custom_notification_dialog_message.text = "Selamat! Kamu berhasil menginputkan suatu lomba"
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customDialog.window!!.attributes.gravity = Gravity.TOP
-        customDialog.window!!.attributes.x = 50
-        customDialog.window!!.attributes.y = 50
+        customDialog.window!!.attributes.verticalMargin = 0.1F
         customDialog.show()
     }
 
