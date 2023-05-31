@@ -22,6 +22,8 @@ class ChatRepository {
     val allMessageFromSpesificChatRoomLiveData: LiveData<List<Chat>> = allMessageFromSpesificChatRoom
     private val newEmptyChatRoom = MutableLiveData<ChatRoom>()
     val newEmptyChatRoomLiveData:LiveData<ChatRoom> = newEmptyChatRoom
+    private val jumlahPesanBelumDibacaUser = MutableLiveData<Int>()
+    val jumlahPesanBelumDibacaUserLiveData: LiveData<Int> = jumlahPesanBelumDibacaUser
 
     /**
      * Fungsi untuk mendapatkan list semua ruang obrolan/chat room
@@ -57,6 +59,29 @@ class ChatRepository {
                 val chatRoom = snapshot.toObject(ChatRoom::class.java)
                 val listChat = ObjectSorter.chatSorter(chatRoom!!.listChat)
                 allMessageFromSpesificChatRoom.postValue(listChat)
+            }
+    }
+
+    /**
+     * Fungsi untuk mendapatkan jumlah pesan belum dibaca oleh pengguna saat ini
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param currentUserid id dari pengguna yang sedang menggunakan aplikasi
+     */
+    fun getMessageNotReadByCurrentUser(currentUserid: String){
+        firestoreDb.collection("chat_room")
+            .get()
+            .addOnSuccessListener {
+                var notReadCounts = 0
+                it.forEach { chatRoomSnapshot ->
+                    val chatRoom = chatRoomSnapshot.toObject(ChatRoom::class.java)
+                    val currentUserPosition = chatRoom.personInChat.indexOf(currentUserid)
+                    notReadCounts += if(currentUserPosition == 0){
+                        chatRoom.messageNotReadByPersonOne
+                    }else{
+                        chatRoom.messageNotReadByPersonTwo
+                    }
+                }
+                jumlahPesanBelumDibacaUser.postValue(notReadCounts)
             }
     }
 

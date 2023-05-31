@@ -32,7 +32,7 @@ class TestimoniAdapter: RecyclerView.Adapter<TestimoniAdapter.ViewHolder>() {
             viewpager_profile_rv_testimoni_asal_universitas_pengirim.text = listTestimoni!![position].asalUniversitasPengirim
             viewpager_profile_rv_testimoni_tahun_angkatan_pengirim.text = listTestimoni!![position].tahunAngkatanPengirim.toString()
             viewpager_profile_rv_testimoni_riwayat_posting.text = DateAndTimeHandler.getTimeAgo(listTestimoni!![position].riwayatPosting!!)
-            viewpager_profile_rv_testimoni_rating_testimoni.rating = listTestimoni!![position].rating!!
+            viewpager_profile_rv_testimoni_rating_testimoni.rating = listTestimoni!![position].rating
             viewpager_profile_rv_testimoni_deskripsi_testimoni.text = listTestimoni!![position].deskripsi
             Glide.with(viewpager_profile_rv_testimoni_foto_pengirim.context)
                 .load(listTestimoni!![position].urlFotoPengirim)

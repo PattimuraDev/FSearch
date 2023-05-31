@@ -9,17 +9,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.view.adapter.PengumumanAdapter
+import repo.pattimuradev.fsearch.viewmodel.NotifikasiViewModel
 import repo.pattimuradev.fsearch.viewmodel.PengumumanViewModel
+import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var pengumumanAdapter: PengumumanAdapter
     private val pengumumanViewModel: PengumumanViewModel by viewModels()
+    private val notifikasiViewModel: NotifikasiViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +48,6 @@ class HomeFragment : Fragment() {
      * @author PattimuraDev (Dwi Satria Patra)
      */
     private fun initView() {
-        initPengumumanAdapter()
         home_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
         home_action_bar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
@@ -73,6 +78,26 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+
+        val badgeDrawable = BadgeDrawable.create(requireContext())
+        userViewModel.currentUser.observe(viewLifecycleOwner){ currentUser ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                notifikasiViewModel.getJumlahNotifikasiBelumDirespon(currentUser.uid)
+            }
+            notifikasiViewModel.jumlahNotifikasiBelumDirespon.observe(viewLifecycleOwner){ jumlah ->
+                if(jumlah == 0){
+                    badgeDrawable.isVisible = false
+                }else{
+                    badgeDrawable.isVisible = true
+                    badgeDrawable.backgroundColor = resources.getColor(R.color.secondary_one, null)
+                    badgeDrawable.number = jumlah
+                }
+            }
+        }
+        val toolbar = home_action_bar
+        BadgeUtils.attachBadgeDrawable(badgeDrawable, toolbar, R.id.go_to_notification)
+
+        initPengumumanAdapter()
     }
 
     /**

@@ -1,15 +1,14 @@
 package repo.pattimuradev.fsearch.view.fragment.viewpager
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_view_pager_lomba_favorit.*
 import repo.pattimuradev.fsearch.R
-import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.misc.LombaClickListener
 import repo.pattimuradev.fsearch.model.Lomba
 import repo.pattimuradev.fsearch.view.adapter.LombaAdapter
@@ -48,10 +47,8 @@ class ViewPagerLombaFavoritFragment : Fragment(), LombaClickListener {
                 lombaAdapter.setCurrentUserIdInAdapter(currentUser.uid)
                 val listLombaFavorit = mutableListOf<Lomba>()
                 for(i in listLomba){
-                    if(i.likedByUserId != null){
-                        if(i.likedByUserId.contains(currentUser.uid)){
-                            listLombaFavorit.add(i)
-                        }
+                    if(i.likedByUserId.contains(currentUser.uid)){
+                        listLombaFavorit.add(i)
                     }
                 }
                 lombaAdapter.setCurrentUserIdInAdapter(currentUser.uid)

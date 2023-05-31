@@ -17,7 +17,6 @@ import repo.pattimuradev.fsearch.misc.DateAndTimeHandler
 import repo.pattimuradev.fsearch.model.Lomba
 import repo.pattimuradev.fsearch.viewmodel.LombaViewModel
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailLombaFragment : Fragment() {
@@ -71,11 +70,7 @@ class DetailLombaFragment : Fragment() {
         }
 
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
-            detail_lomba_button_like.isSelected = if(lomba.likedByUserId == null){
-                false
-            }else{
-                lomba.likedByUserId.contains(userProfile.id)
-            }
+            detail_lomba_button_like.isSelected = lomba.likedByUserId.contains(userProfile.id)
 
             detail_lomba_button_like.setOnClickListener {
                 detail_lomba_button_like.isSelected = !detail_lomba_button_like.isSelected

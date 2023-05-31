@@ -49,11 +49,7 @@ class LombaAdapter(private val lombaClickListener: LombaClickListener): Recycler
                 .error(R.drawable.no_image_available)
                 .into(rv_lomba_poster_lomba)
 
-            rv_lomba_button_like.isSelected = if(listLomba!![position].likedByUserId == null){
-                false
-            }else{
-                listLomba!![position].likedByUserId!!.contains(currentUserId)
-            }
+            rv_lomba_button_like.isSelected = listLomba!![position].likedByUserId.contains(currentUserId)
 
             rv_lomba_container.setOnClickListener {
                 lombaClickListener.clickOnDaftarLombaBody(listLomba!![position], position)

@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
-import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.model.EmailVerification
 import repo.pattimuradev.fsearch.viewmodel.UserViewModel
 import uk.co.jakebreen.sendgridandroid.SendGrid

@@ -19,6 +19,8 @@ class NotifikasiRepository {
     val addNotifikasiStatusLiveData : LiveData<String> = addNotifikasiStatus
     private val listNotifikasi = MutableLiveData<List<Notifikasi>>()
     val listNotifikasiLiveData: LiveData<List<Notifikasi>> = listNotifikasi
+    private val jumlahNotifikasiNotResponded = MutableLiveData<Int>()
+    val jumlahNotifikasiNotRespondedLiveData: LiveData<Int> = jumlahNotifikasiNotResponded
 
     /**
      * Fungsi untuk menambahkan notifikasi ke firebase
@@ -115,6 +117,27 @@ class NotifikasiRepository {
                     }
                 }
                 listNotifikasi.postValue(listNotifikasiResult)
+            }
+    }
+
+    /**
+     * Fungsi untuk mendapatkan jumlah notifikasi belum direspon oleh user tertentu
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param idPenerimaNotifikasi id dari user yang menerima notifikasi
+     */
+    suspend fun getJumlahNotifikasiBelumDirespon(idPenerimaNotifikasi: String){
+        firestoreDb.collection("notifikasi")
+            .addSnapshotListener{ value, _ ->
+                var jumlah = 0
+                if(!value!!.isEmpty){
+                    value.forEach { item ->
+                        val notifikasi = item.toObject(Notifikasi::class.java)
+                        if(notifikasi.idPenerima == idPenerimaNotifikasi && notifikasi.responded == false){
+                            jumlah++
+                        }
+                    }
+                }
+                jumlahNotifikasiNotResponded.postValue(jumlah)
             }
     }
 

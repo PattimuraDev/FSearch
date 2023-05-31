@@ -1,13 +1,12 @@
 package repo.pattimuradev.fsearch.view.fragment.viewpager
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_view_pager_testimoni.*
 import kotlinx.android.synthetic.main.fragment_view_pager_testimoni_pengguna_lain.*
 import repo.pattimuradev.fsearch.R
 import repo.pattimuradev.fsearch.view.adapter.TestimoniAdapter

@@ -9,6 +9,7 @@ class ChatViewModel: ViewModel() {
     val allChatRoom = chatRepository.allChatRoomLiveData
     val allMessageFromAChatRoom = chatRepository.allMessageFromSpesificChatRoomLiveData
     val newEmptyChatRoom = chatRepository.newEmptyChatRoomLiveData
+    val jumlahPesanBelumDibacaUser = chatRepository.jumlahPesanBelumDibacaUserLiveData
 
     suspend fun getAllChatRoom(idCurrentUser: String) = chatRepository.getAllChatRoom(idCurrentUser)
     suspend fun sendMessage(
@@ -29,5 +30,6 @@ class ChatViewModel: ViewModel() {
         namaPersonTwo: String,
         chatSendingTime: Long
     ) = chatRepository.addEmptyChatRoom(idPersonOne, idPersonTwo, fotoUrlPersonOne, fotoUrlPersonTwo, namaPersonOne, namaPersonTwo, chatSendingTime)
+    suspend fun getJumlahPesanBelumDibacaUser(idCurrentUser: String) = chatRepository.getMessageNotReadByCurrentUser(idCurrentUser)
 
 }
