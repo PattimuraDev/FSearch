@@ -60,7 +60,14 @@
         android:id="@+id/chatFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_ruangObrolanFragment"
+            app:destination="@id/ruangObrolanFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_chatDaftarPenggunaFragment"
+            app:destination="@id/chatDaftarPenggunaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="repo.pattimuradev.fsearch.view.fragment.ProfileFragment"
@@ -189,5 +196,23 @@
         <action
             android:id="@+id/action_formTestimoniFragment_to_detailPenggunaLainFagment"
             app:destination="@id/detailPenggunaLainFagment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ruangObrolanFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.RuangObrolanFragment"
+        android:label="fragment_ruang_obrolan"
+        tools:layout="@layout/fragment_ruang_obrolan" >
+        <action
+            android:id="@+id/action_ruangObrolanFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatDaftarPenggunaFragment"
+        android:name="repo.pattimuradev.fsearch.view.fragment.ChatDaftarPenggunaFragment"
+        android:label="fragment_chat_daftar_pengguna"
+        tools:layout="@layout/fragment_chat_daftar_pengguna" >
+        <action
+            android:id="@+id/action_chatDaftarPenggunaFragment_to_ruangObrolanFragment"
+            app:destination="@id/ruangObrolanFragment" />
     </fragment>
 </navigation>

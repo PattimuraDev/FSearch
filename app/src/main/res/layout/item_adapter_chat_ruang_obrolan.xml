@@ -1,0 +1,36 @@
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/rv_chat_layout_sebelah_kiri"
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_chat_message_sebelah_kiri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/contoh_pesan_pada_halaman_chat"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/rv_chat_layout_sebelah_kanan"
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rv_chat_message_sebelah_kanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:text="@string/contoh_pesan_pada_halaman_chat"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -122,6 +122,13 @@
     <string name="terima">Terima</string>
     <string name="tolak">Tolak</string>
     <string name="custom_respon_dialog_message_text">Bagaimana respon kamu terhadap ajakan dari Patra?</string>
+    <string name="contoh_pesan_chat">Contoh Pesan Chat</string>
+    <string name="badge_message_not_read">2</string>
+    <string name="chat_title">Chat</string>
+    <string name="add">Add</string>
+    <string name="format_waktu_chat">13.15</string>
+    <string name="message_here">Message here</string>
+    <string name="contoh_pesan_pada_halaman_chat">Contoh pesan pada halaman chat</string>
 
     <!-- custom string array -->
     <string-array name="tema_lomba">

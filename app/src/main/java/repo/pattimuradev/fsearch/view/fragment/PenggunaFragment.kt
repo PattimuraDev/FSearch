@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_pengguna.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import repo.pattimuradev.fsearch.R
-import repo.pattimuradev.fsearch.misc.CustomObserver.observeOnce
 import repo.pattimuradev.fsearch.misc.DaftarPenggunaClickListener
 import repo.pattimuradev.fsearch.model.UserProfile
 import repo.pattimuradev.fsearch.view.adapter.DaftarPenggunaAdapter
@@ -92,14 +90,19 @@ class PenggunaFragment : Fragment(), DaftarPenggunaClickListener{
             userViewModel.getAllUser()
         }
 
-        userViewModel.currentUserProfile.observe(viewLifecycleOwner){
-            daftarPenggunaAdapter.setUserId(it.id!!)
+        userViewModel.currentUserProfile.observe(viewLifecycleOwner){ currentUserProfile ->
+            daftarPenggunaAdapter.setUserId(currentUserProfile.id!!)
             daftarPenggunaAdapter.notifyDataSetChanged()
-        }
-
-        userViewModel.allUser.observe(viewLifecycleOwner){
-            daftarPenggunaAdapter.setListPengguna(it)
-            daftarPenggunaAdapter.notifyDataSetChanged()
+            userViewModel.allUser.observe(viewLifecycleOwner){ listUser ->
+                val result = mutableListOf<UserProfile>()
+                for(i in listUser){
+                    if(i.id!! != currentUserProfile.id){
+                        result += i
+                    }
+                }
+                daftarPenggunaAdapter.setListPengguna(result)
+                daftarPenggunaAdapter.notifyDataSetChanged()
+            }
         }
     }
 

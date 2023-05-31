@@ -126,8 +126,8 @@ class UserRepository {
                 "dataDiri.asalKota" to userProfile.dataDiri.asalKota,
                 "dataDiri.kepribadian" to userProfile.dataDiri.kepribadian,
                 "urlFoto" to userProfile.urlFoto
+                )
             )
-        )
             .addOnSuccessListener {
                 firestoreDb.collection("user_profile")
                     .document(currentUser.value!!.uid)
@@ -203,7 +203,6 @@ class UserRepository {
                     currentUserFotoProfilUrl.postValue(null)
                 }
             }
-
         }else{
             firestoreDb.collection("user_profile")
                 .document(currentUser.value!!.uid)
@@ -222,7 +221,6 @@ class UserRepository {
      * untuk mengaktivasi dan mendaftarkan email tersebut ke dalam sistem
      */
     suspend fun saveOtpEmail(emailVerification: EmailVerification){
-
         firebaseAuth.fetchSignInMethodsForEmail(emailVerification.email)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful){
@@ -421,11 +419,11 @@ class UserRepository {
                                 .get()
                                 .addOnSuccessListener { _userProfile ->
                                     var totalJumlahAngkaRating = 0.0F
-                                    val _userProfileTarget = _userProfile.toObject(UserProfile::class.java)
-                                    for(i in _userProfileTarget!!.testimoni){
+                                    val userProfileTargetValue = _userProfile.toObject(UserProfile::class.java)
+                                    for(i in userProfileTargetValue!!.testimoni){
                                         totalJumlahAngkaRating += i.rating
                                     }
-                                    val ratingKeseluruhan = totalJumlahAngkaRating / _userProfileTarget.testimoni.size
+                                    val ratingKeseluruhan = totalJumlahAngkaRating / userProfileTargetValue.testimoni.size
                                     firestoreDb.collection("user_profile")
                                         .document(idUserTarget)
                                         .update(mapOf(

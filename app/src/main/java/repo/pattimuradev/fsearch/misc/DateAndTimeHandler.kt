@@ -137,6 +137,19 @@ object DateAndTimeHandler {
     }
 
     /**
+     * Fungsi untuk mendapatkan format tanggal chat terakhir dikirim
+     * @author PattimuraDev (Dwi Satria Patra)
+     * @param millisecond nilai milisecond dari object Date
+     * @return String - hasil format tanggal
+     */
+    fun formatWaktuChatDikirim(millisecond: Long): String{
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = millisecond
+        val jamMenitDateFormat = SimpleDateFormat("HH:mm")
+        return jamMenitDateFormat.format(calendar.time)
+    }
+
+    /**
      * Fungsi untuk mendapatkan format tanggal posting yang benar pada halaman detail notifikasi
      * @author PattimuraDev (Dwi Satria Patra)
      * @param millisecond nilai milisecond dari object Date
@@ -158,8 +171,6 @@ object DateAndTimeHandler {
         val namaBulan = nameOfMonthFromNumber(calendar.get(Calendar.MONTH))
         val tahun = tahunDateFormat.format(calendar.time)
         val jamMenit = jamMenitDateFormat.format(calendar.time)
-
-
         val hasilAmPm = if(jam.toInt() >= 12){
             "PM"
         }else{
@@ -167,6 +178,5 @@ object DateAndTimeHandler {
         }
 
         return "$tanggal $namaBulan $tahun // $jamMenit $hasilAmPm"
-
     }
 }
