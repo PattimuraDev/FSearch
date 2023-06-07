@@ -408,10 +408,28 @@ class UserRepository {
             .addOnSuccessListener { userProfile ->
                 val userProfileTarget = userProfile.toObject(UserProfile::class.java)
                 if(userProfileTarget!!.teamHistory.contains(currentUser.value!!.uid)){
+                    val listTestimoni = userProfileTarget.testimoni
+                    if(listTestimoni.isEmpty()){
+                        listTestimoni.add(testimoni)
+                    }else{
+                        var oldTestimoni: Testimoni? = null
+                        for(item in listTestimoni){
+                            if(item.idPengirim == testimoni.idPengirim){
+                                oldTestimoni = item
+                            }
+                        }
+                        if(oldTestimoni == null){
+                            listTestimoni.add(testimoni)
+                        }else{
+                            val indeksOfOldTestimoni = listTestimoni.indexOf(oldTestimoni)
+                            listTestimoni[indeksOfOldTestimoni] = testimoni
+                        }
+
+                    }
                     firestoreDb.collection("user_profile")
                         .document(idUserTarget)
                         .update(mapOf(
-                            "testimoni" to FieldValue.arrayUnion(testimoni)
+                            "testimoni" to listTestimoni
                         ))
                         .addOnSuccessListener {
                             firestoreDb.collection("user_profile")

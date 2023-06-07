@@ -10,6 +10,7 @@ import java.util.*
  */
 @Parcelize
 data class Testimoni(
+    val idPengirim: String = "",
     val riwayatPosting: Long? = null,
     val urlFotoPengirim: String? = null,
     val namaPengirim: String? = null,
@@ -17,5 +18,5 @@ data class Testimoni(
     val asalUniversitasPengirim: String? = null,
     val tahunAngkatanPengirim: Int? = null,
     val rating: Float = 0.0F,
-    val deskripsi: String = "",
+    val deskripsi: String = ""
 ): Parcelable

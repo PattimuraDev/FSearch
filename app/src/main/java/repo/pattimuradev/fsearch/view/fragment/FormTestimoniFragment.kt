@@ -54,6 +54,7 @@ class FormTestimoniFragment : Fragment() {
         val deskripsiTestimoni = form_testimoni_deskripsi.text.toString().trim()
         val rating = form_testimoni_rating_bar.rating
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){ currentUserProfile ->
+            val idPengirim = currentUserProfile.id
             val riwayatPosting = DateAndTimeHandler.currentDate().time
             val urlFotoPengirim = currentUserProfile.urlFoto
             val namaPengirim = currentUserProfile.nama
@@ -74,6 +75,7 @@ class FormTestimoniFragment : Fragment() {
             }
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
                 userViewModel.addTestimoni(profilePenggunaLain!!.id!!, Testimoni(
+                    idPengirim!!,
                     riwayatPosting,
                     urlFotoPengirim,
                     namaPengirim,
