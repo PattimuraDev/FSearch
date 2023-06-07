@@ -79,6 +79,7 @@ class FormTambahLombaFragment : Fragment() {
                     val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.getNumericValue().toString()
                     val deskripsiLomba = form_tambah_lomba_deskripsi_pengumuman.text.toString().trim()
                     val temaLomba = form_tambah_lomba_tema_lomba.text.toString().trim()
+                    val linkLomba = form_tambah_lomba_link_lomba.text.toString().trim()
 
                     form_tambah_lomba_button_publish.isEnabled = penyelenggaraLomba.isNotEmpty() &&
                             judulLomba.isNotEmpty() &&
@@ -87,6 +88,7 @@ class FormTambahLombaFragment : Fragment() {
                             biayaPendaftaran.isNotEmpty() &&
                             deskripsiLomba.isNotEmpty() &&
                             temaLomba.isNotEmpty() &&
+                            linkLomba.isNotEmpty() &&
                             form_tambah_lomba_radio_group_tingkatan_lomba.checkedRadioButtonId != -1 &&
                             form_tambah_lomba_radio_group_kategori_pembuat_lomba.checkedRadioButtonId != -1
                     if(form_tambah_lomba_button_publish.isEnabled){
