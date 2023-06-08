@@ -69,10 +69,10 @@ class ChatFragment : Fragment() {
         chat_rv_chat_room.layoutManager = LinearLayoutManager(requireContext())
         chat_rv_chat_room.adapter = chatRoomAdapter
 
-        userViewModel.currentUserProfile.observe(viewLifecycleOwner){ userProfile ->
-            chatRoomAdapter.setCurrentUserId(userProfile.id!!)
+        userViewModel.currentUser.observe(viewLifecycleOwner){ userProfile ->
+            chatRoomAdapter.setCurrentUserId(userProfile.uid)
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
-                chatViewModel.getAllChatRoom(userProfile.id)
+                chatViewModel.getAllChatRoom(userProfile.uid)
             }
         }
 

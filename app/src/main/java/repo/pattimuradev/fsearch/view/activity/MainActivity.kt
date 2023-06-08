@@ -37,19 +37,21 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = main_bottom_navigation
 
         userViewModel.currentUser.observe(this@MainActivity){ currentUser ->
-            this.lifecycleScope.launch(Dispatchers.IO){
-                chatViewModel.getJumlahPesanBelumDibacaUser(currentUser.uid)
-            }
-            chatViewModel.jumlahPesanBelumDibacaUser.observe(this@MainActivity){ jumlahPesanBelumDibaca ->
-                val navBar = main_bottom_navigation
-                val badge = navBar.getOrCreateBadge(R.id.chatFragment)
-                if(jumlahPesanBelumDibaca != 0){
-                    badge.isVisible = true
-                    badge.backgroundColor = resources.getColor(R.color.primary, null)
-                    badge.badgeTextColor = resources.getColor(R.color.white, null)
-                    badge.number = jumlahPesanBelumDibaca
-                }else{
-                    badge.isVisible = false
+            if(currentUser != null){
+                this.lifecycleScope.launch(Dispatchers.IO){
+                    chatViewModel.getJumlahPesanBelumDibacaUser(currentUser.uid)
+                }
+                chatViewModel.jumlahPesanBelumDibacaUser.observe(this@MainActivity){ jumlahPesanBelumDibaca ->
+                    val navBar = main_bottom_navigation
+                    val badge = navBar.getOrCreateBadge(R.id.chatFragment)
+                    if(jumlahPesanBelumDibaca != 0){
+                        badge.isVisible = true
+                        badge.backgroundColor = resources.getColor(R.color.primary, null)
+                        badge.badgeTextColor = resources.getColor(R.color.white, null)
+                        badge.number = jumlahPesanBelumDibaca
+                    }else{
+                        badge.isVisible = false
+                    }
                 }
             }
         }

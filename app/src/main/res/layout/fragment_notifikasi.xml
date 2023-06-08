@@ -5,35 +5,39 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.NotifikasiFragment">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/notifikasi_action_bar_container"
-        android:layout_marginBottom="10dp">
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
+        android:id="@+id/notifikasi_action_bar"
+        android:layout_marginHorizontal="10dp"
+        android:layout_height="?attr/actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/back_icon"
-            android:backgroundTint="@color/white"
-            android:layout_alignParentStart="true"
-            android:id="@+id/notifikasi_button_back"
-            android:layout_marginEnd="25dp"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notifikasi_title"
-            android:textSize="16sp"
-            android:textColor="@color/primary"
-            android:layout_toEndOf="@+id/notifikasi_button_back"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
+            android:padding="10dp">
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_icon"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentStart="true"
+                android:id="@+id/notifikasi_button_back"
+                android:layout_marginEnd="25dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notifikasi_title"
+                android:textSize="16sp"
+                android:textColor="@color/primary"
+                android:layout_toEndOf="@+id/notifikasi_button_back"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notifikasi_rv_notifikasi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/notifikasi_action_bar_container"/>
+        android:layout_below="@id/notifikasi_action_bar"/>
 
 </RelativeLayout>

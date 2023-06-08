@@ -46,7 +46,7 @@ class ChatRoomAdapter(private val onClick : (ChatRoom, Int) -> Unit) : RecyclerV
                     .load(listChatRoom!![position].fotoUrlPersonTwo)
                     .error(R.drawable.standard_user_photo)
                     .into(rv_chat_room_foto_user_pengirim)
-            }else{
+            }else if(posisiCurrentUser == 1){
                 rv_chat_room_nama_pengirim.text = listChatRoom!![position].namaPersonOne
                 if(listChatRoom!![position].messageNotReadByPersonTwo == 0){
                     rv_chat_room_badge_message_not_read.isInvisible = true

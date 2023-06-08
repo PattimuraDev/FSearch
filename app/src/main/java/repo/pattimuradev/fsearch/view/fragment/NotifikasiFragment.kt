@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import kotlinx.android.synthetic.main.fragment_notifikasi.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,10 +39,52 @@ class NotifikasiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initNotifikasiAdapter()
+        initActionBar()
         notifikasi_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_notifikasiFragment_to_homeFragment)
         }
+    }
+
+    /**
+     * Fungsi untuk menginisiasi action bar pada halaman notifikasi
+     * @author PattimuraDev (Dwi Satria Patra)
+     */
+    private fun initActionBar() {
+        notifikasi_action_bar.inflateMenu(R.menu.custom_fragment_toolbar_menu)
+        notifikasi_action_bar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.search_view -> {
+                    true
+                }
+                R.id.go_to_notification -> {
+                    true
+                }
+                R.id.go_to_favorit -> {
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val badgeDrawable = BadgeDrawable.create(requireContext())
+        userViewModel.currentUser.observe(viewLifecycleOwner){ currentUser ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+                notifikasiViewModel.getJumlahNotifikasiBelumDirespon(currentUser.uid)
+            }
+            notifikasiViewModel.jumlahNotifikasiBelumDirespon.observe(viewLifecycleOwner){ jumlah ->
+                if(jumlah == 0){
+                    badgeDrawable.isVisible = false
+                }else{
+                    badgeDrawable.isVisible = true
+                    badgeDrawable.backgroundColor = resources.getColor(R.color.secondary_one, null)
+                    badgeDrawable.number = jumlah
+                }
+            }
+        }
+        val toolbar = notifikasi_action_bar
+        BadgeUtils.attachBadgeDrawable(badgeDrawable, toolbar, R.id.go_to_notification)
+
+        initNotifikasiAdapter()
     }
 
     /**

@@ -62,7 +62,7 @@ class RegisterCodeVerificationActivity : AppCompatActivity() {
                                         Toast.makeText(this@RegisterCodeVerificationActivity, "Registrasi berhasil", Toast.LENGTH_LONG).show()
                                         startActivity(Intent(this@RegisterCodeVerificationActivity, LoginActivity::class.java))
                                     }else{
-                                        Toast.makeText(this@RegisterCodeVerificationActivity, "Registrasi gagal", Toast.LENGTH_LONG).show()
+                                        //Toast.makeText(this@RegisterCodeVerificationActivity, "Registrasi gagal", Toast.LENGTH_LONG).show()
                                     }
                                 }
                             }

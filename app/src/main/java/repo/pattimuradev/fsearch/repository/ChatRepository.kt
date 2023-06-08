@@ -70,15 +70,17 @@ class ChatRepository {
     fun getMessageNotReadByCurrentUser(currentUserid: String){
         firestoreDb.collection("chat_room")
             .get()
-            .addOnSuccessListener {
+            .addOnSuccessListener { listChatRoomSnapshot ->
                 var notReadCounts = 0
-                it.forEach { chatRoomSnapshot ->
+                listChatRoomSnapshot.forEach { chatRoomSnapshot ->
                     val chatRoom = chatRoomSnapshot.toObject(ChatRoom::class.java)
-                    val currentUserPosition = chatRoom.personInChat.indexOf(currentUserid)
-                    notReadCounts += if(currentUserPosition == 0){
-                        chatRoom.messageNotReadByPersonOne
-                    }else{
-                        chatRoom.messageNotReadByPersonTwo
+                    if(chatRoom.personInChat.contains(currentUserid)){
+                        val currentUserPosition = chatRoom.personInChat.indexOf(currentUserid)
+                        notReadCounts += if(currentUserPosition == 0){
+                            chatRoom.messageNotReadByPersonOne
+                        }else{
+                            chatRoom.messageNotReadByPersonTwo
+                        }
                     }
                 }
                 jumlahPesanBelumDibacaUser.postValue(notReadCounts)
@@ -129,8 +131,8 @@ class ChatRepository {
             chatSendingTime,
             0,
             0,
-            fotoUrlPersonOne!!,
-            fotoUrlPersonTwo!!,
+            fotoUrlPersonOne,
+            fotoUrlPersonTwo,
             namaPersonOne!!,
             namaPersonTwo!!
         )

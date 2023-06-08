@@ -36,6 +36,9 @@ class ChatDaftarPenggunaFragment : Fragment(), DaftarPenggunaClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        chat_daftar_pengguna_button_back.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_chatDaftarPenggunaFragment_to_chatFragment)
+        }
         initAdapter()
     }
 
