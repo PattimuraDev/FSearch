@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -43,6 +44,11 @@ class FormTestimoniFragment : Fragment() {
         form_testimoni_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_formTestimoniFragment_to_detailPenggunaLainFagment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_formTestimoniFragment_to_detailPenggunaLainFagment)
+            }
+        })
     }
 
     /**

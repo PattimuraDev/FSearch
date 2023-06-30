@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        // tombol back di non aktifkan
-    }
+//    override fun onBackPressed() {
+//        // tombol back di non aktifkan
+//    }
 }

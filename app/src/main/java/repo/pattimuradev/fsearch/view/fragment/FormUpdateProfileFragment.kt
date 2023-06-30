@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,6 +42,11 @@ class FormUpdateProfileFragment : Fragment() {
         form_update_profil_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_formUpdateProfileFragment_to_profileFragment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_formUpdateProfileFragment_to_profileFragment)
+            }
+        })
         initDataAwal()
         form_update_profil_foto_user.setOnClickListener {
             handleTakeImage()

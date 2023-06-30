@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -47,6 +48,11 @@ class FormAjakanBergabungTimFragment : Fragment() {
         form_ajakan_bergabung_tim_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_formAjakanBergabungTimFragment_to_detailPenggunaLainFagment)
+            }
+        })
         form_ajakan_bergabung_tim_button_upload_file.setOnClickListener {
             handleTakeImage()
         }

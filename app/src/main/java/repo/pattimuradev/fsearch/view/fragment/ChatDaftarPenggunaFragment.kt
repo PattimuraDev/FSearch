@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +40,14 @@ class ChatDaftarPenggunaFragment : Fragment(), DaftarPenggunaClickListener {
         chat_daftar_pengguna_button_back.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_chatDaftarPenggunaFragment_to_chatFragment)
         }
+
+        // handle back button
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.action_chatDaftarPenggunaFragment_to_chatFragment)
+            }
+        })
+
         initAdapter()
     }
 

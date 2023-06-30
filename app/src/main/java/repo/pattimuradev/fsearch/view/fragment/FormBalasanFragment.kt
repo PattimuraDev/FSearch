@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
@@ -42,8 +43,15 @@ class FormBalasanFragment : Fragment() {
         form_balasan_button_back.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
-            Navigation.findNavController(view).navigate(R.id.action_formBalasanFragment_to_detailTawaranAjakanFragment, bundle)
+            Navigation.findNavController(view).navigate(R.id.action_formBalasanFragment_to_detailNotifikasiFragment, bundle)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val bundle = Bundle()
+                bundle.putParcelable("notifikasi", notifikasi)
+                Navigation.findNavController(view).navigate(R.id.action_formBalasanFragment_to_detailNotifikasiFragment, bundle)
+            }
+        })
         form_balasan_button_kirim.setOnClickListener {
             handleBalasan(notifikasi!!, respon)
         }
@@ -117,7 +125,7 @@ class FormBalasanFragment : Fragment() {
             if(it == "OK"){
                 val bundle = Bundle()
                 bundle.putParcelable("notifikasi", notifikasi)
-                Navigation.findNavController(requireView()).navigate(R.id.action_formBalasanFragment_to_detailTawaranAjakanFragment, bundle)
+                Navigation.findNavController(requireView()).navigate(R.id.action_formBalasanFragment_to_detailNotifikasiFragment, bundle)
                 showCustomDialog()
             }else{
                 Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()

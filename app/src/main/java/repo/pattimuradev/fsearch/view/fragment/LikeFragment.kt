@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayoutMediator
@@ -28,6 +29,11 @@ class LikeFragment : Fragment() {
         like_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_likeFragment_to_homeFragment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_likeFragment_to_homeFragment)
+            }
+        })
         initRecyclerView()
     }
 

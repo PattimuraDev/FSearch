@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -28,8 +29,13 @@ class DetailNotifikasiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initData()
         detail_notifikasi_button_back.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_detailTawaranAjakanFragment_to_notifikasiFragment)
+            Navigation.findNavController(view).navigate(R.id.action_detailNotifikasiFragment_to_notifikasiFragment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_detailNotifikasiFragment_to_notifikasiFragment)
+            }
+        })
         detail_notifikasi_button_respon.setOnClickListener {
             showDialog()
         }
@@ -55,14 +61,14 @@ class DetailNotifikasiFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
             bundle.putString("respon", "Terima")
-            Navigation.findNavController(requireView()).navigate(R.id.action_detailTawaranAjakanFragment_to_formBalasanFragment, bundle)
+            Navigation.findNavController(requireView()).navigate(R.id.action_detailNotifikasiFragment_to_formBalasanFragment, bundle)
             customDialog.dismiss()
         }
         dialogView.custom_respon_dialog_button_tolak.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("notifikasi", notifikasi)
             bundle.putString("respon", "Tolak")
-            Navigation.findNavController(requireView()).navigate(R.id.action_detailTawaranAjakanFragment_to_formBalasanFragment, bundle)
+            Navigation.findNavController(requireView()).navigate(R.id.action_detailNotifikasiFragment_to_formBalasanFragment, bundle)
             customDialog.dismiss()
         }
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

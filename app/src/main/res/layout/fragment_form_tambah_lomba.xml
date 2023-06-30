@@ -134,23 +134,13 @@
             android:layout_height="wrap_content"
             android:text="@string/tema_lomba"
             android:layout_marginStart="20dp"/>
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.AppCompatSpinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:hint="@string/tema_lomba"
-                android:id="@+id/form_tambah_lomba_tema_lomba"/>
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/form_tambah_lomba_spinner_tema_lomba"
-                android:layout_gravity="center_vertical"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/form_tambah_lomba_spinner_tema_lomba"
+            android:layout_gravity="center_vertical"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,13 +158,24 @@
             android:layout_height="wrap_content"
             android:text="@string/tanggal_pelaksanaan"
             android:layout_marginStart="20dp"/>
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tanggal_pelaksanaan"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="10dp"
-            android:id="@+id/form_tambah_lomba_tanggal_pelaksanaan"/>
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/form_tambah_lomba_button_calendar"
+                android:src="@drawable/calendar_icon"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/masukkan_tanggal"
+                android:id="@+id/form_tambah_lomba_tanggal_pelaksanaan"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -192,13 +193,6 @@
             android:layout_height="wrap_content"
             android:text="@string/biaya_pendaftaran"
             android:layout_marginStart="20dp"/>
-<!--        <androidx.appcompat.widget.AppCompatEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="20dp"-->
-<!--            android:id="@+id/form_tambah_lomba_biaya_pendaftaran"-->
-<!--            android:hint="Masukkan Biaya (hanya angka)"-->
-<!--            android:layout_marginBottom="10dp"/>-->
         <com.cottacush.android.currencyedittext.CurrencyEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,14 +205,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deskripsi_pengumuman"
+            android:text="@string/deskripsi_lomba"
             android:layout_marginStart="20dp"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:id="@+id/form_tambah_lomba_deskripsi_pengumuman"
-            android:hint="@string/deskripsi_pengumuman"
+            android:hint="@string/deskripsi_lomba"
             android:layout_marginBottom="10dp"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"

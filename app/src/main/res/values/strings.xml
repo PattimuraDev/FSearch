@@ -130,6 +130,7 @@
     <string name="message_here">Message here</string>
     <string name="contoh_pesan_pada_halaman_chat">Contoh pesan pada halaman chat</string>
     <string name="daftar_pengguna">Daftar Pengguna</string>
+    <string name="masukkan_tanggal">Masukkan tanggal</string>
 
     <!-- custom string array -->
     <string-array name="tema_lomba">

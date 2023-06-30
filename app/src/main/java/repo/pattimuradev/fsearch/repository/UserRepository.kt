@@ -438,8 +438,8 @@ class UserRepository {
                                 .addOnSuccessListener { _userProfile ->
                                     var totalJumlahAngkaRating = 0.0F
                                     val userProfileTargetValue = _userProfile.toObject(UserProfile::class.java)
-                                    for(i in userProfileTargetValue!!.testimoni){
-                                        totalJumlahAngkaRating += i.rating
+                                    for(userTestimoni in userProfileTargetValue!!.testimoni){
+                                        totalJumlahAngkaRating += userTestimoni.rating
                                     }
                                     val ratingKeseluruhan = totalJumlahAngkaRating / userProfileTargetValue.testimoni.size
                                     firestoreDb.collection("user_profile")

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -46,6 +47,12 @@ class DetailPenggunaLainFragment : Fragment() {
         detail_pengguna_lain_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_detailPenggunaLainFagment_to_penggunaFragment)
         }
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_detailPenggunaLainFagment_to_penggunaFragment)
+            }
+        })
 
         detail_pengguna_lain_button_ajak.setOnClickListener {
             userViewModel.spesificUserById.observeOnce(viewLifecycleOwner){ userProfile ->

@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -50,6 +51,11 @@ class FormTambahLombaFragment : Fragment() {
         form_tambah_lomba_button_back.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_formTambahLombaFragment_to_lombaFragment)
         }
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_formTambahLombaFragment_to_lombaFragment)
+            }
+        })
         handlePublishLomba()
     }
 
@@ -66,7 +72,6 @@ class FormTambahLombaFragment : Fragment() {
             form_tambah_lomba_lokasi_lomba,
             form_tambah_lomba_biaya_pendaftaran,
             form_tambah_lomba_deskripsi_pengumuman,
-            form_tambah_lomba_tema_lomba,
             form_tambah_lomba_link_lomba
         )
         for(field in fields){
@@ -78,7 +83,7 @@ class FormTambahLombaFragment : Fragment() {
                     val lokasi = form_tambah_lomba_lokasi_lomba.text.toString().trim()
                     val biayaPendaftaran = form_tambah_lomba_biaya_pendaftaran.getNumericValue().toString()
                     val deskripsiLomba = form_tambah_lomba_deskripsi_pengumuman.text.toString().trim()
-                    val temaLomba = form_tambah_lomba_tema_lomba.text.toString().trim()
+                    //val temaLomba = form_tambah_lomba_tema_lomba.text.toString().trim()
                     val linkLomba = form_tambah_lomba_link_lomba.text.toString().trim()
 
                     form_tambah_lomba_button_publish.isEnabled = penyelenggaraLomba.isNotEmpty() &&
@@ -87,7 +92,6 @@ class FormTambahLombaFragment : Fragment() {
                             lokasi.isNotEmpty() &&
                             biayaPendaftaran.isNotEmpty() &&
                             deskripsiLomba.isNotEmpty() &&
-                            temaLomba.isNotEmpty() &&
                             linkLomba.isNotEmpty() &&
                             form_tambah_lomba_radio_group_tingkatan_lomba.checkedRadioButtonId != -1 &&
                             form_tambah_lomba_radio_group_kategori_pembuat_lomba.checkedRadioButtonId != -1
@@ -119,7 +123,7 @@ class FormTambahLombaFragment : Fragment() {
         var kategoriPembuatLomba: String? = null
         var temaLomba: String? = null
 
-        form_tambah_lomba_tanggal_pelaksanaan.setOnClickListener {
+        form_tambah_lomba_button_calendar.setOnClickListener {
             val calendar = Calendar.getInstance()
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val month = calendar.get(Calendar.MONTH)
@@ -127,7 +131,7 @@ class FormTambahLombaFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { _, year, monthOfYear, dayOfMonth ->
-                    form_tambah_lomba_tanggal_pelaksanaan.setText(DateAndTimeHandler.formatTanggalDaftarLombaPickerDialog(year, monthOfYear, dayOfMonth))
+                    form_tambah_lomba_tanggal_pelaksanaan.text = DateAndTimeHandler.formatTanggalDaftarLombaPickerDialog(year, monthOfYear, dayOfMonth)
                 },
                 years,
                 month,
@@ -162,13 +166,12 @@ class FormTambahLombaFragment : Fragment() {
         
         form_tambah_lomba_spinner_tema_lomba.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                form_tambah_lomba_tema_lomba.text = temaLombaList[position]
                 temaLomba = temaLombaList[position]
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                temaLomba = null
-                form_tambah_lomba_tema_lomba.text = ""
+                temaLomba = temaLombaList[0]
+                form_tambah_lomba_spinner_tema_lomba.setSelection(0)
             }
         }
 

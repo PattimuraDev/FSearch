@@ -120,7 +120,7 @@ class ProfileFragment : Fragment() {
         customDialog.window!!.attributes.gravity = Gravity.TOP
         customDialog.window!!.attributes.verticalMargin = 0.2F
         customDialog.show()
-        customDialog.window!!.setLayout(480, 300)
+        customDialog.window!!.setLayout(480, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
 }
